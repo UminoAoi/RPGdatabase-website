@@ -1,0 +1,54 @@
+<html>
+
+<head>
+    <title>RPG - Create Weapon</title>
+    <link rel="stylesheet" type="text/css" href="/CSS/style.css" />
+    <link rel="stylesheet" type="text/css" href="/CSS/normalize.css" />
+    <link href="https://fonts.googleapis.com/css?family=Shojumaru&display=swap" rel="stylesheet">
+    <meta content="RPG game for fighting other characters and monsters.">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="userProfile.html">Profile</a>
+            <a href="fightList.html">Fights</a>
+            <a href="mainPage.html">Log out</a>
+        </nav>
+    </header>
+
+    <h2 class="creationHeader">Weapon Creation</h2>
+
+    <div class="container creationCWContainer">
+        <form class="creationForm" method="post" action="userProfile.html" onsubmit="return createWeapon();">
+            <div class=" creationSheet">
+
+                <label>Weapon's Name <input name="weapName" id="weapName" type="text"><span class="error" id="nameError">Error place</span></label>
+
+                <input type="submit" value="Create" class="createButton creationButton">
+                <span class="error" id="buttonError">Error place</span>
+            </div>
+
+            <div class="creationSheet">
+
+                <h3 id="weaponPointsToAdd"><span id="pointsLeft">20</span> POINTS LEFT</h3>
+                <span class="error" id="pointsError">Error place</span>
+                <a class="down" onclick="downAttack(); return false;"><span class="arrow">&larr;</span></a>
+                <input name="attackPoints" id="attackPoints" placeholder="0" disabled>
+                <a class="up" onclick="upAttack(); return false;"><span class="arrow">&rarr;</span></a>
+                <h5>Bonus Attack Points</h5>
+                <br>
+                <a class="down" onclick="downDefence(); return false;"><span class="arrow">&larr;</span></a>
+                <input name="defencePoints" id="defencePoints" placeholder="0" disabled>
+                <a class="up" onclick="upDefence(); return false;"><span class="arrow">&rarr;</span></a>
+                <h5>Bonus Defence Points</h5>
+
+            </div>
+        </form>
+    </div> <!-- container end -->
+    <div class="space"></div>
+    <footer>By Kinga Kwiatkowska s16612 &copy;</footer>
+    <script src="JS/weapCreateJS.js"></script>
+</body>
+
+</html>

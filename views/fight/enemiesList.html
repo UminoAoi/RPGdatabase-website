@@ -1,0 +1,239 @@
+<html>
+
+<head>
+    <title>RPG - Enemies List</title>
+    <link rel="stylesheet" type="text/css" href="/CSS/style.css" />
+    <link rel="stylesheet" type="text/css" href="/CSS/normalize.css" />
+    <link href="https://fonts.googleapis.com/css?family=Shojumaru&display=swap" rel="stylesheet">
+    <meta content="RPG game for fighting other characters and monsters.">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="userProfile.html">Profile</a>
+            <a href="fightList.html">Fights</a>
+            <a href="mainPage.html">Log out</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <form class="enemyContainer" method="get" action="fightScreen.html" onsubmit="return createEnemyFight(); ">
+            <div id="enemyTableContainer">
+                <h3>Choose Enemy Character</h3>
+                <table id="enemyList">
+                    <thead>
+                        <th> </th>
+                        <th>Image</th>
+                        <th>Enemy's name</th>
+                        <th>Enemy's level</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="radio" name="enemy"></td>
+                            <td><img class="characterImageStat" src="https://mario.nintendo.com/assets/img/home/char-mario.png"></td>
+                            <td>Mario</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" name="enemy"></td>
+                            <td><img class="characterImageStat" src="https://mario.nintendo.com/assets/img/home/char-mario.png"></td>
+                            <td>Mario</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" name="enemy"></td>
+                            <td><img class="characterImageStat" src="https://mario.nintendo.com/assets/img/home/char-mario.png"></td>
+                            <td>Mario</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" name="enemy"></td>
+                            <td><img class="characterImageStat" src="https://mario.nintendo.com/assets/img/home/char-mario.png"></td>
+                            <td>Mario</td>
+                            <td>10</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><!-- enemyTableContainer end -->
+
+
+            <div id="worldTableContainer">
+                <h3>Choose World</h3>
+                <table id="worldList">
+                    <thead>
+                        <th></th>
+                        <th>Dificulty</th>
+                        <th>World name</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="radio" name="world"></td>
+                            <td>5</td>
+                            <td>Energylandia</td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" name="world"></td>
+                            <td>5</td>
+                            <td>Energylandia</td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" name="world"></td>
+                            <td>5</td>
+                            <td>Energylandia</td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" name="world"></td>
+                            <td>5</td>
+                            <td>Energylandia</td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" name="world"></td>
+                            <td>5</td>
+                            <td>Energylandia</td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" name="world"></td>
+                            <td>5</td>
+                            <td>Energylandia</td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" name="world"></td>
+                            <td>5</td>
+                            <td>Energylandia</td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" name="world"></td>
+                            <td>5</td>
+                            <td>Energylandia</td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" name="world"></td>
+                            <td>5</td>
+                            <td>Energylandia</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><!-- worldTableContainer end -->
+
+
+            <div class="yourTableContainer">
+                <h3>Choose Your Character</h3>
+                <div class="outside1">
+                    <table class="yourList">
+                        <thead>
+                            <th></th>
+                            <th>Image</th>
+                            <th>Character name</th>
+                            <th>Level</th>
+                            <th>Attack</th>
+                            <th>Defence</th>
+                            <th>Weapon</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="radio" name="user"></td>
+                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
+                                <td>Spongebob</td>
+                                <td>3</td>
+                                <td>12</td>
+                                <td>4</td>
+                                <td>Spoon</td>
+                            </tr>
+                            <tr>
+                                <td><input type="radio" name="user" value="1"></td>
+                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
+                                <td>Spongebob</td>
+                                <td>3</td>
+                                <td>12</td>
+                                <td>4</td>
+                                <td>Spoon</td>
+                            </tr>
+                            <tr>
+                                <td><input type="radio" name="user"></td>
+                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
+                                <td>Spongebob</td>
+                                <td>3</td>
+                                <td>12</td>
+                                <td>4</td>
+                                <td>Spoon</td>
+                            </tr>
+                            <tr>
+                                <td><input type="radio" name="user"></td>
+                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
+                                <td>Spongebob</td>
+                                <td>3</td>
+                                <td>12</td>
+                                <td>4</td>
+                                <td>Spoon</td>
+                            </tr>
+                            <tr>
+                                <td><input type="radio" name="user"></td>
+                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
+                                <td>Spongebob</td>
+                                <td>3</td>
+                                <td>12</td>
+                                <td>4</td>
+                                <td>Spoon</td>
+                            </tr>
+                            <tr>
+                                <td><input type="radio" name="user"></td>
+                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
+                                <td>Spongebob</td>
+                                <td>3</td>
+                                <td>12</td>
+                                <td>4</td>
+                                <td>Spoon</td>
+                            </tr>
+                            <tr>
+                                <td><input type="radio" name="user"></td>
+                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
+                                <td>Spongebob</td>
+                                <td>3</td>
+                                <td>12</td>
+                                <td>4</td>
+                                <td>Spoon</td>
+                            </tr>
+                            <tr>
+                                <td><input type="radio" name="user"></td>
+                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
+                                <td>Spongebob</td>
+                                <td>3</td>
+                                <td>12</td>
+                                <td>4</td>
+                                <td>Spoon</td>
+                            </tr>
+                            <tr>
+                                <td><input type="radio" name="user"></td>
+                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
+                                <td>Spongebob</td>
+                                <td>3</td>
+                                <td>12</td>
+                                <td>4</td>
+                                <td>Spoon</td>
+                            </tr>
+                            <tr>
+                                <td><input type="radio" name="user"></td>
+                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
+                                <td>Spongebob</td>
+                                <td>3</td>
+                                <td>12</td>
+                                <td>4</td>
+                                <td>Spoon</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- yourTableContainer end -->
+            <div class="startFightContainer">
+                <input type="submit" class="startFightButton" value="Fight">
+                <span id="buttonError" class="error">Error place</span>
+            </div>
+        </form>
+    </div> <!-- container end -->
+    <div class="space"></div>
+    <footer>By Kinga Kwiatkowska s16612 &copy;</footer>
+    <script src="JS/fightMakerEnemyJS.js"></script>
+</body>
+
+</html>

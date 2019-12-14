@@ -1,0 +1,40 @@
+<html>
+
+<head>
+    <title>RPG - Create World</title>
+    <link rel="stylesheet" type="text/css" href="/CSS/style.css" />
+    <link rel="stylesheet" type="text/css" href="/CSS/normalize.css" />
+    <link href="https://fonts.googleapis.com/css?family=Shojumaru&display=swap" rel="stylesheet">
+    <meta content="RPG game for fighting other characters and monsters.">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="userProfile.html">Profile</a>
+            <a href="fightList.html">Fights</a>
+            <a href="mainPage.html">Log out</a>
+        </nav>
+    </header>
+
+
+    <h2 class="creationHeader">World Creation</h2>
+
+    <div class="container creationWContainer">
+        <form class="creationForm" method="post" action="userProfile.html" onsubmit="return createWorld();">
+            <div class="creationSheet" id="creationWorld">
+
+                <label>Worlds's Name <input name="worldName" id="worldName" type="text"><span id="nameError" class="error">Error place</span></label>
+                <label>Difficulty <input name="worldDifficulty" type="range" min="1" max="5" value="1"></label>
+
+                <input type="submit" value="Create" class="createButton creationButton">
+                <span id="buttonError" class="error">Error place</span>
+            </div>
+        </form>
+    </div> <!-- container end -->
+    <div class="space"></div>
+    <footer>By Kinga Kwiatkowska s16612 &copy;</footer>
+    <script src="JS/worldCreationJS.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <title>RPG - Log in</title>
+    <!--    <link href="../CSS//normalize.css" rel="stylesheet">-->
+    <!--    <link href="../CSS//style.css" rel="stylesheet">-->
+    <link href="https://fonts.googleapis.com/css?family=Shojumaru&display=swap" rel="stylesheet">
+    <meta content="RPG game for fighting other characters and monsters.">
+    <link rel="stylesheet" type="text/css" href="/CSS/style.css" />
+    <link rel="stylesheet" type="text/css" href="/CSS/normalize.css" />
+
+</head>
+
+<body>
+    <div class="container" id="loginScreen">
+
+        <div class="log" id="logRegister">
+            <h2>Register</h2>
+            <h3>If you want to start your journey.</h3>
+            <form class="logForm" method="post" action="/login/register" onsubmit="return register();">
+                <label>Username <input name="userName" id="userName" type="text"><span id="nameError" class="error">Error place</span></label>
+                <label>Password <input id="password" name="password" type="password"><span id="passwordError" class="error">Error place</span></label>
+                <label>Confirm password <input name="confirm" id="confirm" type="password"><span id="confirmError" class="error">Error place</span></label>
+                <label>Email Address <input id="email" name="email" type="text"><span id="emailError" class="error">Error place</span></label>
+                <input type="submit" value="Register" class="logButton">
+                <span id="buttonError" class="error">Error place</span>
+            </form>
+
+        </div>
+
+
+        <div class="log" id="logLogin">
+            <h2>Login</h2>
+            <h3>If you already have an account.</h3>
+            <form class="logForm" method="post" action="/login/login" onsubmit="return login();">
+                <label>Username <input name="loginName" id="loginName" type="text"><span id="loginNameError" class="error">Error place</span></label>
+                <label>Password <input id="loginPassword" name="loginPassword" type="password"><span id="loginpasswordError" class="error">Error place</span></label>
+                <input type="submit" value="Log in" class="logButton" href="userProfile.html">
+                <span id="button2Error" class="error">Error place</span>
+            </form>
+
+        </div>
+    </div><!-- container end-->
+    <div class="space"></div>
+    <footer>By Kinga Kwiatkowska s16612 &copy;</footer>
+
+    <script src="JS/loginJS.js"></script>
+
+</body>
+
+</html>

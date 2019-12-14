@@ -1,0 +1,628 @@
+html {
+    min-height: 100%;
+}
+
+body {
+    background: url("https://img4.goodfon.com/wallpaper/nbig/1/6f/greg-rutkowski-rise-of-the-overlords-igra-bitva-geroi-magiia.jpg") center no-repeat;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    color: white;
+    text-shadow: 2px 2px 5px black;
+    font-family: 'Shojumaru', cursive;
+    font-size: 50px;
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 100px;
+}
+
+.container {
+    width: 1200px;
+    background: rgba(255, 255, 255, 0.7);
+    margin: 50px auto;
+    padding-bottom: 30px;
+    text-align: center;
+}
+
+a {
+    cursor: pointer;
+    display: inline-block;
+}
+
+#logIn {
+    display: block;
+    margin: 10px 500px;
+    padding: 20px 5px;
+    background: linear-gradient(white, gray);
+    text-decoration: none;
+    color: brown;
+    font-family: 'Shojumaru', cursive;
+    font-size: 18px;
+}
+
+#logIn:visited {
+    color: brown;
+}
+
+#logIn:hover {
+    text-shadow: 2px 2px 5px white;
+    background: linear-gradient(gray, white);
+}
+
+#description {
+    background: white;
+    width: 800px;
+    padding: 60px 40px;
+    text-align: center;
+    margin: 20px auto;
+    color: brown;
+    text-shadow: 1px 1px 5px gray;
+    box-shadow: 4px 4px 10px gray;
+}
+
+footer {
+    display: block;
+    flex: 1;
+    width: 100%;
+    max-height: 50px;
+    background: rgba(150, 150, 150, 0.7);
+    text-align: center;
+    color: brown;
+    text-shadow: 2px 3px 5px gray;
+}
+
+.space {
+    flex: 2;
+    height: auto;
+}
+
+#loginScreen {
+    display: grid;
+    grid-template-columns: 50% / 50%;
+}
+
+.log,
+.creationSheet,
+.tableContainer {
+    display: block;
+    background: white;
+    width: 400px;
+    height: 400px;
+    margin: 30px 50px;
+    margin-bottom: 0;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 4px 4px 10px gray;
+}
+
+h2 {
+    color: brown;
+    text-shadow: 2px 2px 5px gray;
+    font-family: 'Shojumaru', cursive;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+h3 {
+    color: gray;
+    font-size: 15px;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    text-align: left;
+    margin:auto;
+    color: dimgray;
+}
+
+label input {
+    display: block;
+    width: 100%;
+}
+
+span.error {
+    display: block;
+    visibility: hidden;
+    font-size: 11px;
+    margin-bottom: 10px;
+    color: red;
+}
+
+#logLogin {
+    grid-column-start: 2;
+}
+
+#logRegister, #logLogin{
+    height: 500px;
+}
+
+.logButton,
+.newFightButton,
+.startFightButton {
+    padding: 10px 15px;
+    background: linear-gradient(white, gray);
+    color: dimgray;
+    text-decoration: none;
+    font-family: 'Shojumaru', cursive;
+    font-size: 15px;
+}
+
+.logButton:visited,
+.newFightButton:visited,
+.startFightButton:visited {
+    color: brown;
+}
+
+.logButton:hover,
+.newFightButton:hover,
+.startFightButton:hover {
+    text-shadow: 2px 2px 5px white;
+    background: linear-gradient(gray, white);
+}
+
+header {
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    line-height: 25px;
+    background: rgba(150, 150, 150, 0.7);
+    text-align: right;
+}
+
+header a {
+    line-height: 15px;
+    padding: 3px 15px;
+    margin: 0 5px;
+    background: linear-gradient(white, gray);
+    color: dimgray;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+header a:visited {
+    color: brown;
+}
+
+header a:hover {
+    text-shadow: 2px 2px 5px white;
+    background: linear-gradient(gray, white);
+}
+
+#userProfileContainer,
+.creationCWContainer {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+#user,
+#options {
+    text-align: center;
+    background: white;
+    margin: 30px;
+    margin-bottom: 0;
+    box-shadow: 4px 4px 10px gray;
+}
+
+#user {
+    height: 500px;
+}
+
+#statistics table {
+    margin: 50px auto;
+    border: 1px solid gray;
+    padding: 50px;
+}
+
+#fightsButton {
+    display: block;
+    padding: 20px 60px;
+    background: linear-gradient(white, gray);
+    color: dimgray;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+#fightsButton:visited {
+    color: brown;
+}
+
+#fightsButton:hover {
+    text-shadow: 2px 2px 5px white;
+    background: linear-gradient(gray, white);
+}
+
+.createButton {
+    display: block;
+    padding: 10px 0px;
+    background: linear-gradient(white, gray);
+    color: dimgray;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.createButton:visited {
+    color: brown;
+}
+
+.createButton:hover {
+    text-shadow: 2px 2px 5px white;
+    background: linear-gradient(gray, white);
+}
+
+.list table {
+    text-align: center;
+}
+
+.list table td a,
+.fightOptions {
+    line-height: 10px;
+    padding: 2px 5px;
+    background: linear-gradient(white, gray);
+    color: dimgray;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.list table td a:visited,
+.fightOptions:visited {
+    color: brown;
+}
+
+.list table td a:hover,
+.fightOptions:hover {
+    cursor: pointer;
+    text-shadow: 2px 2px 5px white;
+    background: linear-gradient(gray, white);
+}
+
+.list table {
+    width: 400px;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.list table tbody {
+    display: block;
+    width: 400px;
+    overflow: auto;
+    height: 200px;
+    margin: 0 70px;
+}
+
+.list table thead tr {
+    display: block;
+}
+
+.list table td {
+    width: 200px;
+    box-sizing: border-box;
+}
+
+.creationHeader {
+    display: block;
+    margin-top: 60px;
+    color: white;
+    text-align: center;
+    text-shadow: 2px 2px 5px black;
+}
+
+.statisticsCheck {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.statisticsCheck .tooltiptext {
+    visibility: hidden;
+    width: 180px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.characterImageStat {
+    width: 50px;
+}
+
+.statisticsCheck:hover .tooltiptext {
+    visibility: visible;
+}
+
+.creationForm {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.creationButton {
+    margin: auto;
+    width: 150px;
+}
+
+.arrow {
+    display: inline-block;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+#characterPointsToAdd,
+#weaponPointsToAdd {
+    font-size: 35px;
+    font-family: 'Shojumaru', cursive;
+}
+
+h4 {
+    display: inline-block;
+    margin: 0;
+    padding: 0 130px;
+    font-size: 25px;
+}
+
+h5 {
+    margin: 0;
+}
+
+h6 {
+    color: gray;
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+#weaponSelect {
+    margin: 50px 10px;
+    width: 80%;
+}
+
+.updateInfo {
+    text-align: center;
+    color: white;
+    display: block;
+    position: absolute;
+    top: 25;
+    width: 100%;
+    line-height: 25px;
+    background: rgba(150, 150, 150, 0.7);
+}
+
+.creationWContainer {
+    display: grid;
+}
+
+#creationWorld {
+    display: block;
+    background: white;
+    width: 400px;
+    height: 400px;
+    margin: 30px auto;
+    margin-bottom: 0;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 4px 4px 10px gray;
+}
+
+input[type="text"] {
+    color: dimgray;
+}
+
+label input#charDate {
+    margin-left: 3%;
+    width: 70%;
+    color: dimgray;
+    display: inline-block;
+}
+
+#dateLabel {
+    width: 100%;
+    text-align: left;
+    display: inline-block;
+}
+
+#monsterFightsList,
+#fightsList {
+    margin-bottom: 20px;
+    height: 300px;
+    text-align: center;
+
+}
+
+#monsterFightsList th {
+    padding: 0 60px;
+}
+
+#fightsList th {
+    padding: 0 10px;
+}
+
+#fightsList,
+#monsterFightsList {
+    width: 400px;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+#fightsList tbody,
+#monsterFightsList tbody {
+    display: block;
+    width: 440px;
+    overflow: auto;
+    height: 250px;
+}
+
+#fightsList thead tr,
+#monsterFightsList thead tr {
+    display: block;
+}
+
+#fightsList td {
+    width: 130px;
+    padding: 10px 0;
+    box-sizing: border-box;
+}
+
+#monsterFightsList td {
+    width: 200px;
+    padding: 10px 0;
+    box-sizing: border-box;
+}
+
+.enemyContainer {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 40% 10%;
+}
+
+#enemyTableContainer,
+#worldTableContainer,
+.yourTableContainer,
+#monsterTableContainer {
+    background: white;
+    margin: 20px;
+    text-align: center;
+    box-shadow: 4px 4px 10px gray;
+    padding-bottom: 20px;
+}
+
+#worldTablecontainer {
+    grid-row-start: 2;
+}
+
+.yourTableContainer,
+#monsterTableContainer {
+    grid-row-start: span 2;
+}
+
+.startFightButton {
+    grid-column-start: 2;
+    grid-row-start: 3;
+    width: 100px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.yourList,
+#monsterList {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#enemyList,
+#worldList {
+    margin: 0 auto;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#enemyList,
+#worldList,
+.yourList,
+#monsterList {
+    width: 500px;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+#enemyList tbody {
+    display: block;
+    width: 500px;
+    overflow: auto;
+    height: 180px;
+}
+
+#worldList tbody {
+    display: block;
+    width: 500px;
+    overflow: auto;
+    height: 100px;
+}
+
+#enemyList td,
+#worldList td {
+    width: 200px;
+    box-sizing: border-box;
+}
+
+.monsterFightImage {
+    width: 80px;
+}
+
+#monsterList {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.yourList {
+    width: 500px;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.outside1 {
+    overflow: auto;
+    height: 500px;
+}
+
+#worldList {
+    margin: 0 auto;
+    height: 150px;
+    text-align: center;
+}
+
+#worldList th {
+    padding: 0 50px;
+}
+
+#enemyList th {
+    padding: 0 30px;
+}
+
+#resultScreen {
+    margin: 20px auto;
+    width: 90%;
+    height: 350px;
+    text-align: center;
+    background: white;
+    box-shadow: 4px 4px 10px gray;
+    box-sizing: border-box;
+    padding: 100px;
+}
+
+#buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#likeWorld {
+    height: 25px;
+    margin: auto 0;
+    background: linear-gradient(white, indianred);
+    color: indianred;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+#likeWorld:hover {
+    background: linear-gradient(indianred, white);
+}
+
+#likeWorld:active {
+    color: white;
+}

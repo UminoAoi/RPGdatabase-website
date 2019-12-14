@@ -1,0 +1,167 @@
+<!-- dodać opcję usuwania postaci, broni, świata -->
+
+<html>
+
+<head>
+    <title>RPG - User Profile</title>
+    <link rel="stylesheet" type="text/css" href="/CSS/style.css" />
+    <link rel="stylesheet" type="text/css" href="/CSS/normalize.css" />
+    <link href="https://fonts.googleapis.com/css?family=Shojumaru&display=swap" rel="stylesheet">
+    <meta content="RPG game for fighting other characters and monsters.">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="userProfile.html">Profile</a>
+            <a href="fightList.html">Fights</a>
+            <a href="mainPage.html">Log out</a>
+        </nav>
+    </header>
+    <div class="updateInfo">
+        <p><%= updateMessage %></p>
+    </div>
+
+    <div class="container" id="userProfileContainer">
+        <div id="user">
+            <h2><%= player.userName %></h2>
+
+            <div id="statistics">
+                <h3>Statistics</h3>
+                <table>
+                    <thead>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Rank</th>
+                            <td><%= player.rank %></td>
+                        </tr>
+                        <tr>
+                            <th>Strongest character</th>
+                            <td><%= player.getStrongestCharacter() %></td>
+                        </tr>
+                        <tr>
+                            <th>Created characters</th>
+                            <td><%= player.getCharacters().length; %></td>
+                        </tr>
+                        <tr>
+                            <th>Created weapons</th>
+                            <td><%= player.getWeapons().length; %></td>
+                        </tr>
+                        <tr>
+                            <th>Created worlds</th>
+                            <td><%= player.getWorlds().length; %></td>
+                        </tr>
+                        <tr>
+                            <th>Registration date</th>
+                            <td><%= player.registrationDate.toISOString().slice(0,10); %></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> <!-- statistics end -->
+        </div> <!-- user end -->
+
+        <div id="options">
+
+
+
+            <a id="fightsButton" href="/fight">Fights</a>
+            <div class="list" id="characterListContainer">
+                <h6>Characters</h6>
+                <table id="characterListCreated">
+                    <thead></thead>
+                    <tbody>
+                        <% player.getCharacters().forEach(function(character){ %>
+                        <tr>
+                            <td><%= character.characterName %></td>
+                            <td>
+                                <div class="statisticsCheck">
+                                    <a class="charStat">Statistics</a><span class="tooltiptext">
+                                        Level: <%= character.level %> <br>
+                                        Fight points: <%= character.fightPoints %> <br>
+                                        Species: <%= character.species %> <br>
+                                        Attack Points: <%= character.attackPoints%> <br>
+                                        Defence Points: <%= character.defencePoints %> <br>
+                                        <img class="characterImageStat" src="<%= character.characterImage %>" alt=" Character image">
+                                        Creation Date: <%= character.creationDate.toISOString().slice(0,10);  %> <br>
+                                    </span>
+                                </div>
+                                <a class="charEd" href="characterCreation.html">Edit</a>
+                                <a class="charDel">Delete</a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+
+                <a class="createButton" href="/character">Create Character</a>
+            </div><!-- list end -->
+
+            <div class="list" id="weaponListContainer">
+                <h6>Weapons</h6>
+                <table id="weaponListCreated">
+                    <thead>
+                    </thead>
+                    <tbody>
+                        <% player.getWeapons().forEach(function(weapon){ %>
+                        <tr>
+                            <td><%= weapon.weaponName %></td>
+                            <td>
+                                <div class="statisticsCheck">
+                                    <a class="weapStat">Statistics</a><span class="tooltiptext">
+                                        Level: <%= weapon.level %> <br>
+                                        Bonus Attack Points: <%= weapon.bonusAttack %> <br>
+                                        Bonus Defence Points: <%= weapon.bonusDefence %> <br>
+                                        Creation Date: <%= weapon.creationDate.toISOString().slice(0,10);  %> <br>
+                                    </span>
+                                </div>
+                                <a class="weapEd" href="weaponCreation.html">Edit</a>
+                                <a class="weapDel">Delete</a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+
+                <a class="createButton" href="/weapon">Create Weapon</a>
+            </div><!-- list end-->
+
+            <div class="list" id="worldListContainer">
+                <h6>Worlds</h6>
+                <table id="worldListCreated">
+                    <thead>
+                    </thead>
+                    <tbody>
+                        <% player.getWeapons().forEach(function(weapon){ %>
+                        <tr>
+                            <td>World of Pain</td>
+                            <td>
+                                <div class="statisticsCheck">
+                                    <a class="worStat">Statistics</a><span class="tooltiptext">
+                                        Difficulty: 4 <br>
+                                        Bonus Attack Points: 8 <br>
+                                        Bonus Defence Points: 6 <br>
+                                        Fights Number: 34 <br>
+                                        Favourites: 12 <br>
+                                        Creation Date: 10-10-2019 <br>
+                                    </span>
+                                </div>
+                                <a class="worEd" href="worldCreation.html">Edit</a>
+                                <a class="worDel">Delete</a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+                <a class="createButton" href="/world">Create World</a>
+            </div><!-- list end-->
+
+        </div><!-- options end -->
+
+    </div> <!-- container end -->
+    <div class="space"></div>
+    <footer>By Kinga Kwiatkowska s16612 &copy;</footer>
+    <script src="JS/userJS.js"></script>
+</body>
+
+</html>

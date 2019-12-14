@@ -1,0 +1,171 @@
+<html>
+
+<head>
+    <title>RPG - Monster List</title>
+    <link rel="stylesheet" type="text/css" href="/CSS/style.css" />
+    <link rel="stylesheet" type="text/css" href="/CSS/normalize.css" />
+    <link href="https://fonts.googleapis.com/css?family=Shojumaru&display=swap" rel="stylesheet">
+    <meta content="RPG game for fighting other characters and monsters.">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="userProfile.html">Profile</a>
+            <a href="fightList.html">Fights</a>
+            <a href="mainPage.html">Log out</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <form class="enemyContainer" method="post" action="fightScreen.html" onsubmit="return createMonsterFight();">
+            <div id="monsterTableContainer">
+                <h3>Choose Monster</h3>
+                <div class="outside1">
+                    <table id="monsterList">
+                        <thead>
+                            <th> </th>
+                            <th>Image</th>
+                            <th>Monster's name</th>
+                            <th>Monster's level</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="radio" name="monster"></td>
+                                <td><img class="monsterFightImage" src="https://i.dailymail.co.uk/1s/2019/10/16/09/19767196-7577975-Hmm_Gorgi_is_believed_to_be_The_Monster_pictured_as_several_clue-a-26_1571213284744.jpg" alt="Monster image"></td>
+                                <td>Cutesy Ball Dragon</td>
+                                <td>7</td>
+                            </tr>
+                            <tr>
+                                <td><input type="radio" name="monster"></td>
+                                <td><img class="monsterFightImage" src="https://i.dailymail.co.uk/1s/2019/10/16/09/19767196-7577975-Hmm_Gorgi_is_believed_to_be_The_Monster_pictured_as_several_clue-a-26_1571213284744.jpg" alt="Monster image"></td>
+                                <td>Cutesy Ball Dragon</td>
+                                <td>7</td>
+                            </tr>
+                            <tr>
+                                <td><input type="radio" name="monster"></td>
+                                <td><img class="monsterFightImage" src="https://i.dailymail.co.uk/1s/2019/10/16/09/19767196-7577975-Hmm_Gorgi_is_believed_to_be_The_Monster_pictured_as_several_clue-a-26_1571213284744.jpg" alt="Monster image"></td>
+                                <td>Cutesy Ball Dragon</td>
+                                <td>7</td>
+                            </tr>
+                            <tr>
+                                <td><input type="radio" name="monster"></td>
+                                <td><img class="monsterFightImage" src="https://i.dailymail.co.uk/1s/2019/10/16/09/19767196-7577975-Hmm_Gorgi_is_believed_to_be_The_Monster_pictured_as_several_clue-a-26_1571213284744.jpg" alt="Monster image"></td>
+                                <td>Cutesy Ball Dragon</td>
+                                <td>7</td>
+                            </tr>
+                            <tr>
+                                <td><input type="radio" name="monster"></td>
+                                <td><img class="monsterFightImage" src="https://i.dailymail.co.uk/1s/2019/10/16/09/19767196-7577975-Hmm_Gorgi_is_believed_to_be_The_Monster_pictured_as_several_clue-a-26_1571213284744.jpg" alt="Monster image"></td>
+                                <td>Cutesy Ball Dragon</td>
+                                <td>7</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- monsterTableContainer end -->
+
+
+            <div class="yourTableContainer">
+                <h3>Choose Your Character</h3>
+                <div class="outside1">
+                    <table class="yourList">
+                        <thead>
+                            <th></th>
+                            <th>Image</th>
+                            <th>Character name</th>
+                            <th>Level</th>
+                            <th>Attack</th>
+                            <th>Defence</th>
+                            <th>Weapon</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="radio" name="user"></td>
+                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
+                                <td>Spongebob</td>
+                                <td>3</td>
+                                <td>12</td>
+                                <td>4</td>
+                                <td>Spoon</td>
+                            </tr>
+                            <tr>
+                                <td><input type="radio" name="user"></td>
+                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
+                                <td>Spongebob</td>
+                                <td>3</td>
+                                <td>12</td>
+                                <td>4</td>
+                                <td>Spoon</td>
+                            </tr>
+                            <tr>
+                                <td><input type="radio" name="user"></td>
+                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
+                                <td>Spongebob</td>
+                                <td>3</td>
+                                <td>12</td>
+                                <td>4</td>
+                                <td>Spoon</td>
+                            </tr>
+                            <tr>
+                                <td><input type="radio" name="user"></td>
+                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
+                                <td>Spongebob</td>
+                                <td>3</td>
+                                <td>12</td>
+                                <td>4</td>
+                                <td>Spoon</td>
+                            </tr>
+                            <tr>
+                                <td><input type="radio" name="user"></td>
+                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
+                                <td>Spongebob</td>
+                                <td>3</td>
+                                <td>12</td>
+                                <td>4</td>
+                                <td>Spoon</td>
+                            </tr>
+                            <tr>
+                                <td><input type="radio" name="user"></td>
+                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
+                                <td>Spongebob</td>
+                                <td>3</td>
+                                <td>12</td>
+                                <td>4</td>
+                                <td>Spoon</td>
+                            </tr>
+                            <tr>
+                                <td><input type="radio" name="user"></td>
+                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
+                                <td>Spongebob</td>
+                                <td>3</td>
+                                <td>12</td>
+                                <td>4</td>
+                                <td>Spoon</td>
+                            </tr>
+                            <tr>
+                                <td><input type="radio" name="user"></td>
+                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
+                                <td>Spongebob</td>
+                                <td>3</td>
+                                <td>12</td>
+                                <td>4</td>
+                                <td>Spoon</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- yourTableContainer end -->
+
+            <div>
+                <input type="submit" class="startFightButton" value="Fight">
+                <span id="buttonError" class="error">Error place</span>
+            </div>
+        </form>
+    </div> <!-- container end -->
+    <div class="space"></div>
+    <footer>By Kinga Kwiatkowska s16612 &copy;</footer>
+    <script src="JS/fightMakerMonsterJS.js"></script>
+</body>
+
+</html>
