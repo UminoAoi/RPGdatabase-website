@@ -5,7 +5,8 @@ const Player = require('../model/player');
 const Character = require('../model/character');
 
 router.get("/character", (req, res, next) => {
-    res.render('userItems/characterCreation');
+    var character = null;
+    res.render('userItems/characterCreation', {character:character});
 });
 
 router.get("/weapon", (req, res, next) => {

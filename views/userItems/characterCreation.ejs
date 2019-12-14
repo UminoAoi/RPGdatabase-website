@@ -23,10 +23,32 @@
         <form class="creationForm" method="post" action="userProfile.html" onsubmit="return createCharacter();">
             <div class="creationSheet">
 
-                <label>Character's Name <input name="charName" id="charName" type="text" value="<%= character.characterName %>"><span id="nameError" class="error">Error place</span></label>
-                <label>Character's Species <input name="charSpecies" id="charSpecies" type="text" value="<%= character.species %>"><span id="speciesError" class="error">Error place</span></label>
-                <label>Character's Image (URL) <input name="charImage" id="charImage" type="text" value="<%= character.characterImage %>"><span id="imageError" class="error">Error place</span></label>
-                <label id="dateLabel">Date of creation <input name="charDate" id="charDate" type="text" placeholder="mm-dd-rrrr" value="<%= character.returnDate() %>">
+                <label>Character's Name <input name="charName" id="charName" type="text" 
+                 <% if (character == null) { %> 
+                 value="" 
+                 <% }else { %> 
+                 value="<%= character.characterName %>" 
+                 <% } %>>
+                    <span id="nameError" class="error">Error place</span></label>
+                <label>Character's Species <input name="charSpecies" id="charSpecies" type="text" 
+                <% if (character == null) { %> 
+                value="" 
+                <% }else { %> 
+                value="<%= character.species %>" 
+                <% } %>>
+                    <span id="speciesError" class="error">Error place</span></label>
+                <label>Character's Image (URL) <input name="charImage" id="charImage" type="text" 
+                <% if (character == null) { %> 
+                value="" 
+                <% }else { %> 
+                value="<%= character.characterImage %>"
+                <% } %>><span id="imageError" class="error">Error place</span></label>
+                <label id="dateLabel">Date of creation <input name="charDate" id="charDate" type="text" placeholder="mm-dd-rrrr" 
+                <% if (character == null) { %> 
+                value="" 
+                <% }else { %> 
+                value="<%= character.returnDate() %>"
+                <% } %>>
                     <span id="dateError" class="error">Error place</span></label>
 
                 <input type="submit" value="Create" class="createButton creationButton">
@@ -44,12 +66,22 @@
                 </h3>
                 <span id="pointsError" class="error">Error place</span>
                 <a class="down" onclick="downAttack(); return false;"><span class="arrow">&larr;</span></a>
-                <input name="attackPoints" id="attackPoints" placeholder="0" value="<%= character.attackPoints %>" disabled>
+                <input name="attackPoints" id="attackPoints" placeholder="0" 
+                    <% if (character == null) { %>
+                    value="0" 
+                    <% }else { %>
+                    value="<%= character.attackPoints %>" 
+                    <% } %> disabled>
                 <a class="up" onclick="upAttack(); return false;"><span class="arrow">&rarr;</span></a>
                 <h5>Attack Points</h5>
                 <br>
                 <a class="down" onclick="downDefence(); return false;"><span class="arrow">&larr;</span></a>
-                <input name="defencePoints" id="defencePoints" placeholder="0" value="<%= character.defencePoints %>" disabled>
+                <input name="defencePoints" id="defencePoints" placeholder="0" 
+                    <% if (character == null) { %>
+                    value="0" 
+                    <% }else { %>
+                    value="<%= character.defencePoints %>"
+                    <% } %> disabled>
                 <a class="up" onclick="upDefence(); return false;"><span class="arrow">&rarr;</span></a>
                 <h5>Defence Points</h5>
 
