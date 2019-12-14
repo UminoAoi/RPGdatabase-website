@@ -37,4 +37,9 @@ router.get("/world", (req, res, next) => {
     res.render('userItems/worldCreation');
 });
 
+router.get("/logout", (req, res, next) => {
+    loggedPlayer = null;
+    res.render("/login");
+});
+
 module.exports.route = router;

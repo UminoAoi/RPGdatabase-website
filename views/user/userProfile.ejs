@@ -15,7 +15,7 @@
         <nav>
             <a href="userProfile.html">Profile</a>
             <a href="fightList.html">Fights</a>
-            <a href="mainPage.html">Log out</a>
+            <a href="player/logout">Log out</a>
         </nav>
     </header>
     <div class="updateInfo">
@@ -132,18 +132,16 @@
                     <thead>
                     </thead>
                     <tbody>
-                        <% player.getWeapons().forEach(function(weapon){ %>
+                        <% player.getWorlds().forEach(function(world){ %>
                         <tr>
-                            <td>World of Pain</td>
+                            <td><%= world.worldName %></td>
                             <td>
                                 <div class="statisticsCheck">
                                     <a class="worStat">Statistics</a><span class="tooltiptext">
-                                        Difficulty: 4 <br>
-                                        Bonus Attack Points: 8 <br>
-                                        Bonus Defence Points: 6 <br>
-                                        Fights Number: 34 <br>
-                                        Favourites: 12 <br>
-                                        Creation Date: 10-10-2019 <br>
+                                        Difficulty: <%= world.difficulty %> <br>
+                                        Fights Number: <%= world.fightsNumber %> <br>
+                                        Favourites: <%= world.favourites %> <br>
+                                        Creation Date: <%= world.creationDate.toISOString().slice(0,10);  %> <br>
                                     </span>
                                 </div>
                                 <a class="worEd" href="worldCreation.html">Edit</a>

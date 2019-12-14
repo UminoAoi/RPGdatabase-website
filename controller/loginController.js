@@ -22,7 +22,7 @@ router.post("/register", (req, res, next) => {
 });
 
 router.post("/login", (req, res, next) => {
-    var player = Player.checkPlayer(req.body.loginName, req.body.loginPassword);
+    var player = Player.checkAndGetPlayer(req.body.loginName, req.body.loginPassword);
     if (player != null) {
         res.redirect("/player/" + player.id);
     }
