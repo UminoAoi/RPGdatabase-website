@@ -26,8 +26,23 @@ class Character {
 
     }
 
-    edit(characterId) {
+    static edit(characterId) {
 
+    }
+
+    static getCharacter(characterId) {
+        var character = null;
+        for (var i = 0; i < allCharactersList.length; i++) {
+            if (allCharactersList[i].id == characterId) {
+                return allCharactersList[i]
+            }
+        }
+        return character;
+    }
+
+    returnDate() {
+        var d = this.creationDate.toISOString().slice(0, 10).split('-');
+        return d[1] + '-' + d[2] + '-' + d[0];
     }
 }
 

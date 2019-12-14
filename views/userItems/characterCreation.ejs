@@ -23,27 +23,33 @@
         <form class="creationForm" method="post" action="userProfile.html" onsubmit="return createCharacter();">
             <div class="creationSheet">
 
-                <label>Character's Name <input name="charName" id="charName" type="text"><span id="nameError" class="error">Error place</span></label>
-                <label>Character's Species <input name="charSpecies" id="charSpecies" type="text"><span id="speciesError" class="error">Error place</span></label>
-                <label>Character's Image (URL) <input name="charImage" id="charImage" type="text"><span id="imageError" class="error">Error place</span></label>
-                <label id="dateLabel">Date of creation <input name="charDate" id="charDate" type="text" placeholder="mm-dd-rrrr"><span id="dateError" class="error">Error place</span></label>
+                <label>Character's Name <input name="charName" id="charName" type="text" value="<%= character.characterName %>"><span id="nameError" class="error">Error place</span></label>
+                <label>Character's Species <input name="charSpecies" id="charSpecies" type="text" value="<%= character.species %>"><span id="speciesError" class="error">Error place</span></label>
+                <label>Character's Image (URL) <input name="charImage" id="charImage" type="text" value="<%= character.characterImage %>"><span id="imageError" class="error">Error place</span></label>
+                <label id="dateLabel">Date of creation <input name="charDate" id="charDate" type="text" placeholder="mm-dd-rrrr" value="<%= character.returnDate() %>">
+                    <span id="dateError" class="error">Error place</span></label>
 
-                <input  type="submit" value="Create" class="createButton creationButton">
+                <input type="submit" value="Create" class="createButton creationButton">
                 <span id="buttonError" class="error">Error place</span>
-                
+
             </div>
 
             <div class="creationSheet">
-                <h3 id="characterPointsToAdd"><span id="pointsLeft">20</span> POINTS LEFT
+                <h3 id="characterPointsToAdd">
+                    <% if (character == null) { %>
+                    <span id="pointsLeft">20</span> POINTS LEFT
+                    <% }else { %>
+                    <span id="pointsLeft">0</span> POINTS LEFT
+                    <% } %>
                 </h3>
                 <span id="pointsError" class="error">Error place</span>
                 <a class="down" onclick="downAttack(); return false;"><span class="arrow">&larr;</span></a>
-                <input name="attackPoints" id="attackPoints" placeholder="0" disabled>
+                <input name="attackPoints" id="attackPoints" placeholder="0" value="<%= character.attackPoints %>" disabled>
                 <a class="up" onclick="upAttack(); return false;"><span class="arrow">&rarr;</span></a>
                 <h5>Attack Points</h5>
                 <br>
                 <a class="down" onclick="downDefence(); return false;"><span class="arrow">&larr;</span></a>
-                <input name="defencePoints" id="defencePoints" placeholder="0" disabled>
+                <input name="defencePoints" id="defencePoints" placeholder="0" value="<%= character.defencePoints %>" disabled>
                 <a class="up" onclick="upDefence(); return false;"><span class="arrow">&rarr;</span></a>
                 <h5>Defence Points</h5>
 
@@ -60,4 +66,6 @@
     <div class="space"></div>
     <footer>By Kinga Kwiatkowska s16612 &copy;</footer>
     <script src="JS/charCreateJS.js"></script>
-</body></html>
+</body>
+
+</html>
