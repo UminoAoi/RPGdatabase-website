@@ -22,11 +22,11 @@ class Character {
         return character;
     }
 
-    static delete() {
+    static delete(characterId) {
 
     }
 
-    edit(character) {
+    edit(characterId) {
 
     }
 }

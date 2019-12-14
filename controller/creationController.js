@@ -15,4 +15,12 @@ router.get("/world", (req, res, next) => {
     res.render('userItems/worldCreation');
 });
 
+router.get("/editCharacter", (req, res, next) => {
+    var c = req.query.character_id;
+    console.log(c);
+    res.render('userItems/characterCreation', {
+        character: character
+    });
+});
+
 module.exports.route = router;

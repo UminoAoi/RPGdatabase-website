@@ -84,7 +84,7 @@
                                         Creation Date: <%= character.creationDate.toISOString().slice(0,10);  %> <br>
                                     </span>
                                 </div>
-                                <a class="charEd" href="characterCreation.html">Edit</a>
+                                <a class="charEd" href="/creation/editCharacter?character_id=<%= character.id %>">Edit</a>
                                 <a class="charDel">Delete</a>
                             </td>
                         </tr>

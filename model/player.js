@@ -1,4 +1,5 @@
 let nextId = 1;
+var loggedPlayer;
 const playerList = [];
 
 const Character = require('../model/character');
