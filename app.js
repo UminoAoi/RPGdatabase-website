@@ -30,6 +30,9 @@ app.use('/player', playerController.route);
 const fightController = require('./controller/fightController');
 app.use('/fight', fightController.route);
 
+const creationController = require('./controller/creationController');
+app.use('/creation', creationController.route);
+
 app.listen(port, () => {
     console.log(`App is listening at port ${port}`);
 });

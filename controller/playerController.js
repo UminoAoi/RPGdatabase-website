@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const Player = require('../model/player');
+var loggedPlayer;
 
 router.get("/", (req, res, next) => {
     player = Player.getList();
@@ -15,6 +16,7 @@ router.get("/", (req, res, next) => {
 
 router.get("/:playerId", (req, res, next) => {
     var updateMessage = null;
+    loggedPlayer = req.params.playerId;
     const playerId = req.params.playerId;
     const player = Player.getPlayer(playerId);
     res.render('user/userProfile', {
@@ -22,19 +24,5 @@ router.get("/:playerId", (req, res, next) => {
         updateMessage: updateMessage
     });
 });
-
-router.get("/character", (req, res, next) => {
-    res.render('userItems/characterCreation');
-});
-
-router.get("/weapon", (req, res, next) => {
-    res.render('userItems/weaponCreation');
-});
-
-router.get("/world", (req, res, next) => {
-    res.render('userItems/worldCreation');
-});
-
-
 
 module.exports.route = router;
