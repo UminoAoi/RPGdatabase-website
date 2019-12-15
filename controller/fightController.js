@@ -4,6 +4,7 @@ const router = express.Router();
 const Fight = require('../model/fight');
 const Player = require('../model/player');
 const Character = require('../model/character');
+const World = require('../model/world');
 
 router.get("/", (req, res, next) => {
     var player = Player.getPlayer(Player.loggedPlayer);
@@ -17,15 +18,16 @@ router.get("/characterFight", (req, res, next) => {
     var player = Player.getPlayer(Player.loggedPlayer);
     
     var enemyList= Character.enemyList(player);
-    res.render('user/enemiesList', {player:player, enemyList:enemyList});
+    var worlds = World.allWorldList;
+    res.render('fight/enemiesList', {player:player, enemyList:enemyList, worlds:worlds});
 });
 
 router.get("/monsterFight", (req, res, next) => {
-    res.render('user/monsterList');
+    res.render('fight/monsterList');
 });
 
 router.get("/fightResults", (req, res, next) => {
-    res.render('user/monsterList');
+    res.render('fight/monsterList');
 });
 
 

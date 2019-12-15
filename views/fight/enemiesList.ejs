@@ -29,30 +29,14 @@
                         <th>Enemy's level</th>
                     </thead>
                     <tbody>
+                        <% enemyList.forEach(function(character){ %>
                         <tr>
-                            <td><input type="radio" name="enemy"></td>
-                            <td><img class="characterImageStat" src="https://mario.nintendo.com/assets/img/home/char-mario.png"></td>
-                            <td>Mario</td>
-                            <td>10</td>
+                            <td><input type="radio" name="enemy" value="<%= character.id %>"></td>
+                            <td><img class="characterImageStat" src="<%= character.characterImage %>"></td>
+                            <td><%= character.characterName %></td>
+                            <td><%= character.level %></td>
                         </tr>
-                        <tr>
-                            <td><input type="radio" name="enemy"></td>
-                            <td><img class="characterImageStat" src="https://mario.nintendo.com/assets/img/home/char-mario.png"></td>
-                            <td>Mario</td>
-                            <td>10</td>
-                        </tr>
-                        <tr>
-                            <td><input type="radio" name="enemy"></td>
-                            <td><img class="characterImageStat" src="https://mario.nintendo.com/assets/img/home/char-mario.png"></td>
-                            <td>Mario</td>
-                            <td>10</td>
-                        </tr>
-                        <tr>
-                            <td><input type="radio" name="enemy"></td>
-                            <td><img class="characterImageStat" src="https://mario.nintendo.com/assets/img/home/char-mario.png"></td>
-                            <td>Mario</td>
-                            <td>10</td>
-                        </tr>
+                        <% }) %>
                     </tbody>
                 </table>
             </div><!-- enemyTableContainer end -->
@@ -67,51 +51,13 @@
                         <th>World name</th>
                     </thead>
                     <tbody>
+                        <% worlds.forEach(function(world){ %>
                         <tr>
-                            <td><input type="radio" name="world"></td>
-                            <td>5</td>
-                            <td>Energylandia</td>
+                            <td><input type="radio" name="world" value="<%= world.id %>"></td>
+                            <td><%= world.difficulty %></td>
+                            <td><%= world.worldName %></td>
                         </tr>
-                        <tr>
-                            <td><input type="radio" name="world"></td>
-                            <td>5</td>
-                            <td>Energylandia</td>
-                        </tr>
-                        <tr>
-                            <td><input type="radio" name="world"></td>
-                            <td>5</td>
-                            <td>Energylandia</td>
-                        </tr>
-                        <tr>
-                            <td><input type="radio" name="world"></td>
-                            <td>5</td>
-                            <td>Energylandia</td>
-                        </tr>
-                        <tr>
-                            <td><input type="radio" name="world"></td>
-                            <td>5</td>
-                            <td>Energylandia</td>
-                        </tr>
-                        <tr>
-                            <td><input type="radio" name="world"></td>
-                            <td>5</td>
-                            <td>Energylandia</td>
-                        </tr>
-                        <tr>
-                            <td><input type="radio" name="world"></td>
-                            <td>5</td>
-                            <td>Energylandia</td>
-                        </tr>
-                        <tr>
-                            <td><input type="radio" name="world"></td>
-                            <td>5</td>
-                            <td>Energylandia</td>
-                        </tr>
-                        <tr>
-                            <td><input type="radio" name="world"></td>
-                            <td>5</td>
-                            <td>Energylandia</td>
-                        </tr>
+                        <% }) %>
                     </tbody>
                 </table>
             </div><!-- worldTableContainer end -->
@@ -131,96 +77,17 @@
                             <th>Weapon</th>
                         </thead>
                         <tbody>
+                            <% player.getCharacters().forEach(function(character){ %>
                             <tr>
-                                <td><input type="radio" name="user"></td>
-                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
-                                <td>Spongebob</td>
-                                <td>3</td>
-                                <td>12</td>
-                                <td>4</td>
-                                <td>Spoon</td>
+                                <td><input type="radio" name="user" value="<%= character.id %>"></td>
+                                <td><img class="characterImageStat" src="<%= character.characterImage %>"></td>
+                                <td><%= character.characterName %></td>
+                                <td><%= character.level %></td>
+                                <td><%= character.attackPoints %></td>
+                                <td><%= character.defencePoints %></td>
+                                <td><%= character.id %></td>
                             </tr>
-                            <tr>
-                                <td><input type="radio" name="user" value="1"></td>
-                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
-                                <td>Spongebob</td>
-                                <td>3</td>
-                                <td>12</td>
-                                <td>4</td>
-                                <td>Spoon</td>
-                            </tr>
-                            <tr>
-                                <td><input type="radio" name="user"></td>
-                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
-                                <td>Spongebob</td>
-                                <td>3</td>
-                                <td>12</td>
-                                <td>4</td>
-                                <td>Spoon</td>
-                            </tr>
-                            <tr>
-                                <td><input type="radio" name="user"></td>
-                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
-                                <td>Spongebob</td>
-                                <td>3</td>
-                                <td>12</td>
-                                <td>4</td>
-                                <td>Spoon</td>
-                            </tr>
-                            <tr>
-                                <td><input type="radio" name="user"></td>
-                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
-                                <td>Spongebob</td>
-                                <td>3</td>
-                                <td>12</td>
-                                <td>4</td>
-                                <td>Spoon</td>
-                            </tr>
-                            <tr>
-                                <td><input type="radio" name="user"></td>
-                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
-                                <td>Spongebob</td>
-                                <td>3</td>
-                                <td>12</td>
-                                <td>4</td>
-                                <td>Spoon</td>
-                            </tr>
-                            <tr>
-                                <td><input type="radio" name="user"></td>
-                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
-                                <td>Spongebob</td>
-                                <td>3</td>
-                                <td>12</td>
-                                <td>4</td>
-                                <td>Spoon</td>
-                            </tr>
-                            <tr>
-                                <td><input type="radio" name="user"></td>
-                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
-                                <td>Spongebob</td>
-                                <td>3</td>
-                                <td>12</td>
-                                <td>4</td>
-                                <td>Spoon</td>
-                            </tr>
-                            <tr>
-                                <td><input type="radio" name="user"></td>
-                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
-                                <td>Spongebob</td>
-                                <td>3</td>
-                                <td>12</td>
-                                <td>4</td>
-                                <td>Spoon</td>
-                            </tr>
-                            <tr>
-                                <td><input type="radio" name="user"></td>
-                                <td><img class="characterImageStat" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"></td>
-                                <td>Spongebob</td>
-                                <td>3</td>
-                                <td>12</td>
-                                <td>4</td>
-                                <td>Spoon</td>
-                            </tr>
+                            <% }) %>
                         </tbody>
                     </table>
                 </div>

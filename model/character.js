@@ -62,7 +62,8 @@ class Character {
     static enemyList(player){
         var enemyList = [];
         for (var i = 0; i < allCharactersList.length; i++) {
-            if (allCharactersList[i].player == player) {
+            if (allCharactersList[i].player == null || allCharactersList[i].player != player.id) {
+                console.log(player.id + " " + allCharactersList[i].player);
                 enemyList.push(allCharactersList[i]);
             }
         }
@@ -75,9 +76,9 @@ class Character {
     }
     
     static initData() {
-        new Character("Spongebob", "cartoon", 15, 5, "https://vignette.wikia.nocookie.net/encyklopedia-spongebobia/images/c/cb/SpongeBob_SquarePants_Render.png/revision/latest?cb=20190606152207&path-prefix=pl"), new Date(), null);
-        new Character("Cute Robot", "robot", 20, 0, "httphttps://photonrobot.com/wp-content/uploads/photon-render-%E2%80%94-kopia.png"), new Date(), null);
-        new Character("Dexter", "human", 5, 15, "http://19wnx83qh5jk1qlxu63q22fj-wpengine.netdna-ssl.com/wp-content/uploads/2012/10/DEXTER-FROM-DEXTERS-LABORATORY.png"), new Date(), null);
+        new Character("Spongebob", "cartoon", 15, 5, "https://vignette.wikia.nocookie.net/encyklopedia-spongebobia/images/c/cb/SpongeBob_SquarePants_Render.png/revision/latest?cb=20190606152207&path-prefix=pl", new Date(), null);
+        new Character("Cute Robot", "robot", 20, 0, "https://photonrobot.com/wp-content/uploads/photon-render-%E2%80%94-kopia.png", new Date(), null);
+        new Character("Dexter", "human", 5, 15, "http://19wnx83qh5jk1qlxu63q22fj-wpengine.netdna-ssl.com/wp-content/uploads/2012/10/DEXTER-FROM-DEXTERS-LABORATORY.png", new Date(), null);
     }
 }
 
