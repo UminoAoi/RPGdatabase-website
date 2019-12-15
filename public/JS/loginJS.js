@@ -1,3 +1,5 @@
+const Player = require('../model/player');
+
 function register() {
 
     var invalid = false;
@@ -88,4 +90,8 @@ function login() {
 
     return !invalid;
 
+}
+
+static throwLoginError(){
+    
 }

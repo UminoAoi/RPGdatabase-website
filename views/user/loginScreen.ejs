@@ -36,7 +36,10 @@
                 <label>Username <input name="loginName" id="loginName" type="text"><span id="loginNameError" class="error">Error place</span></label>
                 <label>Password <input id="loginPassword" name="loginPassword" type="password"><span id="loginpasswordError" class="error">Error place</span></label>
                 <input type="submit" value="Log in" class="logButton" href="userProfile.html">
-                <span id="button2Error" class="error">Error place</span>
+                <span id="button2Error" class="error"
+                    <% if (typeof(error) != "undefined") { %>
+                    style= "visibility: visible;"
+                    <% } %>>Wrong username or password.</span>
             </form>
 
         </div>

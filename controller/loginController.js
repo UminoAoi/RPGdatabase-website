@@ -23,9 +23,13 @@ router.post("/register", (req, res, next) => {
 
 router.post("/login", (req, res, next) => {
     var player = Player.checkAndGetPlayer(req.body.loginName, req.body.loginPassword);
-    if (player != null) {
+    var error = "";
+    if (player != null) 
         res.redirect("/player/" + player.id);
+    else{
+        error = "Wrong username or password.";
+        res.render("user/loginScreen", {error: error});
     }
 });
-
+    
 module.exports.route = router;
