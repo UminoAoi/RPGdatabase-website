@@ -4,6 +4,7 @@ const router = express.Router();
 const Player = require('../model/player');
 const Character = require('../model/character');
 const World = require('../model/world');
+const Weapon = require('../model/weapon');
 
 router.get("/character", (req, res, next) => {
     var character = null;
@@ -53,8 +54,7 @@ router.get("/editWorld", (req, res, next) => {
 
 router.post("/character/post", (req, res, next) => {
     var dateFormat = req.body.charDate.split("-");
-    console.log(dateFormat);
-    var date = new Date(dateFormat[2], dateFormat[0], dateFormat[1]);
+    var date = new Date(dateFormat[2], dateFormat[0]-1, dateFormat[1]);
     var player = Player.getPlayer(Player.loggedPlayer);
     
     const newCharacter = new Character(req.body.charName, req.body.charSpecies, req.body.attackPoints, req.body.defencePoints, req.body.charImage, date, player);
@@ -64,15 +64,36 @@ router.post("/character/post", (req, res, next) => {
 });
 
 router.post("/editCharacter/post", (req, res, next) => {
-    var player = Player.checkAndGetPlayer(req.body.loginName, req.body.loginPassword);
-    Player.loggedPlayer = player;
-    var error = "";
-    if (player != null) 
-        res.redirect("/player/" + player.id);
-    else{
-        error = "Wrong username or password.";
-        res.render("user/loginScreen", {error: error});
-    }
+    var c = req.query.character_id;
+    var dateFormat = req.body.charDate.split("-");
+    var date = new Date(dateFormat[2], dateFormat[0]-1, dateFormat[1]);
+    var player = Player.getPlayer(Player.loggedPlayer);
+    
+   Character.edit(c, req.body.charName, req.body.charSpecies, req.body.attackPoints, req.body.defencePoints, req.body.charImage, date, player);
+    
+    res.redirect("/player/" + player.id);
+    
+});
+
+router.post("/weapon/post", (req, res, next) => {
+    var player = Player.getPlayer(Player.loggedPlayer);
+    
+    const newWeapon = new Weapon(req.body.weapName, req.body.bonusAttack, req.body.bonusDefence, player);
+    
+    player.addWeapon(newWeapon);
+    res.redirect("/player/" + player.id);
+});
+
+router.post("/editWeapon/post", (req, res, next) => {
+    var c = req.query.character_id;
+    var dateFormat = req.body.charDate.split("-");
+    var date = new Date(dateFormat[2], dateFormat[0]-1, dateFormat[1]);
+    var player = Player.getPlayer(Player.loggedPlayer);
+    
+   Character.edit(c, req.body.charName, req.body.charSpecies, req.body.attackPoints, req.body.defencePoints, req.body.charImage, date, player);
+    
+    res.redirect("/player/" + player.id);
+    
 });
 
 module.exports.route = router;

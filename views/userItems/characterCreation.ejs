@@ -24,7 +24,7 @@
               <% if (character == null) { %> 
                  action="/creation/character/post" 
                  <% }else { %> 
-                 action="/creation/editCharacter/post"
+                 action="/creation/editCharacter/post?character_id=<%= character.id %>"
                  <% } %> onsubmit="return createCharacter();">
             <div class="creationSheet">
 

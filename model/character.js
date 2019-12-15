@@ -30,12 +30,27 @@ class Character {
 
     }
 
-    static edit(characterId) {
+    static edit(characterId, characterName, species, attackpoints, defencepoints, image, date) {
+        var character = null;
+        for (var i = 0; i < allCharactersList.length; i++) {
+            if (allCharactersList[i].id == characterId) {
+                character = allCharactersList[i]
+            }
+        }
         
+        character.characterName = characterName;
+        character.species = species;
+        character.attackPoints = attackpoints;
+        character.defencePoints = defencepoints;
+        character.characterImage = image;
+        if (date == undefined)
+            character.creationDate = new Date();
+        else
+            character.creationDate = date;
+        character.weapon = null;
     }
 
     static getCharacter(characterId) {
-        var character = null;
         for (var i = 0; i < allCharactersList.length; i++) {
             if (allCharactersList[i].id == characterId) {
                 return allCharactersList[i]

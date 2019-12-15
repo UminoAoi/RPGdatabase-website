@@ -20,7 +20,12 @@
     <h2 class="creationHeader">Weapon Creation</h2>
 
     <div class="container creationCWContainer">
-        <form class="creationForm" method="post" action="userProfile.html" onsubmit="return createWeapon();">
+        <form class="creationForm" method="post" 
+              <% if (weapon == null) { %> 
+                 action="/creation/weapon/post" 
+                 <% }else { %> 
+                 action="/creation/editWeapon/post?weapon_id=<%= weapon.id %>"
+                 <% } %> onsubmit="return createWeapon();">
             <div class=" creationSheet">
 
                 <label>Weapon's Name <input name="weapName" id="weapName" type="text" 
