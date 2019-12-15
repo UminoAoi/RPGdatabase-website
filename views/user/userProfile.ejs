@@ -113,7 +113,7 @@
                                         Creation Date: <%= weapon.creationDate.toISOString().slice(0,10);  %> <br>
                                     </span>
                                 </div>
-                                <a class="weapEd" href="weaponCreation.html">Edit</a>
+                                <a class="weapEd" href="/creation/editWeapon?weapon_id=<%= weapon.id %>">Edit</a>
                                 <a class="weapDel">Delete</a>
                             </td>
                         </tr>

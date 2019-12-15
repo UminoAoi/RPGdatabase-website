@@ -25,4 +25,36 @@ router.get("/editCharacter", (req, res, next) => {
     });
 });
 
+router.get("/editWeapon", (req, res, next) => {
+    var c = req.query.weapon_id;
+    var player = Player.getPlayer(Player.loggedPlayer);
+    console.log(player);
+    var weapons = player.getWeapons();
+    var weapon = null;
+    for (var i = 0; i < weapons.length; i++) {
+            if (weapons[i].id == c) {
+                weapon = weapons[i];
+            }
+    }
+    res.render('userItems/weaponCreation', {
+        weapon: weapon
+    });
+});
+
+router.get("/editWorld", (req, res, next) => {
+    var c = req.query.weapon_id;
+    var player = Player.getPlayer(Player.loggedPlayer);
+    console.log(player);
+    var weapons = player.getWeapons();
+    var weapon = null;
+    for (var i = 0; i < weapons.length; i++) {
+            if (weapons[i].id == c) {
+                weapon = weapons[i];
+            }
+    }
+    res.render('userItems/weaponCreation', {
+        weapon: weapon
+    });
+});
+
 module.exports.route = router;

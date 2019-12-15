@@ -14,6 +14,7 @@ class Character {
         this.fightPoints = 0;
         this.player = player;
         this.weapon = null;
+        Character.add(this);
     }
 
     static add(character) {
@@ -27,7 +28,7 @@ class Character {
     }
 
     static edit(characterId) {
-
+        
     }
 
     static getCharacter(characterId) {

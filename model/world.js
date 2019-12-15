@@ -1,4 +1,5 @@
 let nextId = 1;
+const allWorldList = [];
 
 class World {
     constructor(worldName, difficulty, player, id) {
@@ -9,6 +10,13 @@ class World {
         this.favourites = 0;
         this.creationDate = new Date();
         this.player = player;
+        World.add(this);
+    }
+    
+    static add(world){
+        world.id = nextId++;
+        allWorldList.push(world);
+        return world;
     }
     
     edit(character){
