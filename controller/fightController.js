@@ -26,37 +26,58 @@ router.get("/monsterFight", (req, res, next) => {
     res.render('fight/monsterList');
 });
 
-router.get("/fightResults/:worldId/:youId/:enemyId", (req, res, next) => {
-    var result = null;
+router.get("/characterFight/fightResults/:worldId/:youId/:enemyId", (req, res, next) => {
     var worldId = req.params.worldId;
     var youId = req.params.youId;
     var enemyId = req.params.enemyId;
     
     var you = Character.getCharacter(youId);
-    var enemyPower = Character.getCharacter(enemyId);
+    var enemy = Character.getCharacter(enemyId);
     var world = World.getWorld(worldId);
     
-    const player = Player.getPlayer(playerId);
-    res.render('user/userProfile', {
-        player: player,
-        updateMessage: updateMessage
-    });
-    res.render('fight/fightScreen');
+    var enemyPower = enemy.attackPoints*5 + enemy.defencePoints*3 + enemy.level*3 + world.difficulty*5;
+    var youPower = you.attackPoints*5 + you.defencePoints*3 + you.level*3 + world.difficulty*3;
+    
+    var fight = null;
+    var player = Player.getPlayer(Player.loggedPlayer);
+    
+    if(youPower<enemyPower){
+        fight = new Fight(you, enemy, world, "Lost");
+    }else{
+        fight = new Fight(you, enemy, world, "Won");
+    }
+    
+    player.addFight(fight);
+    
+    res.render('fight/fightScreen', {fight: fight});
 });
 
-router.get("/fightResults/:youId/:monsterId", (req, res, next) => {
+router.get("/characterFight/fightResults/:worldId/:youId/:enemyId/like", (req, res, next) => {
+    var worldId = req.params.worldId;
+    var youId = req.params.youId;
+    var enemyId = req.params.enemyId;
     
+    var world = World.getWorld(worldId);
+    world.like();
+    
+    res.render("fightResults/"+ worldId +"/" + youId + "/" + enemyId);
+});
+
+
+router.get("/monsterFightResults/:youId/:monsterId", (req, res, next) => {
+    
+    res.render('fight/monsterFightScreen', {monsterFight: monsterFight});
 });
 
 router.post("/characterFight/new", (req, res, next) => {
     var worldId = req.body.world;
     var you = req.body.user;
     var enemy = req.body.enemy;
-    res.redirect("/fightResults/"+ worldId +"/" + you + "/" + enemy);
+    res.redirect("fightResults/"+ worldId +"/" + you + "/" + enemy);
 });
 
 router.post("/monsterFight/new", (req, res, next) => {
-    res.redirect("/fightResults/:character1Id/:monsterId");
+    res.redirect("monsterFightResults/:character1Id/:monsterId");
 });
 
 

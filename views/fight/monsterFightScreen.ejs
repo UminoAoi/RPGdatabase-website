@@ -22,11 +22,10 @@
         <div id="resultScreen">
 
             <p>Statistics:</p>
-            <p>Your character <%= fight.you.characterName %> fought with <%= fight.enemy.characterName %> in <%= fight.world.worldName %>.</p>
-            <p>Your character <em><%= fight.result %></em></p>
+            <p>Your character <%= monsterFight.you.characterName %> fought with <%= mosterFight.monster.monsterName %>.</p>
+            <p>Your character <em><%= result %></em></p>
         </div><!-- resultScreen end -->
         <div id="buttons">
-            <button id="likeWorld" onclick="like" >&hearts; Like a world</button>
 
             <a class="newFightButton" href="/fight">New Fight</a>
         </div>

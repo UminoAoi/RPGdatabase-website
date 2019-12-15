@@ -4,7 +4,7 @@ class Fight {
         this.enemy = character2;
         this.world = world;
         this.result = result;
-        this.fightDate = new Date();
+        this.fightDate = new Date().toISOString().slice(0,10);
     }
 }
 

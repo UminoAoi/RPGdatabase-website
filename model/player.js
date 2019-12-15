@@ -94,6 +94,10 @@ class Player {
     getWorlds() {
         return this.worldList;
     }
+    
+    addFight(fight){
+        this.fights.push(fight);
+    }
 
     static initData() {
 

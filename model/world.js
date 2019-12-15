@@ -45,6 +45,10 @@ class World {
         return allWorldList;
     }
     
+    like(){
+        this.favourites += 1;
+    }
+    
 }
 
 module.exports = World;
