@@ -10,6 +10,7 @@ class Monster {
         this.characterImage = image;
         this.creationDate = new Date();
         this.level = level;
+        add(this);
     }
 
     static add(monster) {
@@ -18,7 +19,7 @@ class Monster {
     }
 
     static initData() {
-        Monster.add(new Monster("MarioMonster", 20, 20, "https://www.eldarya.pl/static/img/pet/icon/c3e90397c7eea26193f843341f7374db~1525252185.png"));
+        new Monster("MarioMonster", 20, 20, "https://www.electronicbeats.net/app/uploads/sites/5/2018/02/mario.png");
     }
 }
 
