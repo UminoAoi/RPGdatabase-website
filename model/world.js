@@ -41,6 +41,10 @@ class World {
         return world;
     }
     
+    static getWorlds(){
+        return allWorldList;
+    }
+    
 }
 
 module.exports = World;
