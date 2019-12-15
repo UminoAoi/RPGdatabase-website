@@ -85,12 +85,11 @@ router.post("/weapon/post", (req, res, next) => {
 });
 
 router.post("/editWeapon/post", (req, res, next) => {
-    var c = req.query.character_id;
-    var dateFormat = req.body.charDate.split("-");
-    var date = new Date(dateFormat[2], dateFormat[0]-1, dateFormat[1]);
+    var c = req.query.weapon_id;
     var player = Player.getPlayer(Player.loggedPlayer);
+    var weapons = player.getWeapons();
     
-   Character.edit(c, req.body.charName, req.body.charSpecies, req.body.attackPoints, req.body.defencePoints, req.body.charImage, date, player);
+   Weapon.edit(c, req.body.weapName, req.body.bonusAttack, req.body.bonusDefence, weapons);
     
     res.redirect("/player/" + player.id);
     

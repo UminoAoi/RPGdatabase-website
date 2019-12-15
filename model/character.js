@@ -34,7 +34,7 @@ class Character {
         var character = null;
         for (var i = 0; i < allCharactersList.length; i++) {
             if (allCharactersList[i].id == characterId) {
-                character = allCharactersList[i]
+                character = allCharactersList[i];
             }
         }
         
