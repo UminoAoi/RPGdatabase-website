@@ -98,6 +98,10 @@ class Player {
     addFight(fight){
         this.fights.push(fight);
     }
+    
+    addMonsterFight(fight){
+        this.monsterFights.push(fight);
+    }
 
     static initData() {
 

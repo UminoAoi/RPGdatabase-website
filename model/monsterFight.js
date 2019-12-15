@@ -1,6 +1,6 @@
 class MonsterFight {
     constructor(character, monster, result) {
-        this.character = character;
+        this.you = character;
         this.monster = monster;
         this.result = result;
     }

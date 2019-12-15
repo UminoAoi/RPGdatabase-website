@@ -7,19 +7,33 @@ class Monster {
         this.monsterName = monsterName;
         this.attackPoints = attackpoints;
         this.defencePoints = defencepoints;
-        this.characterImage = image;
+        this.monsterImage = image;
         this.creationDate = new Date();
         this.level = level;
-        add(this);
+        Monster.add(this);
     }
 
     static add(monster) {
         monster.id = nextId++;
-        allMonstersList.push(player);
+        allMonstersList.push(monster);
+    }
+    
+    static getMonsters(){
+        return allMonstersList;
+    }
+    
+    static getMonster(monsterId) {
+        var monster = null;
+        for (var i = 0; i < allMonstersList.length; i++) {
+            if (allMonstersList[i].id == monsterId) {
+                return allMonstersList[i];
+            }
+        }
+        return monster;
     }
 
     static initData() {
-        new Monster("MarioMonster", 20, 20, "https://www.electronicbeats.net/app/uploads/sites/5/2018/02/mario.png");
+        new Monster("MarioMonster", 20, 20, "https://www.electronicbeats.net/app/uploads/sites/5/2018/02/mario.png", 3);
     }
 }
 

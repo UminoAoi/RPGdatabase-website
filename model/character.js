@@ -51,6 +51,7 @@ class Character {
     }
 
     static getCharacter(characterId) {
+        var character = null;
         for (var i = 0; i < allCharactersList.length; i++) {
             if (allCharactersList[i].id == characterId) {
                 return allCharactersList[i]

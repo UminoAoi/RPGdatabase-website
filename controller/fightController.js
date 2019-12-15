@@ -2,9 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 const Fight = require('../model/fight');
+const MonsterFight = require('../model/monsterFight');
 const Player = require('../model/player');
 const Character = require('../model/character');
 const World = require('../model/world');
+const Monster = require('../model/monster');
 
 router.get("/", (req, res, next) => {
     var player = Player.getPlayer(Player.loggedPlayer);
@@ -23,7 +25,11 @@ router.get("/characterFight", (req, res, next) => {
 });
 
 router.get("/monsterFight", (req, res, next) => {
-    res.render('fight/monsterList');
+    var player = Player.getPlayer(Player.loggedPlayer);
+    var monsterList = Monster.getMonsters();
+    console.log(monsterList);
+    
+    res.render('fight/monsterList', {player:player, monsterList:monsterList});
 });
 
 router.get("/characterFight/fightResults/:worldId/:youId/:enemyId", (req, res, next) => {
@@ -45,6 +51,7 @@ router.get("/characterFight/fightResults/:worldId/:youId/:enemyId", (req, res, n
         fight = new Fight(you, enemy, world, "Lost");
     }else{
         fight = new Fight(you, enemy, world, "Won");
+        you.fightPoints += enemyPower * 0.1;
     }
     
     player.addFight(fight);
@@ -64,7 +71,27 @@ router.get("/characterFight/fightResults/:worldId/:youId/:enemyId/like", (req, r
 });
 
 
-router.get("/monsterFightResults/:youId/:monsterId", (req, res, next) => {
+router.get("/monsterFight/monsterFightResults/:youId/:monsterId", (req, res, next) => {
+    var youId = req.params.youId;
+    var monsterId = req.params.monsterId;
+    
+    var you = Character.getCharacter(youId);
+    var monster = Monster.getMonster(monsterId);
+    
+    var monsterPower = monster.attackPoints*5 + monster.defencePoints*3 + monster.level*3;
+    var youPower = you.attackPoints*5 + you.defencePoints*3 + you.level*3;
+    
+    var monsterFight = null;
+    var player = Player.getPlayer(Player.loggedPlayer);
+    
+    if(youPower<monsterPower){
+        monsterFight = new MonsterFight(you, monster, "Lost");
+    }else{
+        monsterFight = new MonsterFight(you, monster, "Won");
+        you.fightPoints += monsterPower * 0.1;
+    }
+    
+    player.addMonsterFight(monsterFight);
     
     res.render('fight/monsterFightScreen', {monsterFight: monsterFight});
 });
@@ -77,7 +104,9 @@ router.post("/characterFight/new", (req, res, next) => {
 });
 
 router.post("/monsterFight/new", (req, res, next) => {
-    res.redirect("monsterFightResults/:character1Id/:monsterId");
+    var you = req.body.user;
+    var monster = req.body.monster;
+    res.redirect("monsterFightResults/" + you + "/" + monster);
 });
 
 
