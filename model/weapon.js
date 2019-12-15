@@ -11,7 +11,7 @@ class Weapon {
         this.player = player;
     }
 
-    edit(character) {
+    edit(weapon) {
 
     }
 }

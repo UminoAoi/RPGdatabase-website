@@ -23,7 +23,13 @@
         <form class="creationForm" method="post" action="userProfile.html" onsubmit="return createWeapon();">
             <div class=" creationSheet">
 
-                <label>Weapon's Name <input name="weapName" id="weapName" type="text"><span class="error" id="nameError">Error place</span></label>
+                <label>Weapon's Name <input name="weapName" id="weapName" type="text" 
+                <% if (weapon == null) { %> 
+                 value="" 
+                 <% }else { %> 
+                 value="<%= weapon.characterName %>" 
+                 <% } %>>
+                    ><span class="error" id="nameError">Error place</span></label>
 
                 <input type="submit" value="Create" class="createButton creationButton">
                 <span class="error" id="buttonError">Error place</span>
@@ -31,15 +37,30 @@
 
             <div class="creationSheet">
 
-                <h3 id="weaponPointsToAdd"><span id="pointsLeft">20</span> POINTS LEFT</h3>
+                <h3 id="weaponPointsToAdd">
+                    <% if (weapon == null) { %>
+                    <span id="pointsLeft">20</span> POINTS LEFT
+                    <% }else { %>
+                    <span id="pointsLeft">0</span> POINTS LEFT
+                    <% } %>
+                </h3>
                 <span class="error" id="pointsError">Error place</span>
                 <a class="down" onclick="downAttack(); return false;"><span class="arrow">&larr;</span></a>
-                <input name="attackPoints" id="attackPoints" placeholder="0" disabled>
+                <input name="attackPoints" id="attackPoints" placeholder="0"
+                       <% if (weapon == null) { %>
+                    value="0" 
+                    <% }else { %>
+                    value="<%= weapon.bonusAttack %>" 
+                    <% } %> disabled>
                 <a class="up" onclick="upAttack(); return false;"><span class="arrow">&rarr;</span></a>
                 <h5>Bonus Attack Points</h5>
                 <br>
                 <a class="down" onclick="downDefence(); return false;"><span class="arrow">&larr;</span></a>
-                <input name="defencePoints" id="defencePoints" placeholder="0" disabled>
+                <input name="defencePoints" id="defencePoints" placeholder="0"                        <% if (weapon == null) { %>
+                    value="0" 
+                    <% }else { %>
+                    value="<%= weapon.bonusDefence %>" 
+                    <% } %> disabled>
                 <a class="up" onclick="upDefence(); return false;"><span class="arrow">&rarr;</span></a>
                 <h5>Bonus Defence Points</h5>
 

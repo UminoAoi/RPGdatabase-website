@@ -10,7 +10,8 @@ router.get("/character", (req, res, next) => {
 });
 
 router.get("/weapon", (req, res, next) => {
-    res.render('userItems/weaponCreation');
+    var character = null;
+    res.render('userItems/weaponCreation', {weapon:weapon});
 });
 
 router.get("/world", (req, res, next) => {
@@ -42,17 +43,8 @@ router.get("/editWeapon", (req, res, next) => {
 });
 
 router.get("/editWorld", (req, res, next) => {
-    var c = req.query.weapon_id;
-    var player = Player.getPlayer(Player.loggedPlayer);
-    console.log(player);
-    var weapons = player.getWeapons();
-    var weapon = null;
-    for (var i = 0; i < weapons.length; i++) {
-            if (weapons[i].id == c) {
-                weapon = weapons[i];
-            }
-    }
-    res.render('userItems/weaponCreation', {
+   
+    res.render('userItems/worldCreation', {
         weapon: weapon
     });
 });
