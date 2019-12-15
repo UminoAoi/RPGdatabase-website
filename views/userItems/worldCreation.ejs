@@ -23,8 +23,17 @@
         <form class="creationForm" method="post" action="userProfile.html" onsubmit="return createWorld();">
             <div class="creationSheet" id="creationWorld">
 
-                <label>Worlds's Name <input name="worldName" id="worldName" type="text"><span id="nameError" class="error">Error place</span></label>
-                <label>Difficulty <input name="worldDifficulty" type="range" min="1" max="5" value="1"></label>
+                <label>Worlds's Name <input name="worldName" id="worldName" type="text" 
+                 <% if (world == null) { %> 
+                 value="" 
+                 <% }else { %> 
+                 value="<%= world.worldName %>" 
+                 <% } %>><span id="nameError" class="error">Error place</span></label>
+                <label>Difficulty <input name="worldDifficulty" type="range" min="1" max="5" <% if (world == null) { %> 
+                 value="1" 
+                 <% }else { %> 
+                 value="<%= world.difficulty %>" 
+                 <% } %>></label>
 
                 <input type="submit" value="Create" class="createButton creationButton">
                 <span id="buttonError" class="error">Error place</span>

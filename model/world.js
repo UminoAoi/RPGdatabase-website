@@ -19,9 +19,20 @@ class World {
         return world;
     }
     
-    edit(character){
+    edit(world){
         
     }
+    
+    static getWorld(worldId) {
+        var world = null;
+        for (var i = 0; i < allWorldList.length; i++) {
+            if (allWorldList[i].id == worldId) {
+                return allWorldList[i]
+            }
+        }
+        return world;
+    }
+    
 }
 
 module.exports = World;

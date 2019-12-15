@@ -3,6 +3,7 @@ const router = express.Router();
 
 const Player = require('../model/player');
 const Character = require('../model/character');
+const World = require('../model/world');
 
 router.get("/character", (req, res, next) => {
     var character = null;
@@ -10,12 +11,13 @@ router.get("/character", (req, res, next) => {
 });
 
 router.get("/weapon", (req, res, next) => {
-    var character = null;
+    var weapon = null;
     res.render('userItems/weaponCreation', {weapon:weapon});
 });
 
 router.get("/world", (req, res, next) => {
-    res.render('userItems/worldCreation');
+    var world = null;
+    res.render('userItems/worldCreation', {world:world});
 });
 
 router.get("/editCharacter", (req, res, next) => {
@@ -43,9 +45,10 @@ router.get("/editWeapon", (req, res, next) => {
 });
 
 router.get("/editWorld", (req, res, next) => {
-   
+    var c = req.query.world_id;
+    var world = World.getWorld(c);
     res.render('userItems/worldCreation', {
-        weapon: weapon
+        world: world
     });
 });
 
