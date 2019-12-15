@@ -2,14 +2,17 @@ let nextId = 1;
 const allCharactersList = [];
 
 class Character {
-    constructor(characterName, species, attackpoints, defencepoints, image, player, id) {
+    constructor(characterName, species, attackpoints, defencepoints, image, date, player, id) {
         this.id = id;
         this.characterName = characterName;
         this.species = species;
         this.attackPoints = attackpoints;
         this.defencePoints = defencepoints;
         this.characterImage = image;
-        this.creationDate = new Date();
+        if (date == undefined)
+            this.creationDate = new Date();
+        else
+            this.creationDate = date;
         this.level = 1;
         this.fightPoints = 0;
         this.player = player;

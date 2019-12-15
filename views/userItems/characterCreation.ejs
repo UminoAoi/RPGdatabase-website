@@ -20,7 +20,12 @@
     <h2 class="creationHeader">Character Creation</h2>
 
     <div class="container">
-        <form class="creationForm" method="post" action="userProfile.html" onsubmit="return createCharacter();">
+        <form class="creationForm" method="post" 
+              <% if (character == null) { %> 
+                 action="/creation/character/post" 
+                 <% }else { %> 
+                 action="/creation/editCharacter/post"
+                 <% } %> onsubmit="return createCharacter();">
             <div class="creationSheet">
 
                 <label>Character's Name <input name="charName" id="charName" type="text" 
