@@ -19,8 +19,16 @@ class World {
         return world;
     }
     
-    edit(world){
+    static edit(worldId, worldName, difficulty){
+        var world = null;
+        for (var i = 0; i < allWorldList.length; i++) {
+            if (allWorldList[i].id == worldId) {
+                world = allWorldList[i];
+            }
+        }
         
+        world.worldName = worldName;
+        world.difficulty = difficulty;
     }
     
     static getWorld(worldId) {

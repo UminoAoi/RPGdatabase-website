@@ -95,4 +95,23 @@ router.post("/editWeapon/post", (req, res, next) => {
     
 });
 
+router.post("/world/post", (req, res, next) => {
+    var player = Player.getPlayer(Player.loggedPlayer);
+    
+    const newWorld = new World(req.body.worldName, req.body.worldDifficulty, player);
+    
+    player.addWorld(newWorld);
+    res.redirect("/player/" + player.id);
+});
+
+router.post("/editWorld/post", (req, res, next) => {
+    var c = req.query.world_id;
+    var player = Player.getPlayer(Player.loggedPlayer);
+    
+   World.edit(c, req.body.worldName, req.body.worldDifficulty);
+    
+    res.redirect("/player/" + player.id);
+    
+});
+
 module.exports.route = router;

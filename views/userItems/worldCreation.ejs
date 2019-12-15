@@ -20,7 +20,12 @@
     <h2 class="creationHeader">World Creation</h2>
 
     <div class="container creationWContainer">
-        <form class="creationForm" method="post" action="userProfile.html" onsubmit="return createWorld();">
+        <form class="creationForm" method="post" 
+              <% if (world == null) { %> 
+                 action="/creation/world/post" 
+                 <% }else { %> 
+                 action="/creation/editWorld/post?world_id=<%= world.id %>"
+                 <% } %> onsubmit="return createWorld();">
             <div class="creationSheet" id="creationWorld">
 
                 <label>Worlds's Name <input name="worldName" id="worldName" type="text" 
