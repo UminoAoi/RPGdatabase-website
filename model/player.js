@@ -22,7 +22,7 @@ class Player {
 
         Player.add(this);
         
-        this.addCharacter(new Character("FirstCharacter", "human", 10, 10, "https://www.eldarya.pl/static/img/pet/icon/c3e90397c7eea26193f843341f7374db~1525252185.png", new Date(), this.id));
+        this.addCharacter(new Character("FirstCharacter", "human", 10, 10, "https://www.eldarya.pl/static/img/pet/icon/c3e90397c7eea26193f843341f7374db~1525252185.png", new Date(), null, this.id));
         this.addWeapon(new Weapon("CoolWeapon", 5, 5, this, this.weaponList.length));
         this.addWorld(new World("Amazing World of Coolness", 5, this, this.worldList.length));
         
@@ -90,6 +90,16 @@ class Player {
 
     addWeapon(weapon) {
         this.weaponList.push(weapon);
+    }
+    
+    getWeapon(weaponId){
+        var weapon = null;
+        for (var i = 0; i < this.weaponList.length; i++) {
+            if (this.weaponList[i].id >= weaponId) {
+                weapon = this.weaponList[i];
+            }
+        }
+        return weapon;
     }
 
     getWeapons() {

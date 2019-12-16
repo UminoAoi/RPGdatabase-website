@@ -8,7 +8,9 @@ const Weapon = require('../model/weapon');
 
 router.get("/character", (req, res, next) => {
     var character = null;
-    res.render('userItems/characterCreation', {character:character});
+    var player = Player.getPlayer(Player.loggedPlayer);
+    var weapons = player.getWeapons();
+    res.render('userItems/characterCreation', {character:character, weapons:weapons});
 });
 
 router.get("/weapon", (req, res, next) => {
@@ -24,8 +26,11 @@ router.get("/world", (req, res, next) => {
 router.get("/editCharacter", (req, res, next) => {
     var c = req.query.character_id;
     var character = Character.getCharacter(c);
+    var player = Player.getPlayer(Player.loggedPlayer);
+    var weapons = player.getWeapons();
     res.render('userItems/characterCreation', {
-        character: character
+        character: character,
+        weapons: weapons
     });
 });
 
@@ -56,8 +61,9 @@ router.post("/character/post", (req, res, next) => {
     var dateFormat = req.body.charDate.split("-");
     var date = new Date(dateFormat[2], dateFormat[0]-1, dateFormat[1]);
     var player = Player.getPlayer(Player.loggedPlayer);
+    var weapon = player.getWeapon(req.body.weapon);
     
-    const newCharacter = new Character(req.body.charName, req.body.charSpecies, req.body.attackPoints, req.body.defencePoints, req.body.charImage, date, player);
+    const newCharacter = new Character(req.body.charName, req.body.charSpecies, req.body.attackPoints, req.body.defencePoints, req.body.charImage, date, weapon, player.id);
     
     player.addCharacter(newCharacter);
     res.redirect("/player/" + player.id);
@@ -68,8 +74,9 @@ router.post("/editCharacter/post", (req, res, next) => {
     var dateFormat = req.body.charDate.split("-");
     var date = new Date(dateFormat[2], dateFormat[0]-1, dateFormat[1]);
     var player = Player.getPlayer(Player.loggedPlayer);
+    var weapon = player.getWeapon(req.body.weapon)
     
-   Character.edit(c, req.body.charName, req.body.charSpecies, req.body.attackPoints, req.body.defencePoints, req.body.charImage, date, player);
+   Character.edit(c, req.body.charName, req.body.charSpecies, req.body.attackPoints, req.body.defencePoints, req.body.charImage, date, weapon);
     
     res.redirect("/player/" + player.id);
     

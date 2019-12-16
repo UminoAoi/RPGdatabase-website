@@ -2,7 +2,7 @@ let nextId = 1;
 const allCharactersList = [];
 
 class Character {
-    constructor(characterName, species, attackpoints, defencepoints, image, date, player, id) {
+    constructor(characterName, species, attackpoints, defencepoints, image, date, weapon, player, id) {
         this.id = id;
         this.characterName = characterName;
         this.species = species;
@@ -15,8 +15,11 @@ class Character {
             this.creationDate = date;
         this.level = 1;
         this.fightPoints = 0;
+        if(weapon != null)
+            this.weapon = weapon;
+        else 
+            this.weapon = null;
         this.player = player;
-        this.weapon = null;
         Character.add(this);
     }
 
@@ -35,7 +38,7 @@ class Character {
         }
     }
 
-    static edit(characterId, characterName, species, attackpoints, defencepoints, image, date) {
+    static edit(characterId, characterName, species, attackpoints, defencepoints, image, date, weapon) {
         var character = null;
         for (var i = 0; i < allCharactersList.length; i++) {
             if (allCharactersList[i].id == characterId) {
@@ -52,7 +55,10 @@ class Character {
             character.creationDate = new Date();
         else
             character.creationDate = date;
-        character.weapon = null;
+        if(weapon != null)
+            character.weapon = weapon;
+        else 
+            character.weapon = null;
     }
 
     static getCharacter(characterId) {
@@ -70,7 +76,6 @@ class Character {
         for (var i = 0; i < allCharactersList.length; i++) {
             if (allCharactersList[i].player == null || allCharactersList[i].player != player.id) {
                 enemyList.push(allCharactersList[i]);
-                console.log(allCharactersList[i].player + " " + player.id);
             }
         }
         return enemyList;

@@ -85,7 +85,11 @@
                                 <td><%= character.level %></td>
                                 <td><%= character.attackPoints %></td>
                                 <td><%= character.defencePoints %></td>
-                                <td><%= character.id %></td>
+                                <td><% if (character.weapon == null) { %>
+                                none
+                                <% }else { %>
+                                <%= character.weapon.weaponName %>
+                                <% } %></td>
                             </tr>
                             <% }) %>
                         </tbody>

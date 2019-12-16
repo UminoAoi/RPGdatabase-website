@@ -91,9 +91,15 @@
                 <h5>Defence Points</h5>
 
                 <label>Weapon
-                    <select id="weaponSelect">
-                        <option selected></option>
-                        <option>Name1</option>
+                    <select id="weaponSelect" name="weapon">
+                        <% if (character != null && character.weapon != null) { %>
+                        <option value="<%= character.weapon.id %>" selected><%= character.weapon.weaponName %> </option>
+                    <% }else { %>
+                        <option value="0" selected></option>
+                        <% } %>
+                        <% weapons.forEach(function(weapon){ %>
+                            <option value="<%= weapon.id %>" ><%= weapon.weaponName %></option>
+                        <% }) %>
                     </select></label>
             </div>
 
