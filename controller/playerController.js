@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const Player = require('../model/player');
+const Character = require('../model/character');
+const Weapon= require('../model/weapon');
+const World = require('../model/world');
 
 router.get("/", (req, res, next) => {
     player = Player.getList();
@@ -22,6 +25,13 @@ router.get("/:playerId", (req, res, next) => {
         player: player,
         updateMessage: updateMessage
     });
+});
+
+router.get("/delete/character", (req, res, next) => {
+    var c = req.query.character_id;
+    var player = Player.getPlayer(Player.loggedPlayer);
+    player.deleteCharacter(c);
+    res.redirect("/player/" + player.id);
 });
 
 module.exports.route = router;

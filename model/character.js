@@ -27,7 +27,12 @@ class Character {
     }
 
     static delete(characterId) {
-
+         for (var i = 0; i < allCharactersList.length; i++) {
+            if (allCharactersList[i].id == characterId) {
+                allCharactersList.splice(i, 1);
+                i--;
+            }
+        }
     }
 
     static edit(characterId, characterName, species, attackpoints, defencepoints, image, date) {

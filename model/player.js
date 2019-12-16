@@ -66,6 +66,16 @@ class Player {
     getCharacters() {
         return this.characterList;
     }
+    
+    deleteCharacter(characterId){
+       for (var i = 0; i < this.characterList.length; i++) {
+            if (this.characterList[i].id == characterId) {
+                this.characterList.splice(i, 1);
+                i--;
+            }
+        } 
+        Character.delete(characterId);
+    }
 
     getStrongestCharacter() {
         var char = null;
