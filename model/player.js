@@ -127,6 +127,15 @@ class Player {
         this.fights.push(fight);
     }
     
+    deleteFight(fightId){
+        for (var i = 0; i < this.fights.length; i++) {
+            if (this.fights[i].id == fightId) {
+                this.fights.splice(i, 1);
+                i--;
+            }
+        } 
+    }
+    
     addMonsterFight(fight){
         this.monsterFights.push(fight);
     }

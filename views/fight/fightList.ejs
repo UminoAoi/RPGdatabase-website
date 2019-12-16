@@ -38,11 +38,11 @@
                         <td>
                             <div class="statisticsCheck">
                                 <a class="fightOptions">Details</a><span class="tooltiptext">
-                                    Date of fight: <%= fight.fightDate %> <br>
+                                    Date of fight: <%= fight.fightDate.toISOString().slice(0,10) %> <br>
                                     Result: <%= fight.result %> <br>
                                 </span>
                             </div>
-                            <a class="fightOptions">Delete</a>
+                            <a class="fightOptions" href="/fight/delete?fight_id=<%= fight.id %>">Delete</a>
                         </td>
                     </tr>
                     <% }) %>

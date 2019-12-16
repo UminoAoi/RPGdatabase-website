@@ -24,10 +24,18 @@ router.get("/characterFight", (req, res, next) => {
     res.render('fight/enemiesList', {player:player, enemyList:enemyList, worlds:worlds});
 });
 
+router.get("/delete", (req, res, next) => {
+    var fightId = req.query.fight_id;
+    
+    var player = Player.getPlayer(Player.loggedPlayer);
+    player.deleteFight(fightId);
+    
+    res.redirect("/fight");
+});
+
 router.get("/monsterFight", (req, res, next) => {
     var player = Player.getPlayer(Player.loggedPlayer);
     var monsterList = Monster.getMonsters();
-    console.log(monsterList);
     
     res.render('fight/monsterList', {player:player, monsterList:monsterList});
 });
