@@ -104,6 +104,15 @@ class Player {
         return this.worldList;
     }
     
+    deleteWeapon(weaponId){
+        for (var i = 0; i < this.weaponList.length; i++) {
+            if (this.weaponList[i].id == weaponId) {
+                this.weaponList.splice(i, 1);
+                i--;
+            }
+        } 
+    }
+    
     addFight(fight){
         this.fights.push(fight);
     }

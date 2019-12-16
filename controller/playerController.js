@@ -34,4 +34,11 @@ router.get("/delete/character", (req, res, next) => {
     res.redirect("/player/" + player.id);
 });
 
+router.get("/delete/weapon", (req, res, next) => {
+    var c = req.query.weapon_id;
+    var player = Player.getPlayer(Player.loggedPlayer);
+    player.deleteWeapon(c);
+    res.redirect("/player/" + player.id);
+});
+
 module.exports.route = router;
