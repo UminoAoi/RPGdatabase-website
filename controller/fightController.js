@@ -12,7 +12,7 @@ router.get("/", (req, res, next) => {
     var player = Player.getPlayer(Player.loggedPlayer);
     var enemyFights = player.fights;
     var monsterFights = player.monsterFights;
-    res.render('fight/fightList', {enemyFights:enemyFights, monsterFights:monsterFights});
+    res.render('fight/fightList', {enemyFights:enemyFights, monsterFights:monsterFights, player:player});
 });
 
 
@@ -64,7 +64,7 @@ router.get("/characterFight/fightResults/:worldId/:youId/:enemyId", (req, res, n
     
     player.addFight(fight);
     
-    res.render('fight/fightScreen', {fight: fight});
+    res.render('fight/fightScreen', {fight: fight, player:player});
 });
 
 router.get("/characterFight/fightResults/:worldId/:youId/:enemyId/like", (req, res, next) => {
@@ -101,7 +101,7 @@ router.get("/monsterFight/monsterFightResults/:youId/:monsterId", (req, res, nex
     
     player.addMonsterFight(monsterFight);
     
-    res.render('fight/monsterFightScreen', {monsterFight: monsterFight});
+    res.render('fight/monsterFightScreen', {monsterFight: monsterFight, player:player});
 });
 
 router.post("/characterFight/new", (req, res, next) => {

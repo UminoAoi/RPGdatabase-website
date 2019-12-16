@@ -10,17 +10,19 @@ router.get("/character", (req, res, next) => {
     var character = null;
     var player = Player.getPlayer(Player.loggedPlayer);
     var weapons = player.getWeapons();
-    res.render('userItems/characterCreation', {character:character, weapons:weapons});
+    res.render('userItems/characterCreation', {character:character, weapons:weapons, player:player});
 });
 
 router.get("/weapon", (req, res, next) => {
     var weapon = null;
-    res.render('userItems/weaponCreation', {weapon:weapon});
+    var player = Player.getPlayer(Player.loggedPlayer);
+    res.render('userItems/weaponCreation', {weapon:weapon, player:player});
 });
 
 router.get("/world", (req, res, next) => {
     var world = null;
-    res.render('userItems/worldCreation', {world:world});
+    var player = Player.getPlayer(Player.loggedPlayer);
+    res.render('userItems/worldCreation', {world:world, player:player});
 });
 
 router.get("/editCharacter", (req, res, next) => {
@@ -30,7 +32,8 @@ router.get("/editCharacter", (req, res, next) => {
     var weapons = player.getWeapons();
     res.render('userItems/characterCreation', {
         character: character,
-        weapons: weapons
+        weapons: weapons,
+        player:player
     });
 });
 
@@ -45,15 +48,18 @@ router.get("/editWeapon", (req, res, next) => {
             }
     }
     res.render('userItems/weaponCreation', {
-        weapon: weapon
+        weapon: weapon,
+        player:player
     });
 });
 
 router.get("/editWorld", (req, res, next) => {
     var c = req.query.world_id;
     var world = World.getWorld(c);
+    var player = Player.getPlayer(Player.loggedPlayer);
     res.render('userItems/worldCreation', {
-        world: world
+        world: world,
+        player:player
     });
 });
 
