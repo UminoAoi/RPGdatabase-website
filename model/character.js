@@ -65,6 +65,7 @@ class Character {
         for (var i = 0; i < allCharactersList.length; i++) {
             if (allCharactersList[i].player == null || allCharactersList[i].player != player.id) {
                 enemyList.push(allCharactersList[i]);
+                console.log(allCharactersList[i].player + " " + player.id);
             }
         }
         return enemyList;
