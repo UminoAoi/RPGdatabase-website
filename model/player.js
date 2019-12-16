@@ -95,6 +95,15 @@ class Player {
     getWeapons() {
         return this.weaponList;
     }
+    
+    deleteWeapon(weaponId){
+        for (var i = 0; i < this.weaponList.length; i++) {
+            if (this.weaponList[i].id == weaponId) {
+                this.weaponList.splice(i, 1);
+                i--;
+            }
+        } 
+    }
 
     addWorld(world) {
         this.worldList.push(world);
@@ -104,13 +113,14 @@ class Player {
         return this.worldList;
     }
     
-    deleteWeapon(weaponId){
-        for (var i = 0; i < this.weaponList.length; i++) {
-            if (this.weaponList[i].id == weaponId) {
-                this.weaponList.splice(i, 1);
+    deleteWorld(worldId){
+       for (var i = 0; i < this.worldList.length; i++) {
+            if (this.worldList[i].id == worldId) {
+                this.worldList.splice(i, 1);
                 i--;
             }
         } 
+        World.delete(worldId);
     }
     
     addFight(fight){

@@ -49,6 +49,15 @@ class World {
         this.favourites += 1;
     }
     
+    static delete(worldId) {
+         for (var i = 0; i < allWorldList.length; i++) {
+            if (allWorldList[i].id == worldId) {
+                allWorldList.splice(i, 1);
+                i--;
+            }
+        }
+    }
+    
 }
 
 module.exports = World;
