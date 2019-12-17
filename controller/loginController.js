@@ -15,9 +15,7 @@ router.get("/userProfile", (req, res, next) => {
 router.post("/register", (req, res, next) => {
     const newUser = new Player(req.body.userName, req.body.password, req.body.email);
     Player.loggedPlayer = newUser;
-    res.redirect("/player/" + newUser.id); //JAK WYRENDEROWAĆ W PLAYERCONTROLLER DLA DANEGO NUMERU? JAK PRZESŁAĆ ZMIENNĄ DANEGO UŻYTKOWNIKA Z REDIRECT DO KONTROLERA?
-
-    //res.redirect("/player");
+    res.redirect("/player/" + newUser.id); 
 });
 
 router.post("/login", (req, res, next) => {
