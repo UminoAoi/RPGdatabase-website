@@ -2,8 +2,8 @@ let nextId = 1;
 const allWorldList = [];
 
 class World {
-    constructor(worldName, difficulty, player, id) {
-        this.id = id;
+    constructor(worldName, difficulty, player) {
+        this.id = null;
         this.worldName = worldName;
         this.difficulty = difficulty;
         this.fightsNumber = 0;

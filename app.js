@@ -45,6 +45,7 @@ const pageParamsHelper =  (req, res, next) => {
   res.locals.loggedUser = req.session.loggedUser;
   next();
 };
+app.use(pageParamsHelper);
 
 //funkcja sprawdzająca, czy użytkownik jest zalogowany
 //bez niej byłoby możliwe wykonanie niedozwolonej akcji przez niezalogowanego użytkownika
@@ -55,13 +56,13 @@ const loginController = require('./controller/loginController');
 app.use('/login', loginController.route);
 
 const playerController = require('./controller/playerController');
-app.use('/player', playerController.route);
+app.use('/player', authCheck, playerController.route);
 
 const fightController = require('./controller/fightController');
-app.use('/fight', fightController.route);
+app.use('/fight', authCheck, fightController.route);
 
 const creationController = require('./controller/creationController');
-app.use('/creation', creationController.route);
+app.use('/creation', authCheck, creationController.route);
 
 app.listen(port, () => {
     console.log(`App is listening at port ${port}`);
