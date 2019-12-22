@@ -1,4 +1,3 @@
-const Player = require('../model/player');
 
 function register() {
 
@@ -92,6 +91,3 @@ function login() {
 
 }
 
-static throwLoginError(){
-    
-}
