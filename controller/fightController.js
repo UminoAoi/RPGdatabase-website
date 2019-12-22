@@ -9,7 +9,7 @@ const World = require('../model/world');
 const Monster = require('../model/monster');
 
 router.get("/", (req, res, next) => {
-    var player = Player.getPlayer(Player.loggedPlayer);
+    var player = Player.getPlayer(req.session.loggedUser.id);
     var enemyFights = player.fights;
     var monsterFights = player.monsterFights;
     res.render('fight/fightList', {enemyFights:enemyFights, monsterFights:monsterFights, player:player});
@@ -17,7 +17,7 @@ router.get("/", (req, res, next) => {
 
 
 router.get("/characterFight", (req, res, next) => {
-    var player = Player.getPlayer(Player.loggedPlayer);
+    var player = Player.getPlayer(req.session.loggedUser.id);
     
     var enemyList= Character.enemyList(player);
     var worlds = World.getWorlds();
@@ -27,14 +27,14 @@ router.get("/characterFight", (req, res, next) => {
 router.get("/delete", (req, res, next) => {
     var fightId = req.query.fight_id;
     
-    var player = Player.getPlayer(Player.loggedPlayer);
+    var player = Player.getPlayer(req.session.loggedUser.id);
     player.deleteFight(fightId);
     
     res.redirect("/fight");
 });
 
 router.get("/monsterFight", (req, res, next) => {
-    var player = Player.getPlayer(Player.loggedPlayer);
+    var player = Player.getPlayer(req.session.loggedUser.id);
     var monsterList = Monster.getMonsters();
     
     res.render('fight/monsterList', {player:player, monsterList:monsterList});
@@ -53,7 +53,7 @@ router.get("/characterFight/fightResults/:worldId/:youId/:enemyId", (req, res, n
     var youPower = you.attackPoints*5 + you.defencePoints*3 + you.level*3 + world.difficulty*3;
     
     var fight = null;
-    var player = Player.getPlayer(Player.loggedPlayer);
+    var player = Player.getPlayer(req.session.loggedUser.id);
     
     if(youPower<enemyPower){
         fight = new Fight(you, enemy, world, "Lost");
@@ -90,7 +90,7 @@ router.get("/monsterFight/monsterFightResults/:youId/:monsterId", (req, res, nex
     var youPower = you.attackPoints*5 + you.defencePoints*3 + you.level*3;
     
     var monsterFight = null;
-    var player = Player.getPlayer(Player.loggedPlayer);
+    var player = Player.getPlayer(req.session.loggedUser.id);
     
     if(youPower<monsterPower){
         monsterFight = new MonsterFight(you, monster, "Lost");

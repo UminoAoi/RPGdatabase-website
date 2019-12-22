@@ -1,4 +1,3 @@
-//https://www.geeksforgeeks.org/model-view-controllermvc-architecture-for-node-applications/
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');

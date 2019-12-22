@@ -69,12 +69,15 @@ class Player {
     static checkAndGetPlayer(userName, password) {
         var player = null;
         for (var i = 0; i < playerList.length; i++) {
-            if (playerList[i].userName == userName &&
-                playerList[i].comparePassword(password)) {
+            if (playerList[i].userName == userName) {
                 player = playerList[i];
-                return player;
+                player.comparePassword(password).then(result => {
+                    if(result)
+                        return player;
+                    });
             }
-        }
+            player = null;
+        }        
         return player;
     }
 
