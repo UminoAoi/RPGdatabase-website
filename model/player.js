@@ -2,6 +2,8 @@ let nextId = 1;
 var loggedPlayer;
 const playerList = [];
 
+const bcrypt = require('bcryptjs');
+
 const Character = require('../model/character');
 const Weapon = require('../model/weapon');
 const World = require('../model/world');
@@ -10,7 +12,13 @@ class Player {
     constructor(userName, password, email, id) {
         this.id = id;
         this.userName = userName;
-        this.password = password;
+        Player.hashPassword(password)
+          .then(hash => {
+            this.password = password;
+          })
+          .catch(err => {
+            console.log(err);
+          });
         this.email = email;
         this.rank = 1;
         this.registrationDate = new Date();
@@ -26,6 +34,18 @@ class Player {
         this.addWeapon(new Weapon("CoolWeapon", 5, 5, this, this.weaponList.length));
         this.addWorld(new World("Amazing World of Coolness", 5, this, this.worldList.length));
         
+    }
+    
+    static hashPassword(password) {
+      //wołanie asynchroniczne
+      //zwraca promesę, a nie wynik bezpośrednio
+      return bcrypt.hash(password, 12);
+    }
+    
+    comparePassword(password) {
+      //wołanie asynchroniczne
+      //zwraca promesę, a nie wynik bezpośrednio
+      return bcrypt.compare(password, this.password);
     }
 
     static add(player) {
@@ -51,7 +71,7 @@ class Player {
         var player = null;
         for (var i = 0; i < playerList.length; i++) {
             if (playerList[i].userName == userName &&
-                playerList[i].password == password) {
+                playerList[i].comparePassword(password)) {
                 player = playerList[i];
                 return player;
             }

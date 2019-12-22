@@ -4,6 +4,7 @@ const router = express.Router();
 const Player = require('../model/player');
 
 router.get("/", (req, res, next) => {
+    req.session.destroy();
     res.render('user/loginScreen');
 });
 
@@ -24,8 +25,11 @@ router.post("/login", (req, res, next) => {
     var player = Player.checkAndGetPlayer(req.body.loginName, req.body.loginPassword);
     Player.loggedPlayer = player;
     var error = "";
-    if (player != null) 
+    if (player != null){ 
         res.redirect("/player/" + player.id);
+        req.session.isUserLoggedIn = true;
+        req.session.loggedUser = player;
+    }
     else{
         error = "Wrong username or password.";
         res.render("user/loginScreen", {error: error});
