@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
@@ -9,6 +11,27 @@ const port = 3000;
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+
+
+const db = require('./db/mysql');
+let dbSchemaScript = fs.readFileSync(path.join(__dirname, '/db/schema.sql')).toString();
+console.log(`Attempt to run schema.sql...`);
+console.log(dbSchemaScript);
+db.query(dbSchemaScript)
+  .then( () => {
+    //test pobierania danych z bazy
+    //przykład sekwencjonowania wywołań asynchronicznych -
+    //zwrócona promesa będzie obsłużowna w następnym bloku then()
+    return db.execute('select * from users');
+  })
+  .then(([users, metadata]) => {
+    console.log(users);
+  })
+  .catch(err => {
+    console.log(err);
+  })
+;
+
 
 app.use(session({
   //hasło do szyfrowania cookie będącym identyfikatorem sesji
