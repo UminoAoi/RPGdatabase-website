@@ -1,12 +1,11 @@
-const mysql = require('mysql2');
+const mysql = require('mysql');
 
-const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: 'toor',
-  database: 'tin-example',
-  multipleStatements: true,
-  charset: 'utf8'
+const db = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "1234567890",
+    database: "rpgdb",
+    multipleStatements: true
 });
 
-module.exports = pool.promise();
+module.exports = db;

@@ -1,5 +1,6 @@
+const db = require('../db/mysql');
 let nextId = 1;
-const playerList = [];
+//const playerList = [];
 
 const bcrypt = require('bcryptjs');
 
@@ -11,13 +12,14 @@ class Player {
     constructor(userName, password, email, id) {
         this.id = id;
         this.userName = userName;
-        Player.hashPassword(password)
+        Player.hashPassword(password) // NIE DZIAŁA CZEMU?? UNDEFINED, W BAZIE DANYCH NULL
           .then(hash => {
-            this.password = password;
+            //this.password = password;
           })
           .catch(err => {
             console.log(err);
           });
+        this.password = password;
         this.email = email;
         this.rank = 1;
         this.registrationDate = new Date();
@@ -27,11 +29,11 @@ class Player {
         this.fights = [];
         this.monsterFights = [];
 
-        Player.add(this);
+        this.add();
         
-        this.addCharacter(new Character("FirstCharacter", "human", 10, 10, "https://www.eldarya.pl/static/img/pet/icon/c3e90397c7eea26193f843341f7374db~1525252185.png", new Date(), null, this.id));
-        this.addWeapon(new Weapon("CoolWeapon", 5, 5, this.id));
-        this.addWorld(new World("Amazing World of Coolness", 5, this.id));
+        //this.addCharacter(new Character("FirstCharacter", "human", 10, 10, "https://www.eldarya.pl/static/img/pet/icon/c3e90397c7eea26193f843341f7374db~1525252185.png", new Date(), null, this.id));
+        //this.addWeapon(new Weapon("CoolWeapon", 5, 5, this.id));
+        //this.addWorld(new World("Amazing World of Coolness", 5, this.id));
         
     }
     
@@ -47,10 +49,23 @@ class Player {
       return bcrypt.compare(password, this.password);
     }
 
-    static add(player) {
-        player.id = nextId++;
-        playerList.push(player);
-        return player;
+    add() {
+        //player.id = nextId++;
+        //playerList.push(player);
+        //return player;
+        
+        var sql = "SELECT @id := COUNT(*)+1 Id FROM user; " +
+            "Insert into user (UserId, Username, Password, Email, UserRank, RegistrationDate, Nationality) " +
+            "values (@id, ?, ?, ?, 1, CURDATE(), 'None');" 
+        db.query(sql,[this.userName, this.password, this.email], (err, rows, fields) => {
+            if(err)
+                console.log(err);
+            else{
+                console.log("Added player.");
+                var objectValue = JSON.parse(JSON.stringify(rows[0]));
+                return objectValue['Id'];
+            }
+        });
     }
 
     static getList() {
@@ -58,11 +73,13 @@ class Player {
     }
 
     static getPlayer(id) {
-        for (var i = 0; i < playerList.length; i++) {
-            if (playerList[i].id == id) {
-                return playerList[i];
-            }
-        }
+        var sql = "SELECT * FROM user WHERE UserId = " + id;
+        db.query(sql,[id], (err, rows, fields) => {
+            if(err)
+                console.log(err);
+            else
+                console.log(rows);
+        });
         return null;
     }
 

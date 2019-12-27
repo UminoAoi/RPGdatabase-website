@@ -1,3 +1,4 @@
+const db = require('../db/mysql');
 let nextId = 1;
 const allCharactersList = [];
 
