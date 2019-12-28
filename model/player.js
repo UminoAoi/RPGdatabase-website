@@ -1,3 +1,5 @@
+//PROBLEM Z HASHOWANIEM HASEŁ, PRZYPISYWANIEM ID Z BAZY DANYCH, ZWRACANIEM WYNIKU DZIAŁAŃ Z BAZY DANYCH
+
 const db = require('../db/mysql');
 let nextId = 1;
 //const playerList = [];
