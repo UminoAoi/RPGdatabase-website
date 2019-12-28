@@ -14,6 +14,7 @@ router.get("/userProfile", (req, res, next) => {
 
 router.post("/register", (req, res, next) => {
     const newUser = new Player(req.body.userName, req.body.password, req.body.email);
+    console.log(newUser);
     req.session.isUserLoggedIn = true;
     req.session.loggedUser = newUser;
     //console.log(req.session.loggedUser);

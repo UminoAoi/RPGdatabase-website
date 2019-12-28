@@ -29,7 +29,7 @@ class Player {
         this.fights = [];
         this.monsterFights = [];
 
-        this.add();
+        this.id = this.add(); //.then(data => this id = data), zwracanie promise, NIC NIE DZIAŁA???
         
         //this.addCharacter(new Character("FirstCharacter", "human", 10, 10, "https://www.eldarya.pl/static/img/pet/icon/c3e90397c7eea26193f843341f7374db~1525252185.png", new Date(), null, this.id));
         //this.addWeapon(new Weapon("CoolWeapon", 5, 5, this.id));
@@ -49,23 +49,29 @@ class Player {
       return bcrypt.compare(password, this.password);
     }
 
-    add() {
+    async add() {
         //player.id = nextId++;
         //playerList.push(player);
         //return player;
         
-        var sql = "SELECT @id := COUNT(*)+1 Id FROM user; " +
+        var result = null;
+        var r = null;
+        
+        var sql = "SELECT @id := COUNT(*)+1 id FROM user; " +
             "Insert into user (UserId, Username, Password, Email, UserRank, RegistrationDate, Nationality) " +
             "values (@id, ?, ?, ?, 1, CURDATE(), 'None');" 
-        db.query(sql,[this.userName, this.password, this.email], (err, rows, fields) => {
+        await db.query(sql,[this.userName, this.password, this.email], (err, rows, fields) => {
             if(err)
                 console.log(err);
             else{
                 console.log("Added player.");
-                var objectValue = JSON.parse(JSON.stringify(rows[0]));
-                return objectValue['Id'];
+                var objectValue = JSON.stringify(rows[0][0]);
+                var id = JSON.parse(objectValue).id;
+                r = id;
             }
         });
+        result = await r;
+        return result;
     }
 
     static getList() {
