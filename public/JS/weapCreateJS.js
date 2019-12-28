@@ -21,15 +21,16 @@ function createWeapon() {
     }
 
     var pointsLeft = document.getElementById("pointsLeft").textContent;
-    if (pointsLeft > 0) {
-        document.getElementById("pointsError").style.visibility = "visible";
-        document.getElementById("pointsError").innerHTML = "You have to spend all points.";
-        invalid = true;
-    }
 
     var weapAtt = document.getElementById("attackPoints").value;
     var weapDef = document.getElementById("defencePoints").value;
 
+    if(parseInt(weapAtt, 10) + parseInt(weapDef, 10) != 10){
+        document.getElementById("pointsError").style.visibility = "visible";
+        document.getElementById("pointsError").innerHTML = "Error in points number.";
+        invalid = true;
+    }
+    
     if (invalid) {
         buttonError.innerHTML = "Errors in the form."
         buttonError.style.visibility = "visible";
@@ -42,7 +43,7 @@ function upAttack() {
     var pointsLeft = document.getElementById("pointsLeft");
     if (pointsLeft.textContent > 0) {
         var points = document.getElementById("attackPoints");
-        points.innerHTML = parseInt(points.textContent, 10) + 1;
+        points.value = parseInt(points.value, 10) + 1;
         pointsLeft.innerHTML = parseInt(pointsLeft.textContent, 10) - 1;
     }
 }
@@ -50,9 +51,9 @@ function upAttack() {
 function downAttack() {
     var pointsLeft = document.getElementById("pointsLeft");
     var points = document.getElementById("attackPoints");
-    if (pointsLeft.textContent < 20 && points.textContent > 0) {
+    if (pointsLeft.textContent < 20 && points.value > 0) {
 
-        points.innerHTML = parseInt(points.textContent, 10) - 1;
+        points.value = parseInt(points.value, 10) - 1;
         pointsLeft.innerHTML = parseInt(pointsLeft.textContent, 10) + 1;
     }
 }
@@ -61,7 +62,7 @@ function upDefence() {
     var pointsLeft = document.getElementById("pointsLeft");
     if (pointsLeft.textContent > 0) {
         var points = document.getElementById("defencePoints");
-        points.innerHTML = parseInt(points.textContent, 10) + 1;
+        points.value = parseInt(points.value, 10) + 1;
         pointsLeft.innerHTML = parseInt(pointsLeft.textContent, 10) - 1;
     }
 }
@@ -69,8 +70,8 @@ function upDefence() {
 function downDefence() {
     var pointsLeft = document.getElementById("pointsLeft");
     var points = document.getElementById("defencePoints");
-    if (pointsLeft.textContent < 20 && points.textContent > 0) {
-        points.innerHTML = parseInt(points.textContent, 10) - 1;
+    if (pointsLeft.textContent < 20 && points.value > 0) {
+        points.value = parseInt(points.value, 10) - 1;
         pointsLeft.innerHTML = parseInt(pointsLeft.textContent, 10) + 1;
     }
 }

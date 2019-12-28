@@ -626,3 +626,12 @@ label input#charDate {
 #likeWorld:active {
     color: white;
 }
+
+#defencePoints, #attackPoints{
+    border: solid 1px gray;
+    background-color: white;
+    font-size: 26px;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+}

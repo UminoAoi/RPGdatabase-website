@@ -74,6 +74,8 @@ class Player {
                 player.comparePassword(password).then(result => {
                     if(result)
                         return player;
+                    else
+                        console.log(password, player.password);
                     });
             }
             player = null;

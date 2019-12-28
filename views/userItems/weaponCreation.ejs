@@ -44,7 +44,7 @@
 
                 <h3 id="weaponPointsToAdd">
                     <% if (weapon == null) { %>
-                    <span id="pointsLeft">20</span> POINTS LEFT
+                    <span id="pointsLeft">10</span> POINTS LEFT
                     <% }else { %>
                     <span id="pointsLeft">0</span> POINTS LEFT
                     <% } %>
@@ -56,7 +56,7 @@
                     value="0" 
                     <% }else { %>
                     value="<%= weapon.bonusAttack %>" 
-                    <% } %> disabled>
+                    <% } %> readonly>
                 <a class="up" onclick="upAttack(); return false;"><span class="arrow">&rarr;</span></a>
                 <h5>Bonus Attack Points</h5>
                 <br>
@@ -65,7 +65,7 @@
                     value="0" 
                     <% }else { %>
                     value="<%= weapon.bonusDefence %>" 
-                    <% } %> disabled>
+                    <% } %> readonly>
                 <a class="up" onclick="upDefence(); return false;"><span class="arrow">&rarr;</span></a>
                 <h5>Bonus Defence Points</h5>
 

@@ -91,7 +91,7 @@ router.post("/editCharacter/post", (req, res, next) => {
 router.post("/weapon/post", (req, res, next) => {
     var player = Player.getPlayer(req.session.loggedUser.id);
     
-    const newWeapon = new Weapon(req.body.weapName, req.body.bonusAttack, req.body.bonusDefence, player);
+    const newWeapon = new Weapon(req.body.weapName, req.body.attackPoints, req.body.defencePoints, player);
     
     player.addWeapon(newWeapon);
     res.redirect("/player/" + player.id);
@@ -102,7 +102,7 @@ router.post("/editWeapon/post", (req, res, next) => {
     var player = Player.getPlayer(req.session.loggedUser.id);
     var weapons = player.getWeapons();
     
-   Weapon.edit(c, req.body.weapName, req.body.bonusAttack, req.body.bonusDefence, weapons);
+   Weapon.edit(c, req.body.weapName, req.body.attackPoints, req.body.defencePoints, weapons);
     
     res.redirect("/player/" + player.id);
     
