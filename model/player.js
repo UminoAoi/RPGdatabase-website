@@ -1,6 +1,4 @@
 const db = require('../db/mysql');
-let nextId = 1;
-//const playerList = [];
 
 const bcrypt = require('bcryptjs');
 
@@ -147,7 +145,7 @@ class Player {
     }
 
     getWeapons() {
-        var sql = "SELECT * FROM weapons WHERE User_UserId = ?";
+        var sql = "SELECT * FROM weapon WHERE User_UserId = ?";
         
         return new Promise((resolve, reject) => {
             db.query(sql,[this.id], (err, rows) => {
@@ -171,7 +169,7 @@ class Player {
     }
 
     getWorlds() {
-        var sql = "SELECT * FROM worlds WHERE User_UserId = ?";
+        var sql = "SELECT * FROM world WHERE User_UserId = ?";
         
         return new Promise((resolve, reject) => {
             db.query(sql,[this.id], (err, rows) => {

@@ -1,3 +1,5 @@
+const db = require('../db/mysql');
+
 class Weapon {
     constructor(weaponName, bonusattack, bonusdefence, player, id) {
         this.id = id;

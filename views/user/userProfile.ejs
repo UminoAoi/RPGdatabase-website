@@ -39,19 +39,19 @@
                         </tr>
                         <tr>
                             <th>Strongest character</th>
-                            <td><%= player.getStrongestCharacter().then(result => {return result}) %></td>
+                            <td><%= player.getStrongestCharacter().then(result => {console.log(result); return result}) %></td>
                         </tr>
                         <tr>
                             <th>Created characters</th>
-                            <td><%= player.getCharacters().then(result => {return Object.keys(result).length}); %></td>
+                            <td><%= player.getCharacters().then(result => {console.log(Object.keys(result).length); return Object.keys(result).length.toString()}); %></td>
                         </tr>
                         <tr>
                             <th>Created weapons</th>
-                            <td><%= player.getWeapons().then(result => {return Object.keys(result).length}); %></td>
+                            <td><%= player.getWeapons().then(result => {console.log(result); return Object.keys(result).length}); %></td>
                         </tr>
                         <tr>
                             <th>Created worlds</th>
-                            <td><%= player.getWorlds().then(result => {return Object.keys(result).length}); %></td>
+                            <td><%= player.getWorlds().then(result => {console.log(result); return Object.keys(result).length}); %></td>
                         </tr>
                         <tr>
                             <th>Registration date</th>

@@ -97,9 +97,9 @@
                     <% }else { %>
                         <option value="0" selected></option>
                         <% } %>
-                        <% weapons.forEach(function(weapon){ %>
+                        <% for(weapon in player.getWeapons()){  %>
                             <option value="<%= weapon.id %>" ><%= weapon.weaponName %></option>
-                        <% }) %>
+                        <% }; %>
                     </select></label>
             </div>
 
