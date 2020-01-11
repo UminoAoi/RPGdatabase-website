@@ -76,17 +76,17 @@
                     value="0" 
                     <% }else { %>
                     value="<%= character.attackPoints %>" 
-                    <% } %> disabled>
+                    <% } %> readonly>
                 <a class="up" onclick="upAttack(); return false;"><span class="arrow">&rarr;</span></a>
                 <h5>Attack Points</h5>
                 <br>
                 <a class="down" onclick="downDefence(); return false;"><span class="arrow">&larr;</span></a>
-                <input name="defencePoints" id="defencePoints" placeholder="0" 
+                <input name="defencePoints" id="defencePoints" 
                     <% if (character == null) { %>
                     value="0" 
                     <% }else { %>
                     value="<%= character.defencePoints %>"
-                    <% } %> disabled>
+                    <% } %> readonly>
                 <a class="up" onclick="upDefence(); return false;"><span class="arrow">&rarr;</span></a>
                 <h5>Defence Points</h5>
 
@@ -97,9 +97,9 @@
                     <% }else { %>
                         <option value="0" selected></option>
                         <% } %>
-                        <% for(weapon in player.getWeapons()){  %>
+                        <% for(weapon in weapons){ %>
                             <option value="<%= weapon.id %>" ><%= weapon.weaponName %></option>
-                        <% }; %>
+                        <% } %>
                     </select></label>
             </div>
 
