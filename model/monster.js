@@ -1,5 +1,4 @@
-let nextId = 1;
-const allMonstersList = [];
+const db = require('../db/mysql');
 
 class Monster {
     constructor(monsterName, attackpoints, defencepoints, image, level, id) {
@@ -10,12 +9,21 @@ class Monster {
         this.monsterImage = image;
         this.creationDate = new Date();
         this.level = level;
-        Monster.add(this);
+        //Monster.add(this);
     }
 
     static add(monster) {
-        monster.id = nextId++;
-        allMonstersList.push(monster);
+            var sql =
+                "Insert into monster (MonsterName, AttackPoints, DefencePoints, MonsterImage, Level, MonsterCreationDate) " +
+                "values (?, ?, ?, ?, ?, ?, ?);"
+
+            return new Promise((resolve, reject) => {
+                db.query(sql, [monster.monsterName, monster.attackPoints, monster.defencePoints, monster.monsterImage, monster.level,monster.creationDate], (err, rows) => {
+                    if (err)
+                        return reject(err);
+                    resolve(rows);
+                });
+            });
     }
     
     static getMonsters(){
@@ -37,6 +45,6 @@ class Monster {
     }
 }
 
-Monster.initData();
+//Monster.initData();
 
 module.exports = Monster;

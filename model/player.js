@@ -51,8 +51,8 @@ class Player {
 
     add() {
         var sql =
-            "Insert into user (Username, Password, Email, UserRank, RegistrationDate, Nationality) " +
-            "values (?, ?, ?, 1, CURDATE(), 'None');"
+            "Insert into user (Username, Password, Email, UserRank, RegistrationDate) " +
+            "values (?, ?, ?, 1, CURDATE());"
 
         return new Promise((resolve, reject) => {
             db.query(sql, [this.userName, this.password, this.email], (err, rows) => {
@@ -186,8 +186,42 @@ class Player {
        })
     }
     
+    getEnemyFights() {
+        var sql = "SELECT a.FightDate, a.CharacterId_1, a.CharacteId_2, a.WorldId, a.Result " +
+            "FROM fight a " +
+            "join rpgdb.character b on a.CharacterId_1 = b.CharacterId " +
+            "join user c on b.User_UserId = c.UserId " +
+            "where c.UserId = ?;";
+        
+        return new Promise((resolve, reject) => {
+            db.query(sql,[this.id], (err, rows) => {
+                if (err)
+                    return reject(err);
+                resolve(rows);
+            });
+        });
+    }
+    
+    getMonsterFights() {
+        var sql = "SELECT a.MonsterId, a.CharacterId " +
+            "FROM monsterfight a " +
+            "join rpgdb.character b on a.CharacterId = b.CharacterId " +
+            "join user c on b.User_UserId = c.UserId " +
+            "where c.UserId = ?;";
+        
+        return new Promise((resolve, reject) => {
+            db.query(sql,[this.id], (err, rows) => {
+                if (err)
+                    return reject(err);
+                resolve(rows);
+            });
+        });
+    }
+    
     addFight(fight){
-        this.fights.push(fight);
+        Fight.add(fight).then(result =>{
+            console.log(result);
+        })
     }
     
     deleteFight(fightId){
@@ -200,7 +234,9 @@ class Player {
     }
     
     addMonsterFight(fight){
-        this.monsterFights.push(fight);
+        MonsterFight.add(fight).then(result =>{
+            console.log(result);
+        })
     }
 }
 
