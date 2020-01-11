@@ -14,35 +14,55 @@ class World {
     }
     
     static add(world){
-        world.id = nextId++;
-        allWorldList.push(world);
-        return world;
+        var sql =
+            "Insert into world (WorldName, Difficulty, WorldCreationDate, FightsNumber, Favourites, User_UserId) " +
+            "values (?,?,?,?,?,?)"
+
+        return new Promise((resolve, reject) => {
+            db.query(sql, [world.worldName, world.difficulty, world.creationDate, world.fightsNumber, world.favourites, world.player], (err, rows) => {
+                if (err)
+                    return reject(err);
+                resolve(rows);
+            });
+        });
     }
     
     static edit(worldId, worldName, difficulty){
-        var world = null;
-        for (var i = 0; i < allWorldList.length; i++) {
-            if (allWorldList[i].id == worldId) {
-                world = allWorldList[i];
-            }
-        }
+        var sql = "UPDATE world " + 
+        "SET WorldName = ?, Defficulty = ? " +
+        "WHERE worldId = ?;";
         
-        world.worldName = worldName;
-        world.difficulty = difficulty;
+        return new Promise((resolve, reject) => {
+            db.query(sql,[worldName, difficulty, worldId], (err, rows) => {
+                  if (err)
+                     return reject(err);
+                 resolve(rows);
+            });
+        })
     }
     
     static getWorld(worldId) {
-        var world = null;
-        for (var i = 0; i < allWorldList.length; i++) {
-            if (allWorldList[i].id == worldId) {
-                return allWorldList[i]
-            }
-        }
-        return world;
+        var sql = "SELECT * FROM world WHERE worldId = ?;";
+        
+        return new Promise((resolve, reject) => {
+            db.query(sql,[worldId], (err, rows) => {
+                if (err)
+                    return reject(err);
+                resolve(rows);
+            });
+        });
     }
     
     static getWorlds(){
-        return allWorldList;
+        var sql = "SELECT * FROM world;";
+        
+        return new Promise((resolve, reject) => {
+            db.query(sql,(err, rows) => {
+                if (err)
+                    return reject(err);
+                resolve(rows);
+            });
+        });
     }
     
     like(){
@@ -50,12 +70,15 @@ class World {
     }
     
     static delete(worldId) {
-         for (var i = 0; i < allWorldList.length; i++) {
-            if (allWorldList[i].id == worldId) {
-                allWorldList.splice(i, 1);
-                i--;
-            }
-        }
+         var sql = "DELETE FROM world WHERE worldId = ?;";
+        
+        return new Promise((resolve, reject) => {
+            db.query(sql,[worldId], (err, rows) => {
+                if (err)
+                    return reject(err);
+                resolve(rows);
+            });
+        });
     }
     
 }

@@ -51,7 +51,7 @@
                         </tr>
                         <tr>
                             <th>Created worlds</th>
-                            <td><%= player.getWorlds().then(result => {return Object.keys(result).length});; %></td>
+                            <td><%= player.getWorlds().then(result => {return Object.keys(result).length}); %></td>
                         </tr>
                         <tr>
                             <th>Registration date</th>
@@ -70,7 +70,7 @@
                 <table id="characterListCreated">
                     <thead></thead>
                     <tbody>
-                        <% player.getCharacters().forEach(function(character){ %>
+                        <% for(character in player.getCharacters()){ %>
                         <tr>
                             <td><%= character.characterName %></td>
                             <td>
@@ -90,7 +90,7 @@
                                 <a class="charDel" href="/player/delete/character?character_id=<%= character.id %>">Delete</a>
                             </td>
                         </tr>
-                        <% }) %>
+                        <% }; %>
                     </tbody>
                 </table>
 
@@ -103,7 +103,7 @@
                     <thead>
                     </thead>
                     <tbody>
-                        <% player.getWeapons().forEach(function(weapon){ %>
+                        <% for(weapon in player.getWeapons()){ %>
                         <tr>
                             <td><%= weapon.weaponName %></td>
                             <td>
@@ -119,7 +119,7 @@
                                 <a class="weapDel" href="/player/delete/weapon?weapon_id=<%= weapon.id %>">Delete</a>
                             </td>
                         </tr>
-                        <% }) %>
+                        <% }; %>
                     </tbody>
                 </table>
 
@@ -132,7 +132,7 @@
                     <thead>
                     </thead>
                     <tbody>
-                        <% player.getWorlds().forEach(function(world){ %>
+                        <% for(world in player.getWorlds()){ %>
                         <tr>
                             <td><%= world.worldName %></td>
                             <td>
@@ -148,7 +148,7 @@
                                 <a class="worDel" href="/player/delete/world?world_id=<%= world.id %>">Delete</a>
                             </td>
                         </tr>
-                        <% }) %>
+                        <% }; %>
                     </tbody>
                 </table>
                 <a class="createButton" href="/creation/world">Create World</a>

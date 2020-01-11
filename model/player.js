@@ -165,21 +165,27 @@ class Player {
     }
 
     addWorld(world) {
-        this.worldList.push(world);
+         World.add(world).then(result =>{
+            console.log(result);
+        })
     }
 
     getWorlds() {
-        return this.worldList;
+        var sql = "SELECT * FROM worlds WHERE User_UserId = ?";
+        
+        return new Promise((resolve, reject) => {
+            db.query(sql,[this.id], (err, rows) => {
+                if (err)
+                    return reject(err);
+                resolve(rows);
+            });
+        });
     }
     
     deleteWorld(worldId){
-       for (var i = 0; i < this.worldList.length; i++) {
-            if (this.worldList[i].id == worldId) {
-                this.worldList.splice(i, 1);
-                i--;
-            }
-        } 
-        World.delete(worldId);
+       World.delete(worldId).then(result => {
+           console.log(result);
+       })
     }
     
     addFight(fight){
