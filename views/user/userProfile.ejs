@@ -43,15 +43,15 @@
                         </tr>
                         <tr>
                             <th>Created characters</th>
-                            <td><%= player.getCharacters().length; %></td>
+                            <td><%= player.getCharacters().then(result => {return Object.keys(result).length}); %></td>
                         </tr>
                         <tr>
                             <th>Created weapons</th>
-                            <td><%= player.getWeapons().length; %></td>
+                            <td><%= player.getWeapons().then(result => {return Object.keys(result).length}); %></td>
                         </tr>
                         <tr>
                             <th>Created worlds</th>
-                            <td><%= player.getWorlds().length; %></td>
+                            <td><%= player.getWorlds().then(result => {return Object.keys(result).length});; %></td>
                         </tr>
                         <tr>
                             <th>Registration date</th>

@@ -30,15 +30,7 @@ class Player {
             this.registrationDate = new Date();
         else
             this.registrationDate = date;
-        
-        //this.characterList = [];
-        //this.weaponList = [];
-        //this.worldList = [];
-        //this.fights = [];
-        //this.monsterFights = [];
 
-        
-        //this.addCharacter(new Character("FirstCharacter", "human", 10, 10, "https://www.eldarya.pl/static/img/pet/icon/c3e90397c7eea26193f843341f7374db~1525252185.png", new Date(), null, this.id));
         //this.addWeapon(new Weapon("CoolWeapon", 5, 5, this.id));
         //this.addWorld(new World("Amazing World of Coolness", 5, this.id));
     }
@@ -110,7 +102,7 @@ class Player {
     }
 
     addCharacter(character) {
-        character.add().then(result =>{
+        Character.add(character).then(result =>{
             console.log(result);
         })
     }
@@ -149,30 +141,27 @@ class Player {
     }
 
     addWeapon(weapon) {
-        this.weaponList.push(weapon);
-    }
-    
-    getWeapon(weaponId){
-        var weapon = null;
-        for (var i = 0; i < this.weaponList.length; i++) {
-            if (this.weaponList[i].id >= weaponId) {
-                weapon = this.weaponList[i];
-            }
-        }
-        return weapon;
+        Weapon.add(weapon).then(result =>{
+            console.log(result);
+        })
     }
 
     getWeapons() {
-        return this.weaponList;
+        var sql = "SELECT * FROM weapons WHERE User_UserId = ?";
+        
+        return new Promise((resolve, reject) => {
+            db.query(sql,[this.id], (err, rows) => {
+                if (err)
+                    return reject(err);
+                resolve(rows);
+            });
+        });
     }
     
     deleteWeapon(weaponId){
-        for (var i = 0; i < this.weaponList.length; i++) {
-            if (this.weaponList[i].id == weaponId) {
-                this.weaponList.splice(i, 1);
-                i--;
-            }
-        } 
+        Weapon.delete(weaponId).then(result => {
+           console.log(result);
+       })
     }
 
     addWorld(world) {

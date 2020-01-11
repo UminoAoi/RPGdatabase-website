@@ -1,6 +1,4 @@
 const db = require('../db/mysql');
-let nextId = 1;
-const allCharactersList = [];
 
 class Character {
     constructor(characterName, species, attackpoints, defencepoints, image, date, weapon, player, id) {
@@ -21,10 +19,9 @@ class Character {
         else 
             this.weapon = null;
         this.player = player;
-        //Character.add(this);
     }
 
-    static add(character, playerId) {
+    static add(character) {
         var sql =
             "Insert into rpgdb.character (CharacterName, Species, AttackPoints, DefencePoints, Level, FightPoints, CharacterImage, CharacterCreationDate, User_UserId, Weapon_WeaponId) " +
             "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
@@ -75,21 +72,16 @@ class Character {
     }
     
     static edit(characterId, characterName, species, attackpoints, defencepoints, image, date, weapon) {
-        var character = null;
-        
-        Character.getCharacter(characterId).then(result => {
-            character = result;
             
-            var sql = "UPDATE rpgdb.character " + 
-            "SET CharacterName = ?, Species = ?, AttackPoints = ?, DefencePoints = ?, CharacterImage =?, CharacterCreationDate = ?, Weapon_WeaponId = ? " +
-            "WHERE characterId = ?;";
+        var sql = "UPDATE rpgdb.character " + 
+        "SET CharacterName = ?, Species = ?, AttackPoints = ?, DefencePoints = ?, CharacterImage =?, CharacterCreationDate = ?, Weapon_WeaponId = ? " +
+        "WHERE characterId = ?;";
         
-            return new Promise((resolve, reject) => {
-                db.query(sql,[characterName, species, attackpoints, defencepoints, image, date, weapon ,characterId], (err, rows) => {
-                    if (err)
-                        return reject(err);
-                    resolve(rows);
-                });
+        return new Promise((resolve, reject) => {
+            db.query(sql,[characterName, species, attackpoints, defencepoints, image, date, weapon, characterId], (err, rows) => {
+                  if (err)
+                     return reject(err);
+                 resolve(rows);
             });
         })
     }
