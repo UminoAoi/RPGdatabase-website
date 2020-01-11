@@ -1,5 +1,3 @@
-//PROBLEM Z HASHOWANIEM HASEŁ, PRZYPISYWANIEM ID Z BAZY DANYCH, ZWRACANIEM WYNIKU DZIAŁAŃ Z BAZY DANYCH
-
 const db = require('../db/mysql');
 let nextId = 1;
 //const playerList = [];
@@ -16,7 +14,7 @@ class Player {
         this.userName = userName;
         Player.hashPassword(password) // NIE DZIAŁA CZEMU?? UNDEFINED, W BAZIE DANYCH NULL
           .then(hash => {
-            //this.password = password;
+            //this.password = password; NIE DZIAŁA???
           })
           .catch(err => {
             console.log(err);
@@ -25,15 +23,14 @@ class Player {
         this.email = email;
         this.rank = 1;
         this.registrationDate = new Date();
-        this.characterList = [];
-        this.weaponList = [];
-        this.worldList = [];
-        this.fights = [];
-        this.monsterFights = [];
+        //this.characterList = [];
+        //this.weaponList = [];
+        //this.worldList = [];
+        //this.fights = [];
+        //this.monsterFights = [];
 
-        this.id = this.add(); //.then(data => this id = data), zwracanie promise, NIC NIE DZIAŁA???
         
-        //this.addCharacter(new Character("FirstCharacter", "human", 10, 10, "https://www.eldarya.pl/static/img/pet/icon/c3e90397c7eea26193f843341f7374db~1525252185.png", new Date(), null, this.id));
+        this.addCharacter(new Character("FirstCharacter", "human", 10, 10, "https://www.eldarya.pl/static/img/pet/icon/c3e90397c7eea26193f843341f7374db~1525252185.png", new Date(), null, this.id));
         //this.addWeapon(new Weapon("CoolWeapon", 5, 5, this.id));
         //this.addWorld(new World("Amazing World of Coolness", 5, this.id));
         
@@ -52,43 +49,41 @@ class Player {
     }
 
     async add() {
-        //player.id = nextId++;
-        //playerList.push(player);
-        //return player;
-        
-        var result = null;
-        var r = null;
-        
-        var sql = "SELECT @id := COUNT(*)+1 id FROM user; " +
-            "Insert into user (UserId, Username, Password, Email, UserRank, RegistrationDate, Nationality) " +
-            "values (@id, ?, ?, ?, 1, CURDATE(), 'None');" 
-        await db.query(sql,[this.userName, this.password, this.email], (err, rows, fields) => {
-            if(err)
-                console.log(err);
-            else{
-                console.log("Added player.");
-                var objectValue = JSON.stringify(rows[0][0]);
-                var id = JSON.parse(objectValue).id;
-                r = id;
-            }
+        var sql =
+            "Insert into user (Username, Password, Email, UserRank, RegistrationDate, Nationality) " +
+            "values (?, ?, ?, 1, CURDATE(), 'None');"
+
+        return new Promise((resolve, reject) => {
+            db.query(sql, [this.userName, this.password, this.email], (err, rows) => {
+                if (err)
+                    return reject(err);
+                resolve(rows);
+            });
         });
-        result = await r;
-        return result;
     }
 
     static getList() {
-        return playerList;
+        var sql =
+            "SELECT * FROM user";
+        return new Promise((resolve, reject) => {
+            db.query(sql, [this.userName, this.password, this.email], (err, rows) => {
+                if (err)
+                    return reject(err);
+                resolve(rows);
+            });
+        });
     }
 
     static getPlayer(id) {
-        var sql = "SELECT * FROM user WHERE UserId = " + id;
-        db.query(sql,[id], (err, rows, fields) => {
-            if(err)
-                console.log(err);
-            else
-                console.log(rows);
+        var sql = "SELECT * FROM user WHERE UserId = ?";
+        
+        return new Promise((resolve, reject) => {
+            db.query(sql,[id], (err, rows) => {
+                if (err)
+                    return reject(err);
+                resolve(rows);
+            });
         });
-        return null;
     }
 
     static checkAndGetPlayer(userName, password) {

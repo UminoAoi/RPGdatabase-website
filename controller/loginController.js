@@ -14,11 +14,15 @@ router.get("/userProfile", (req, res, next) => {
 
 router.post("/register", (req, res, next) => {
     const newUser = new Player(req.body.userName, req.body.password, req.body.email);
-    console.log(newUser);
-    req.session.isUserLoggedIn = true;
-    req.session.loggedUser = newUser;
-    //console.log(req.session.loggedUser);
-    res.redirect("/player/" + newUser.id); 
+    
+    newUser.add().then(result => {
+        let insertUserId = result.insertId
+        newUser.id = insertUserId
+        req.session.isUserLoggedIn = true;
+        req.session.loggedUser = newUser;
+        //console.log("ID: " + insertUserId)
+        res.redirect("/player");//+ insertUserId);
+    });
 });
 
 router.post("/login", (req, res, next) => {

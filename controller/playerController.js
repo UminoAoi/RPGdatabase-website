@@ -7,25 +7,17 @@ const Weapon= require('../model/weapon');
 const World = require('../model/world');
 
 router.get("/", (req, res, next) => {
-    player = Player.getList();
-    res.render('user/userProfile', {
-        user: player[0]
-        //characterList: player[0].getCharacters(),
-        //weaponList: player[0].getWeapons(),
-        //worldList: player[0].getWorld()
-    });
-});
-
-router.get("/:playerId", (req, res, next) => {
     var updateMessage = null;
-    //const player = req.session.loggedUser;
-    //console.log(player.getStrongestCharacter()); //CZEMU NIE DZIAŁA???
     
-    const player = Player.getPlayer(req.session.loggedUser.id);
-    res.render('user/userProfile', {
-        player: player,
-        updateMessage: updateMessage
+    Player.getPlayer(req.session.loggedUser.id).then(result => {
+        const player = result;
+        console.log(player)
+        res.render('user/userProfile', {
+            player: player,
+            updateMessage: updateMessage
+        });
     });
+    
 });
 
 router.get("/delete/character", (req, res, next) => {
