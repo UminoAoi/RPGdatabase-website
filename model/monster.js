@@ -27,24 +27,29 @@ class Monster {
     }
     
     static getMonsters(){
-        return allMonstersList;
+        var sql = "SELECT * FROM monster;";
+        
+        return new Promise((resolve, reject) => {
+            db.query(sql,(err, rows) => {
+                if (err)
+                    return reject(err);
+                resolve(rows);
+            });
+        });
     }
     
     static getMonster(monsterId) {
-        var monster = null;
-        for (var i = 0; i < allMonstersList.length; i++) {
-            if (allMonstersList[i].id == monsterId) {
-                return allMonstersList[i];
-            }
-        }
-        return monster;
-    }
-
-    static initData() {
-        new Monster("MarioMonster", 20, 20, "https://www.electronicbeats.net/app/uploads/sites/5/2018/02/mario.png", 3);
+        var sql = "SELECT * FROM monster WHERE monsterId = ?;";
+        
+        return new Promise((resolve, reject) => {
+            db.query(sql,[monsterId], (err, rows) => {
+                if (err)
+                    return reject(err);
+                resolve(rows);
+            });
+        });
     }
 }
 
-//Monster.initData();
 
 module.exports = Monster;

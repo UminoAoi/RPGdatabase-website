@@ -22,6 +22,18 @@ class Fight {
                 });
             });
     }
+    
+    static delete(date, you, enemy) {
+        var sql = "DELETE FROM fight WHERE FightDate = ? && CharacterId_1 = ? && CharacterId_2 = ?;";
+        
+        return new Promise((resolve, reject) => {
+            db.query(sql,[date, you, enemy], (err, rows) => {
+                if (err)
+                    return reject(err);
+                resolve(rows);
+            });
+        });
+    }
 }
 
 module.exports = Fight;

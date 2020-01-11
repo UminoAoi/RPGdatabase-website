@@ -224,13 +224,10 @@ class Player {
         })
     }
     
-    deleteFight(fightId){
-        for (var i = 0; i < this.fights.length; i++) {
-            if (this.fights[i].id == fightId) {
-                this.fights.splice(i, 1);
-                i--;
-            }
-        } 
+    deleteFight(date, you, enemy){
+        Fight.delete(date, you, enemy).then(result => {
+           console.log(result);
+       })
     }
     
     addMonsterFight(fight){

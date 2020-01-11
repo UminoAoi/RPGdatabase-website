@@ -11,7 +11,7 @@
 <body>
     <header>
         <nav>
-            <a href="/player/<%= player.id %>">Profile</a>
+            <a href="/player">Profile</a>
             <a href="/fight">Fights</a>
             <a href="/login/logout">Log out</a>
         </nav>
@@ -29,14 +29,14 @@
                         <th>Enemy's level</th>
                     </thead>
                     <tbody>
-                        <% enemyList.forEach(function(character){ %>
+                        <% for(character in enemyList){ %>
                         <tr>
                             <td><input type="radio" name="enemy" value="<%= character.id %>"></td>
                             <td><img class="characterImageStat" src="<%= character.characterImage %>"></td>
                             <td><%= character.characterName %></td>
                             <td><%= character.level %></td>
                         </tr>
-                        <% }) %>
+                        <% } %>
                     </tbody>
                 </table>
             </div><!-- enemyTableContainer end -->
@@ -51,13 +51,13 @@
                         <th>World name</th>
                     </thead>
                     <tbody>
-                        <% worlds.forEach(function(world){ %>
+                        <% for(world in worlds){ %>
                         <tr>
                             <td><input type="radio" name="world" value="<%= world.id %>"></td>
                             <td><%= world.difficulty %></td>
                             <td><%= world.worldName %></td>
                         </tr>
-                        <% }) %>
+                        <% } %>
                     </tbody>
                 </table>
             </div><!-- worldTableContainer end -->
@@ -77,7 +77,7 @@
                             <th>Weapon</th>
                         </thead>
                         <tbody>
-                            <% player.getCharacters().forEach(function(character){ %>
+                            <% for(character in player.getCharacters()){ %>
                             <tr>
                                 <td><input type="radio" name="user" value="<%= character.id %>"></td>
                                 <td><img class="characterImageStat" src="<%= character.characterImage %>"></td>
@@ -91,7 +91,7 @@
                                 <%= character.weapon.weaponName %>
                                 <% } %></td>
                             </tr>
-                            <% }) %>
+                            <% } %>
                         </tbody>
                     </table>
                 </div>

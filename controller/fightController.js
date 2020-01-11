@@ -10,8 +10,8 @@ const Monster = require('../model/monster');
 
 router.get("/", (req, res, next) => {
     const player = Player.makePlayerFrom(req.session.loggedUser);
-    var enemyFights = player.fights;
-    var monsterFights = player.monsterFights;
+    var enemyFights = player.getEnemyFights();
+    var monsterFights = player.getMonsterFights();
     res.render('fight/fightList', {enemyFights:enemyFights, monsterFights:monsterFights, player:player});
 });
 

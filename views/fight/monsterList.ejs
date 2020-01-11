@@ -11,7 +11,7 @@
 <body>
     <header>
         <nav>
-            <a href="/player/<%= player.id %>">Profile</a>
+            <a href="/player">Profile</a>
             <a href="/fight">Fights</a>
             <a href="/login/logout">Log out</a>
         </nav>
@@ -30,14 +30,14 @@
                             <th>Monster's level</th>
                         </thead>
                         <tbody>
-                            <% monsterList.forEach(function(monster){ %>
+                            <% for(monster in monsterList){ %>
                             <tr>
                                 <td><input type="radio" name="monster" value="<%= monster.id %>"></td>
                                 <td><img class="monsterFightImage" src="<%= monster.monsterImage %>" alt="Monster image"></td>
                                 <td><%= monster.monsterName %></td>
                                 <td><%= monster.level %></td>
                             </tr>
-                            <% }) %>
+                            <% } %>
                         </tbody>
                     </table>
                 </div>
@@ -58,7 +58,7 @@
                             <th>Weapon</th>
                         </thead>
                         <tbody>
-                            <% player.getCharacters().forEach(function(character){ %>
+                            <% for(character in player.getCharacters()){ %>
                             <tr>
                                 <td><input type="radio" name="user" value="<%= character.id %>"></td>
                                 <td><img class="characterImageStat" src="<%= character.characterImage %>"></td>
@@ -73,7 +73,7 @@
                                 <%= character.weapon.weaponName %>
                                 <% } %></td>
                             </tr>
-                            <% }) %>
+                            <% } %>
                             
                         </tbody>
                     </table>

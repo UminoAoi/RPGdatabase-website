@@ -31,7 +31,7 @@ router.post("/login", (req, res, next) => {
     if (player != null){ 
         req.session.isUserLoggedIn = true;
         req.session.loggedUser = player;
-        res.redirect("/player/" + player.id);
+        res.redirect("/player");
     }
     else{
         error = "Wrong username or password.";
