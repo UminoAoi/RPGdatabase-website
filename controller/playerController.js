@@ -10,8 +10,9 @@ router.get("/", (req, res, next) => {
     var updateMessage = null;
     
     Player.getPlayer(req.session.loggedUser.id).then(result => {
-        const player = result;
-        console.log(player)
+        console.log(result[0]["Username"]);
+        const player = new Player(result[0]["Username"], result[0]["Password"], result[0]["Email"], result[0]["UserId"], result[0]["UserRank"], result[0]["RegistrationDate"]);
+        console.log(player); //jak zrobić z tego Playera na którym można używać metod? model playera? da się bez tworzenia nowego?
         res.render('user/userProfile', {
             player: player,
             updateMessage: updateMessage

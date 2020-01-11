@@ -9,7 +9,7 @@ const Weapon = require('../model/weapon');
 const World = require('../model/world');
 
 class Player {
-    constructor(userName, password, email, id) {
+    constructor(userName, password, email, id, rank, date) {
         this.id = id;
         this.userName = userName;
         Player.hashPassword(password) // NIE DZIAŁA CZEMU?? UNDEFINED, W BAZIE DANYCH NULL
@@ -21,8 +21,16 @@ class Player {
           });
         this.password = password;
         this.email = email;
-        this.rank = 1;
-        this.registrationDate = new Date();
+        if(rank == null)
+            this.rank = 1;
+        else
+            this.rank = rank;
+        
+        if(date == null)
+            this.registrationDate = new Date();
+        else
+            this.registrationDate = date;
+        
         //this.characterList = [];
         //this.weaponList = [];
         //this.worldList = [];
@@ -30,7 +38,7 @@ class Player {
         //this.monsterFights = [];
 
         
-        this.addCharacter(new Character("FirstCharacter", "human", 10, 10, "https://www.eldarya.pl/static/img/pet/icon/c3e90397c7eea26193f843341f7374db~1525252185.png", new Date(), null, this.id));
+        //this.addCharacter(new Character("FirstCharacter", "human", 10, 10, "https://www.eldarya.pl/static/img/pet/icon/c3e90397c7eea26193f843341f7374db~1525252185.png", new Date(), null, this.id));
         //this.addWeapon(new Weapon("CoolWeapon", 5, 5, this.id));
         //this.addWorld(new World("Amazing World of Coolness", 5, this.id));
         
@@ -48,7 +56,7 @@ class Player {
       return bcrypt.compare(password, this.password);
     }
 
-    async add() {
+    add() {
         var sql =
             "Insert into user (Username, Password, Email, UserRank, RegistrationDate, Nationality) " +
             "values (?, ?, ?, 1, CURDATE(), 'None');"
@@ -66,7 +74,7 @@ class Player {
         var sql =
             "SELECT * FROM user";
         return new Promise((resolve, reject) => {
-            db.query(sql, [this.userName, this.password, this.email], (err, rows) => {
+            db.query(sql, (err, rows) => {
                 if (err)
                     return reject(err);
                 resolve(rows);
@@ -87,47 +95,54 @@ class Player {
     }
 
     static checkAndGetPlayer(userName, password) {
-        var player = null;
-        for (var i = 0; i < playerList.length; i++) {
-            if (playerList[i].userName == userName) {
-                player = playerList[i];
-                player.comparePassword(password).then(result => {
-                    if(result)
-                        return player;
-                    });
-            }
-            player = null;
-        }        
-        return player;
+        var sql = "SELECT * FROM user WHERE UserName = ? && Password = ?";
+        
+        return new Promise((resolve, reject) => {
+            db.query(sql,[userName, password], (err, rows) => {
+                if (err)
+                    return reject(err);
+                resolve(rows);
+            });
+        });
     }
 
     addCharacter(character) {
-        this.characterList.push(character);
+        character.add().then(result =>{
+            console.log(result);
+        })
     }
 
     getCharacters() {
-        return this.characterList;
+        var sql = "SELECT * FROM rpgdb.character WHERE User_UserId = ?";
+        
+        return new Promise((resolve, reject) => {
+            db.query(sql,[this.id], (err, rows) => {
+                if (err)
+                    return reject(err);
+                resolve(rows);
+            });
+        });
     }
     
     deleteCharacter(characterId){
-       for (var i = 0; i < this.characterList.length; i++) {
-            if (this.characterList[i].id == characterId) {
-                this.characterList.splice(i, 1);
-                i--;
-            }
-        } 
-        Character.delete(characterId);
+       Character.delete(characterId).then(result => {
+           console.log(result);
+       })
     }
 
     getStrongestCharacter() {
-        var char = null;
-        var level = 0;
-        for (var i = 0; i < this.characterList.length; i++) {
-            if (this.characterList[i].level >= level) {
-                char = this.characterList[i].characterName;
-            }
-        }
-        return char;
+        var sql = "select CharacterName from rpgdb.character " +
+            "where User_UserId = ? " +
+            "group by level " +
+            "having level = (select max(level) from rpgdb.character);";
+        
+        return new Promise((resolve, reject) => {
+            db.query(sql,[this.id], (err, rows) => {
+                if (err)
+                    return reject(err);
+                resolve(rows);
+            });
+        });
     }
 
     addWeapon(weapon) {
@@ -191,15 +206,6 @@ class Player {
     addMonsterFight(fight){
         this.monsterFights.push(fight);
     }
-
-    static initData() {
-
-    }
-
 }
-
-
-
-Player.initData();
 
 module.exports = Player;

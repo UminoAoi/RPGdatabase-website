@@ -21,79 +21,99 @@ class Character {
         else 
             this.weapon = null;
         this.player = player;
-        Character.add(this);
+        //Character.add(this);
     }
 
-    static add(character) {
-        character.id = nextId++;
-        allCharactersList.push(character);
-        return character;
+    static add(character, playerId) {
+        var sql =
+            "Insert into rpgdb.character (CharacterName, Species, AttackPoints, DefencePoints, Level, FightPoints, CharacterImage, CharacterCreationDate, User_UserId, Weapon_WeaponId) " +
+            "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+
+        return new Promise((resolve, reject) => {
+            db.query(sql, [character.characterName, character.species, character.attackPoints, character.defencePoints, character.level, character.fightPoints, character.characterImage, character.creationDate, character.player, character.weapon], (err, rows) => {
+                if (err)
+                    return reject(err);
+                resolve(rows);
+            });
+        });
     }
 
     static delete(characterId) {
-         for (var i = 0; i < allCharactersList.length; i++) {
-            if (allCharactersList[i].id == characterId) {
-                allCharactersList.splice(i, 1);
-                i--;
-            }
-        }
-    }
-
-    static edit(characterId, characterName, species, attackpoints, defencepoints, image, date, weapon) {
-        var character = null;
-        for (var i = 0; i < allCharactersList.length; i++) {
-            if (allCharactersList[i].id == characterId) {
-                character = allCharactersList[i];
-            }
-        }
+        var sql = "DELETE FROM rpgdb.character WHERE characterId = ?;";
         
-        character.characterName = characterName;
-        character.species = species;
-        character.attackPoints = attackpoints;
-        character.defencePoints = defencepoints;
-        character.characterImage = image;
-        if (date == undefined)
-            character.creationDate = new Date();
-        else
-            character.creationDate = date;
-        if(weapon != null)
-            character.weapon = weapon;
-        else 
-            character.weapon = null;
+        return new Promise((resolve, reject) => {
+            db.query(sql,[characterId], (err, rows) => {
+                if (err)
+                    return reject(err);
+                resolve(rows);
+            });
+        });
+    }
+    
+    static getAllCharacters() {
+        var sql = "SELECT * FROM rpgdb.character;";
+        
+        return new Promise((resolve, reject) => {
+            db.query(sql,(err, rows) => {
+                if (err)
+                    return reject(err);
+                resolve(rows);
+            });
+        });
     }
 
     static getCharacter(characterId) {
+        var sql = "SELECT * FROM rpgdb.character WHERE characterId = ?;";
+        
+        return new Promise((resolve, reject) => {
+            db.query(sql,[characterId], (err, rows) => {
+                if (err)
+                    return reject(err);
+                resolve(rows);
+            });
+        });
+    }
+    
+    static edit(characterId, characterName, species, attackpoints, defencepoints, image, date, weapon) {
         var character = null;
-        for (var i = 0; i < allCharactersList.length; i++) {
-            if (allCharactersList[i].id == characterId) {
-                return allCharactersList[i]
-            }
-        }
-        return character;
+        
+        Character.getCharacter(characterId).then(result => {
+            character = result;
+            
+            var sql = "UPDATE rpgdb.character " + 
+            "SET CharacterName = ?, Species = ?, AttackPoints = ?, DefencePoints = ?, CharacterImage =?, CharacterCreationDate = ?, Weapon_WeaponId = ? " +
+            "WHERE characterId = ?;";
+        
+            return new Promise((resolve, reject) => {
+                db.query(sql,[characterName, species, attackpoints, defencepoints, image, date, weapon ,characterId], (err, rows) => {
+                    if (err)
+                        return reject(err);
+                    resolve(rows);
+                });
+            });
+        })
     }
     
     static enemyList(player){
-        var enemyList = [];
-        for (var i = 0; i < allCharactersList.length; i++) {
-            if (allCharactersList[i].player == null || allCharactersList[i].player != player.id) {
-                enemyList.push(allCharactersList[i]);
+        
+        Character.getAllCharacters().then(result => {
+            var charactersList = result;
+            
+            var enemyList = []; //OGARNĄĆ CZY DZIAŁA (BO COŚ TAM Z JSONEM)
+            
+            for (var i = 0; i < charactersList.length; i++) {
+                if (allCharactersList[i].player == null || charactersList[i].player != player.id) {
+                    enemyList.push(charactersList[i]);
+                }
             }
-        }
-        return enemyList;
+            return enemyList;
+        });
     }
 
     returnDate() {
         var d = this.creationDate.toISOString().slice(0, 10).split('-');
         return d[1] + '-' + d[2] + '-' + d[0];
     }
-    
-    static initData() {
-        new Character("Spongebob", "cartoon", 15, 5, "https://vignette.wikia.nocookie.net/encyklopedia-spongebobia/images/c/cb/SpongeBob_SquarePants_Render.png/revision/latest?cb=20190606152207&path-prefix=pl", new Date(), null);
-        new Character("Cute Robot", "robot", 20, 0, "https://photonrobot.com/wp-content/uploads/photon-render-%E2%80%94-kopia.png", new Date(), null);
-        new Character("Dexter", "human", 5, 15, "http://19wnx83qh5jk1qlxu63q22fj-wpengine.netdna-ssl.com/wp-content/uploads/2012/10/DEXTER-FROM-DEXTERS-LABORATORY.png", new Date(), null);
-    }
 }
-
-Character.initData();
 
 module.exports = Character;

@@ -39,7 +39,7 @@
                         </tr>
                         <tr>
                             <th>Strongest character</th>
-                            <td><%= player.getStrongestCharacter() %></td>
+                            <td><%= player.getStrongestCharacter().then(result => {return result}) %></td>
                         </tr>
                         <tr>
                             <th>Created characters</th>
