@@ -41,7 +41,10 @@ class Player {
         //this.addCharacter(new Character("FirstCharacter", "human", 10, 10, "https://www.eldarya.pl/static/img/pet/icon/c3e90397c7eea26193f843341f7374db~1525252185.png", new Date(), null, this.id));
         //this.addWeapon(new Weapon("CoolWeapon", 5, 5, this.id));
         //this.addWorld(new World("Amazing World of Coolness", 5, this.id));
-        
+    }
+    
+    static makePlayerFrom(form){
+        return new Player(form.userName, form.password, form.email, form.id, form.rank, form.date);
     }
     
     static hashPassword(password) {
