@@ -42,7 +42,7 @@
                                     Result: <%= fight.result %> <br>
                                 </span>
                             </div>
-                            <a class="fightOptions" href="/fight/delete?fight_id=<%= fight.id %>">Delete</a>
+                            <a class="fightOptions" href="/fight/delete?fight_date=<%= fight.fightDate %>&&you_id=<%= fight.you %>&&enemy_id=<%= fight.enemy %>">Delete</a>
                         </td>
                     </tr>
                     <% } %>

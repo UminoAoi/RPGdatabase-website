@@ -36,7 +36,17 @@ class Monster {
             db.query(sql,(err, rows) => {
                 if (err)
                     return reject(err);
-                resolve(rows);
+                var monstersList = [];
+                var arr = rows;
+                for (var i = 0; i < rows.length; i++){
+                    var obj = arr[i];
+                    var monster = null;
+                  for (var key in obj){
+                    var monster = new Monster(obj["MonsterName"], obj["AttackPoints"], obj["DefencePoints"], obj["MonsterImage"], obj["Level"], obj["MonsterId"], obj["MonsterCreationDate"]);
+                  }
+                    monstersList.push(monster);
+                }
+                resolve(monstersList);
             });
         });
     }
@@ -48,7 +58,10 @@ class Monster {
             db.query(sql,[monsterId], (err, rows) => {
                 if (err)
                     return reject(err);
-                resolve(rows);
+                var monster = null;
+                var obj = rows[0];
+                var monster = new Monster(obj["MonsterName"], obj["AttackPoints"], obj["DefencePoints"], obj["MonsterImage"], obj["Level"], obj["MonsterId"], obj["MonsterCreationDate"]);
+                resolve(monster);
             });
         });
     }

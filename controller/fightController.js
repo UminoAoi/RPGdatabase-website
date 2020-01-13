@@ -10,9 +10,13 @@ const Monster = require('../model/monster');
 
 router.get("/", (req, res, next) => {
     const player = Player.makePlayerFrom(req.session.loggedUser);
-    var enemyFights = player.getEnemyFights();
-    var monsterFights = player.getMonsterFights();
-    res.render('fight/fightList', {enemyFights:enemyFights, monsterFights:monsterFights, player:player});
+    player.getEnemyFights().then(result => {
+        var enemyFights = result;
+        player.getMonsterFights().then(result => {
+            var monsterFights = result;
+            res.render('fight/fightList', {enemyFights:enemyFights, monsterFights:monsterFights, player:player});
+        });
+    });
 });
 
 
@@ -20,24 +24,30 @@ router.get("/characterFight", (req, res, next) => {
     const player = Player.makePlayerFrom(req.session.loggedUser);
     
     var enemyList= Character.enemyList(player);
-    var worlds = World.getWorlds();
-    res.render('fight/enemiesList', {player:player, enemyList:enemyList, worlds:worlds});
+    World.getWorlds().then(result => {
+        var worlds = result;
+        res.render('fight/enemiesList', {player:player, enemyList:enemyList, worlds:worlds});
+    });
+    
 });
 
 router.get("/delete", (req, res, next) => {
-    var fightId = req.query.fight_id;
+    var fightDate = req.query.fight_date;
+    var fightYou = req.query.you_id;
+    var fightEnemy = req.query.enemy_id;
     
     const player = Player.makePlayerFrom(req.session.loggedUser);
-    player.deleteFight(fightId);
+    player.deleteFight(fightDate, fightYou, fightEnemy);
     
     res.redirect("/fight");
 });
 
 router.get("/monsterFight", (req, res, next) => {
     const player = Player.makePlayerFrom(req.session.loggedUser);
-    var monsterList = Monster.getMonsters();
-    
-    res.render('fight/monsterList', {player:player, monsterList:monsterList});
+    Monster.getMonsters().then(result => {
+        var monsterList = result;
+        res.render('fight/monsterList', {player:player, monsterList:monsterList});
+    });
 });
 
 router.get("/characterFight/fightResults/:worldId/:youId/:enemyId", (req, res, next) => {
@@ -45,26 +55,32 @@ router.get("/characterFight/fightResults/:worldId/:youId/:enemyId", (req, res, n
     var youId = req.params.youId;
     var enemyId = req.params.enemyId;
     
-    var you = Character.getCharacter(youId);
-    var enemy = Character.getCharacter(enemyId);
-    var world = World.getWorld(worldId);
+    Character.getCharacter(youId).then(result => {
+        var you = result;
+        Character.getCharacter(enemyId).then(result => {
+            var enemy = result;
+            World.getWorld(worldId).then(result => {
+                var world = result;
+                
+                 var enemyPower = enemy.attackPoints*5 + enemy.defencePoints*3 + enemy.level*3 + world.difficulty*5;
+                var youPower = you.attackPoints*5 + you.defencePoints*3 + you.level*3 + world.difficulty*3;
+
+                var fight = null;
+                const player = Player.makePlayerFrom(req.session.loggedUser);
+                
+                if(youPower<enemyPower){
+                fight = new Fight(you, enemy, world, "Lost");
+                }else{
+                    fight = new Fight(you, enemy, world, "Won");
+                    you.fightPoints += enemyPower * 0.1;
+                }
+                
+                player.addFight(fight);
     
-    var enemyPower = enemy.attackPoints*5 + enemy.defencePoints*3 + enemy.level*3 + world.difficulty*5;
-    var youPower = you.attackPoints*5 + you.defencePoints*3 + you.level*3 + world.difficulty*3;
-    
-    var fight = null;
-    const player = Player.makePlayerFrom(req.session.loggedUser);
-    
-    if(youPower<enemyPower){
-        fight = new Fight(you, enemy, world, "Lost");
-    }else{
-        fight = new Fight(you, enemy, world, "Won");
-        you.fightPoints += enemyPower * 0.1;
-    }
-    
-    player.addFight(fight);
-    
-    res.render('fight/fightScreen', {fight: fight, player:player});
+                res.render('fight/fightScreen', {fight: fight, player:player});
+            });
+        });
+    });
 });
 
 router.get("/characterFight/fightResults/:worldId/:youId/:enemyId/like", (req, res, next) => {
@@ -72,36 +88,38 @@ router.get("/characterFight/fightResults/:worldId/:youId/:enemyId/like", (req, r
     var youId = req.params.youId;
     var enemyId = req.params.enemyId;
     
-    var world = World.getWorld(worldId);
-    world.like();
-    
-    res.render("fightResults/"+ worldId +"/" + youId + "/" + enemyId);
+    var world = World.getWorld(worldId).then(result => {
+        world.like();
+        res.render("fightResults/"+ worldId +"/" + youId + "/" + enemyId);
+    });
 });
-
 
 router.get("/monsterFight/monsterFightResults/:youId/:monsterId", (req, res, next) => {
     var youId = req.params.youId;
     var monsterId = req.params.monsterId;
     
-    var you = Character.getCharacter(youId);
-    var monster = Monster.getMonster(monsterId);
-    
-    var monsterPower = monster.attackPoints*5 + monster.defencePoints*3 + monster.level*3;
-    var youPower = you.attackPoints*5 + you.defencePoints*3 + you.level*3;
-    
-    var monsterFight = null;
-    const player = Player.makePlayerFrom(req.session.loggedUser);
-    
-    if(youPower<monsterPower){
-        monsterFight = new MonsterFight(you, monster, "Lost");
-    }else{
-        monsterFight = new MonsterFight(you, monster, "Won");
-        you.fightPoints += monsterPower * 0.1;
-    }
-    
-    player.addMonsterFight(monsterFight);
-    
-    res.render('fight/monsterFightScreen', {monsterFight: monsterFight, player:player});
+    Character.getCharacter(youId).then( result => {
+        var you = result;
+        Monster.getMonster(monsterId).then(result => {
+            var monster = result;
+            var monsterPower = monster.attackPoints*5 + monster.defencePoints*3 + monster.level*3;
+            var youPower = you.attackPoints*5 + you.defencePoints*3 + you.level*3;
+
+            var monsterFight = null;
+            const player = Player.makePlayerFrom(req.session.loggedUser);
+
+            if(youPower<monsterPower){
+                monsterFight = new MonsterFight(you, monster, "Lost");
+            }else{
+                monsterFight = new MonsterFight(you, monster, "Won");
+                you.fightPoints += monsterPower * 0.1;
+            }
+
+            player.addMonsterFight(monsterFight);
+
+            res.render('fight/monsterFightScreen', {monsterFight: monsterFight, player:player});
+        });
+    });
 });
 
 router.post("/characterFight/new", (req, res, next) => {
