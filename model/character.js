@@ -1,7 +1,7 @@
 const db = require('../db/mysql');
 
 class Character {
-    constructor(characterName, species, attackpoints, defencepoints, image, date, weapon, player, id) {
+    constructor(characterName, species, attackpoints, defencepoints, image, date, weapon, player, id, level, fightPoints) {
         this.id = id;
         this.characterName = characterName;
         this.species = species;
@@ -12,8 +12,15 @@ class Character {
             this.creationDate = new Date();
         else
             this.creationDate = date;
-        this.level = 1;
-        this.fightPoints = 0;
+        if(level == null)
+            this.level = 1;
+        else
+            this.level = level;
+        if(fightPoints == null)
+            this.fightPoints = 0;
+        else
+            this.fightPoints = fightPoints;
+        
         if(weapon != null)
             this.weapon = weapon;
         else 
@@ -94,7 +101,7 @@ class Character {
             var enemyList = []; //OGARNĄĆ CZY DZIAŁA (BO COŚ TAM Z JSONEM)
             
             for (var i = 0; i < charactersList.length; i++) {
-                if (allCharactersList[i].player == null || charactersList[i].player != player.id) {
+                if (charactersList[i].player == null || charactersList[i].player != player.id) {
                     enemyList.push(charactersList[i]);
                 }
             }

@@ -20,7 +20,6 @@ router.post("/register", (req, res, next) => {
         newUser.id = insertUserId
         req.session.isUserLoggedIn = true;
         req.session.loggedUser = newUser;
-        //console.log("ID: " + insertUserId)
         res.redirect("/player");//+ insertUserId);
     });
 });

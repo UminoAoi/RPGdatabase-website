@@ -105,7 +105,7 @@ class Player {
         })
     }
 
-    getCharacters() {
+    getCharactersJSON() {
         var sql = "SELECT * FROM rpgdb.character WHERE User_UserId = ?";
         
         return new Promise((resolve, reject) => {
@@ -115,6 +115,21 @@ class Player {
                 resolve(rows);
             });
         });
+    }
+    
+    getCharacters() {
+        ver charactersList = [];
+        this.getCharactersJSON().then(resut => {
+            var charactersJSON = result;
+            for (var i = 0; i < result.length; i++){
+              var obj = arr[i];
+              for (var key in obj){
+                var character = new Weapon(obj["WeaponName"], obj["BonusAttackPoints"], obj["BonusDefencePoints"], obj["User_UserId"], obj["WeaponId"], obj["Level"], obj["WeaponCreationDate"]);
+                charactersList.push(character);
+              }
+            }
+        });
+        return weaponsList;
     }
     
     deleteCharacter(characterId){
@@ -143,8 +158,8 @@ class Player {
             console.log(result);
         })
     }
-
-    getWeapons() {
+    
+    getWeaponsJSON(){
         var sql = "SELECT * FROM weapon WHERE User_UserId = ?";
         
         return new Promise((resolve, reject) => {
@@ -154,6 +169,21 @@ class Player {
                 resolve(rows);
             });
         });
+    }
+
+    getWeapons() {
+        ver weaponsList = [];
+        this.getWeaponsJSON().then(resut => {
+            var weaponsJSON = result;
+            for (var i = 0; i < result.length; i++){
+              var obj = arr[i];
+              for (var key in obj){
+                var weapon = new Weapon(obj["WeaponName"], obj["BonusAttackPoints"], obj["BonusDefencePoints"], obj["User_UserId"], obj["WeaponId"], obj["Level"], obj["WeaponCreationDate"]);
+                weaponsList.push(weapon);
+              }
+            }
+        });
+        return weaponsList;
     }
     
     deleteWeapon(weaponId){

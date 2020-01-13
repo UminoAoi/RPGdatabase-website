@@ -10,7 +10,9 @@ router.get("/character", (req, res, next) => {
     var character = null;
     const player = Player.makePlayerFrom(req.session.loggedUser);
     var weapons = player.getWeapons();
+        
     res.render('userItems/characterCreation', {character:character, weapons:weapons, player:player});
+    
 });
 
 router.get("/weapon", (req, res, next) => {

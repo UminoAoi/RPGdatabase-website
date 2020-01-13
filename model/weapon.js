@@ -1,13 +1,19 @@
 const db = require('../db/mysql');
 
 class Weapon {
-    constructor(weaponName, bonusattack, bonusdefence, player, id) {
+    constructor(weaponName, bonusattack, bonusdefence, player, id, level, creationDate) {
         this.id = id;
         this.weaponName = weaponName;
         this.bonusAttack = bonusattack;
         this.bonusDefence = bonusdefence;
-        this.level = 1;
-        this.creationDate = new Date();
+        if(level == null)
+            this.level = 1;
+        else
+            this.level = level;
+        if(creationDate == null)
+            this.creationDate = new Date();
+        else
+            this.creationDate = creationDate;
         this.player = player;
     }
     

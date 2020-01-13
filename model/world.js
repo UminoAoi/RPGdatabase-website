@@ -3,13 +3,22 @@ let nextId = 1;
 const allWorldList = [];
 
 class World {
-    constructor(worldName, difficulty, player, id) {
+    constructor(worldName, difficulty, player, id, fightsNumber, favourites, creationDate) {
         this.id = id;
         this.worldName = worldName;
         this.difficulty = difficulty;
-        this.fightsNumber = 0;
-        this.favourites = 0;
-        this.creationDate = new Date();
+        if(fightsNumber == null)
+            this.fightsNumber = 0;
+        else
+            this.fightsNumber = fightsNumber;
+        if(favourites == null)
+            this.favourites = 0;
+        else
+            this.favourites = favourites;
+        if(creationDate == null)
+            this.creationDate = new Date();
+        else
+            this.creationDate = creationDate;
         this.player = player;
     }
     
