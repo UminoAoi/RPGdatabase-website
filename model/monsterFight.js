@@ -1,7 +1,7 @@
 const db = require('../db/mysql');
 
 class MonsterFight {
-    constructor(character, monster, result) {
+    constructor(character, monster) {
         this.you = character;
         this.monster = monster;
     }

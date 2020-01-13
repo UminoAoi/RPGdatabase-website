@@ -1,12 +1,15 @@
 const db = require('../db/mysql');
 
 class Fight {
-    constructor(character1, character2, world, result) {
+    constructor(character1, character2, world, result, fightDate) {
         this.you = character1;
         this.enemy = character2;
         this.world = world;
         this.result = result;
-        this.fightDate = new Date();
+        if(fightDate == null)
+            this.fightDate = new Date();
+        else
+            this.fightDate= fightDate;
     }
 
     static add(fight) {

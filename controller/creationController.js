@@ -42,13 +42,7 @@ router.get("/editCharacter", (req, res, next) => {
 router.get("/editWeapon", (req, res, next) => {
     var c = req.query.weapon_id;
     const player = Player.makePlayerFrom(req.session.loggedUser);
-    var weapons = player.getWeapons();
-    var weapon = null;
-    for (var i = 0; i < weapons.length; i++) {
-            if (weapons[i].id == c) {
-                weapon = weapons[i];
-            }
-    }
+    var weapon = Weapon.getWeapon(c);
     res.render('userItems/weaponCreation', {
         weapon: weapon,
         player:player
@@ -84,9 +78,10 @@ router.post("/editCharacter/post", (req, res, next) => {
     const player = Player.makePlayerFrom(req.session.loggedUser);
     var weapon = player.getWeapon(req.body.weapon)
     
-   Character.edit(c, req.body.charName, req.body.charSpecies, req.body.attackPoints, req.body.defencePoints, req.body.charImage, date, weapon);
-    
-    res.redirect("/player");
+   Character.edit(c, req.body.charName, req.body.charSpecies, req.body.attackPoints, req.body.defencePoints, req.body.charImage, date, weapon).then(result => {    
+        res.redirect("/player");
+   });
+
     
 });
 

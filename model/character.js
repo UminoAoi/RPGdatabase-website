@@ -66,7 +66,7 @@ class Character {
         });
     }
 
-    static getCharacter(characterId) {
+    static getCharacterJSON(characterId) {
         var sql = "SELECT * FROM rpgdb.character WHERE characterId = ?;";
         
         return new Promise((resolve, reject) => {
@@ -75,6 +75,15 @@ class Character {
                     return reject(err);
                 resolve(rows);
             });
+        });
+    }
+    
+    static getCharacter(characterId) {
+        var character = null;
+        Character.getCharacterJSON(characterId).then(result => {
+            var obj = result[0];
+            var character = new Character(obj["CharacterName"], obj["Species"], obj["AttackPoints"], obj["DefencePoints"], obj["CharacterImage"], obj["CharacterCreationDate"], obj["Weapon_WeaponId"], obj["User_UserId"], obj["CharacterId"], obj["Level"], obj["FightPoints"]);
+            return character;
         });
     }
     

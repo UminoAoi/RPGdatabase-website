@@ -105,31 +105,27 @@ class Player {
         })
     }
 
-    getCharactersJSON() {
+    getCharacters() {
         var sql = "SELECT * FROM rpgdb.character WHERE User_UserId = ?";
         
         return new Promise((resolve, reject) => {
             db.query(sql,[this.id], (err, rows) => {
                 if (err)
                     return reject(err);
-                resolve(rows);
+                
+                var charactersList = [];
+                var arr = rows;
+                for (var i = 0; i < rows.length; i++){
+                  var obj = arr[i];
+                    var character = null;
+                  for (var key in obj){
+                    character = new Character(obj["CharacterName"], obj["Species"], obj["AttackPoints"], obj["DefencePoints"], obj["CharacterImage"], obj["CharacterCreationDate"], obj["Weapon_WeaponId"], obj["User_UserId"], obj["CharacterId"], obj["Level"], obj["FightPoints"]);
+                  }
+                    charactersList.push(character);
+                }
+                resolve(charactersList);
             });
         });
-    }
-    
-    getCharacters() {
-        ver charactersList = [];
-        this.getCharactersJSON().then(resut => {
-            var charactersJSON = result;
-            for (var i = 0; i < result.length; i++){
-              var obj = arr[i];
-              for (var key in obj){
-                var character = new Weapon(obj["WeaponName"], obj["BonusAttackPoints"], obj["BonusDefencePoints"], obj["User_UserId"], obj["WeaponId"], obj["Level"], obj["WeaponCreationDate"]);
-                charactersList.push(character);
-              }
-            }
-        });
-        return weaponsList;
     }
     
     deleteCharacter(characterId){
@@ -159,31 +155,27 @@ class Player {
         })
     }
     
-    getWeaponsJSON(){
+    getWeapons(){
         var sql = "SELECT * FROM weapon WHERE User_UserId = ?";
         
         return new Promise((resolve, reject) => {
             db.query(sql,[this.id], (err, rows) => {
                 if (err)
                     return reject(err);
-                resolve(rows);
-            });
+                var weaponsList = [];
+                var arr = rows;
+                var weapon = null;
+                for (var i = 0; i < rows.length; i++){
+                  var obj = arr[i];
+                  for (var key in obj){
+                    weapon = new Weapon(obj["WeaponName"], obj["BonusAttackPoints"], obj["BonusDefencePoints"], obj["User_UserId"], obj["WeaponId"], obj["Level"], obj["WeaponCreationDate"]);
+                    
+                  }
+                    weaponsList.push(weapon);
+                }
+                    resolve(weaponsList);
+                });
         });
-    }
-
-    getWeapons() {
-        ver weaponsList = [];
-        this.getWeaponsJSON().then(resut => {
-            var weaponsJSON = result;
-            for (var i = 0; i < result.length; i++){
-              var obj = arr[i];
-              for (var key in obj){
-                var weapon = new Weapon(obj["WeaponName"], obj["BonusAttackPoints"], obj["BonusDefencePoints"], obj["User_UserId"], obj["WeaponId"], obj["Level"], obj["WeaponCreationDate"]);
-                weaponsList.push(weapon);
-              }
-            }
-        });
-        return weaponsList;
     }
     
     deleteWeapon(weaponId){
@@ -205,8 +197,19 @@ class Player {
             db.query(sql,[this.id], (err, rows) => {
                 if (err)
                     return reject(err);
-                resolve(rows);
-            });
+                var worldsList = [];
+                var arr = rows;
+                for (var i = 0; i < rows.length; i++){
+                  var obj = arr[i];
+                    var world = null;
+                  for (var key in obj){
+                    world = new World(obj["WorldName"], obj["Difficulty"], obj["User_UserId"], obj["WorldId"], obj["FightsNumber"], obj["Favourites"], obj["WorldCreationDate"]);
+                    
+                  }
+                    worldsList.push(world);
+                }
+                    resolve(worldsList);
+                });
         });
     }
     

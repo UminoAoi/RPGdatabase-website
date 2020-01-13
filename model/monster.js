@@ -1,13 +1,16 @@
 const db = require('../db/mysql');
 
 class Monster {
-    constructor(monsterName, attackpoints, defencepoints, image, level, id) {
+    constructor(monsterName, attackpoints, defencepoints, image, level, id, creationDate) {
         this.id = id;
         this.monsterName = monsterName;
         this.attackPoints = attackpoints;
         this.defencePoints = defencepoints;
         this.monsterImage = image;
-        this.creationDate = new Date();
+        if(creationDate == null)
+            this.creationDate = new Date();
+        else 
+            this.creationDate = creationDate;
         this.level = level;
         //Monster.add(this);
     }

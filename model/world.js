@@ -50,7 +50,7 @@ class World {
         })
     }
     
-    static getWorld(worldId) {
+    static getWorldJSON(worldId) {
         var sql = "SELECT * FROM world WHERE worldId = ?;";
         
         return new Promise((resolve, reject) => {
@@ -59,6 +59,15 @@ class World {
                     return reject(err);
                 resolve(rows);
             });
+        });
+    }
+    
+    static getWorld(worldId) {
+        var world = null;
+        World.getWorldJSON(worldId).then(result => {
+            var obj = result[0];
+            var world = new World(obj["WorldName"], obj["Difficulty"], obj["User_UserId"], obj["WorldId"], obj["FightsNumber"], obj["Favourites"], obj["WorldCreationDate"]);
+            return world;
         });
     }
     
