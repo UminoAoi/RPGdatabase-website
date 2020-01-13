@@ -9,9 +9,10 @@ const Weapon = require('../model/weapon');
 router.get("/character", (req, res, next) => {
     var character = null;
     const player = Player.makePlayerFrom(req.session.loggedUser);
-    var weapons = player.getWeapons();
-        
-    res.render('userItems/characterCreation', {character:character, weapons:weapons, player:player});
+    player.getWeapons().then(result => {
+        var weapons = result;
+        res.render('userItems/characterCreation', {character:character, weapons:weapons, player:player});
+    });
     
 });
 
@@ -29,33 +30,42 @@ router.get("/world", (req, res, next) => {
 
 router.get("/editCharacter", (req, res, next) => {
     var c = req.query.character_id;
-    var character = Character.getCharacter(c);
-    const player = Player.makePlayerFrom(req.session.loggedUser);
-    var weapons = player.getWeapons();
-    res.render('userItems/characterCreation', {
-        character: character,
-        weapons: weapons,
-        player:player
+    Character.getCharacter(c).then(result => {
+        var character = result;
+        const player = Player.makePlayerFrom(req.session.loggedUser);
+        player.getWeapons().then(result => {
+            var weapons = result;
+            res.render('userItems/characterCreation', {
+            character: character,
+            weapons: weapons,
+            player:player
+            });
+        })
     });
+    
 });
 
 router.get("/editWeapon", (req, res, next) => {
     var c = req.query.weapon_id;
     const player = Player.makePlayerFrom(req.session.loggedUser);
-    var weapon = Weapon.getWeapon(c);
-    res.render('userItems/weaponCreation', {
+    Weapon.getWeapon(c).then(result => {
+        var weapon = result;
+        res.render('userItems/weaponCreation', {
         weapon: weapon,
         player:player
+        });
     });
 });
 
 router.get("/editWorld", (req, res, next) => {
     var c = req.query.world_id;
-    var world = World.getWorld(c);
     const player = Player.makePlayerFrom(req.session.loggedUser);
-    res.render('userItems/worldCreation', {
+    World.getWorld(c).then(result => {
+        var world = result;
+        res.render('userItems/worldCreation', {
         world: world,
         player:player
+        });
     });
 });
 
@@ -63,12 +73,13 @@ router.post("/character/post", (req, res, next) => {
     var dateFormat = req.body.charDate.split("-");
     var date = new Date(dateFormat[2], dateFormat[0]-1, dateFormat[1]);
     const player = Player.makePlayerFrom(req.session.loggedUser);
-    var weapon = Weapon.getWeapon(req.body.weapon);
-    
-    const newCharacter = new Character(req.body.charName, req.body.charSpecies, req.body.attackPoints, req.body.defencePoints, req.body.charImage, date, weapon, player.id);
-    
-    player.addCharacter(newCharacter);
-    res.redirect("/player");
+    //console.log(req.body.weapon);
+    Weapon.getWeapon(req.body.weapon).then(result => {
+        var weapon = result;
+        const newCharacter = new Character(req.body.charName, req.body.charSpecies, req.body.attackPoints, req.body.defencePoints, req.body.charImage, date, weapon, player.id);
+        player.addCharacter(newCharacter)
+            res.redirect("/player");
+    });
 });
 
 router.post("/editCharacter/post", (req, res, next) => {
@@ -76,13 +87,13 @@ router.post("/editCharacter/post", (req, res, next) => {
     var dateFormat = req.body.charDate.split("-");
     var date = new Date(dateFormat[2], dateFormat[0]-1, dateFormat[1]);
     const player = Player.makePlayerFrom(req.session.loggedUser);
-    var weapon = player.getWeapon(req.body.weapon)
-    
-   Character.edit(c, req.body.charName, req.body.charSpecies, req.body.attackPoints, req.body.defencePoints, req.body.charImage, date, weapon).then(result => {    
-        res.redirect("/player");
-   });
+    Weapon.getWeapon(req.body.weapon).then(result => {   
+        var weapon = result;
+        Character.edit(c, req.body.charName, req.body.charSpecies, req.body.attackPoints, req.body.defencePoints, req.body.charImage, date, weapon).then(result => {    
+            res.redirect("/player");
+       });
+    })
 
-    
 });
 
 router.post("/weapon/post", (req, res, next) => {
@@ -99,9 +110,9 @@ router.post("/editWeapon/post", (req, res, next) => {
     const player = Player.makePlayerFrom(req.session.loggedUser);
     var weapons = player.getWeapons();
     
-   Weapon.edit(c, req.body.weapName, req.body.bonusAttack, req.body.bonusDefence, weapons);
-    
-    res.redirect("/player");
+   Weapon.edit(c, req.body.weapName, req.body.bonusAttack, req.body.bonusDefence).then(result =>{
+        res.redirect("/player");
+   });
     
 });
 
@@ -118,9 +129,9 @@ router.post("/editWorld/post", (req, res, next) => {
     var c = req.query.world_id;
     const player = Player.makePlayerFrom(req.session.loggedUser);
     
-   World.edit(c, req.body.worldName, req.body.worldDifficulty);
-    
-    res.redirect("/player");
+    World.edit(c, req.body.worldName, req.body.worldDifficulty).then(result => {
+        res.redirect("/player");
+    });
     
 });
 

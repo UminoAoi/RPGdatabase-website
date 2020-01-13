@@ -204,7 +204,6 @@ class Player {
                     var world = null;
                   for (var key in obj){
                     world = new World(obj["WorldName"], obj["Difficulty"], obj["User_UserId"], obj["WorldId"], obj["FightsNumber"], obj["Favourites"], obj["WorldCreationDate"]);
-                    
                   }
                     worldsList.push(world);
                 }

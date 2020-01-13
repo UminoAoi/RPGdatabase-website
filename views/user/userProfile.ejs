@@ -39,7 +39,11 @@
                         </tr>
                         <tr>
                             <th>Strongest character</th>
-                            <td><%= player.getStrongestCharacter().then(result => {console.log(result[0]["CharacterName"]); return result[0]["CharacterName"]}) %></td>
+                            <td><%= player.getStrongestCharacter().then(result => {
+                                    if (Object.entries(result).length === 0)
+                                        return " ";
+                                    console.log(result[0]["CharacterName"]);
+                                    return result[0]["CharacterName"]}) %></td>
                         </tr>
                         <tr>
                             <th>Created characters</th>

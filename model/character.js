@@ -33,6 +33,7 @@ class Character {
             "Insert into rpgdb.character (CharacterName, Species, AttackPoints, DefencePoints, Level, FightPoints, CharacterImage, CharacterCreationDate, User_UserId, Weapon_WeaponId) " +
             "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
 
+        //console.log(character.weapon);
         return new Promise((resolve, reject) => {
             db.query(sql, [character.characterName, character.species, character.attackPoints, character.defencePoints, character.level, character.fightPoints, character.characterImage, character.creationDate, character.player, character.weapon], (err, rows) => {
                 if (err)
@@ -61,29 +62,33 @@ class Character {
             db.query(sql,(err, rows) => {
                 if (err)
                     return reject(err);
-                resolve(rows);
+                var charactersList = [];
+                var arr = rows;
+                for (var i = 0; i < rows.length; i++){
+                  var obj = arr[i];
+                    var character = null;
+                  for (var key in obj){
+                    character = new Character(obj["CharacterName"], obj["Species"], obj["AttackPoints"], obj["DefencePoints"], obj["CharacterImage"], obj["CharacterCreationDate"], obj["Weapon_WeaponId"], obj["User_UserId"], obj["CharacterId"], obj["Level"], obj["FightPoints"]);
+                  }
+                    charactersList.push(character);
+                }
+                resolve(charactersList);
             });
         });
     }
 
-    static getCharacterJSON(characterId) {
+    static getCharacter(characterId) {
         var sql = "SELECT * FROM rpgdb.character WHERE characterId = ?;";
         
         return new Promise((resolve, reject) => {
             db.query(sql,[characterId], (err, rows) => {
                 if (err)
                     return reject(err);
-                resolve(rows);
+                var character = null;
+                var obj = rows[0];
+                var character = new Character(obj["CharacterName"], obj["Species"], obj["AttackPoints"], obj["DefencePoints"], obj["CharacterImage"], obj["CharacterCreationDate"], obj["Weapon_WeaponId"], obj["User_UserId"], obj["CharacterId"], obj["Level"], obj["FightPoints"]);
+                resolve(character);
             });
-        });
-    }
-    
-    static getCharacter(characterId) {
-        var character = null;
-        Character.getCharacterJSON(characterId).then(result => {
-            var obj = result[0];
-            var character = new Character(obj["CharacterName"], obj["Species"], obj["AttackPoints"], obj["DefencePoints"], obj["CharacterImage"], obj["CharacterCreationDate"], obj["Weapon_WeaponId"], obj["User_UserId"], obj["CharacterId"], obj["Level"], obj["FightPoints"]);
-            return character;
         });
     }
     

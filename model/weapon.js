@@ -17,24 +17,20 @@ class Weapon {
         this.player = player;
     }
     
-    static getWeaponJSON(weaponId) {
+    static getWeapon(weaponId) {
         var sql = "SELECT * FROM weapon WHERE weaponId = ?;";
         
         return new Promise((resolve, reject) => {
             db.query(sql,[weaponId], (err, rows) => {
                 if (err)
                     return reject(err);
-                resolve(rows);
-            });
-        });
-    }
-    
-    static getWeapon(weaponId) {
-        var weapon = null;
-        Weapon.getWeaponJSON(weaponId).then(result => {
-            var obj = result[0];
-            var weapon = new Weapon(obj["WeaponName"], obj["BonusAttackPoints"], obj["BonusDefencePoints"], obj["User_UserId"], obj["WeaponId"], obj["Level"], obj["WeaponCreationDate"]);
-            return weapon;
+                var weapon = null;
+                var obj = rows[0];
+                if(Object.entries(rows).length > 0)
+                    var weapon = new Weapon(obj["WeaponName"], obj["BonusAttackPoints"], obj["BonusDefencePoints"], obj["User_UserId"], obj["WeaponId"], obj["Level"], obj["WeaponCreationDate"]);
+                console.log(weapon);
+                resolve(weapon);
+                });
         });
     }
     
