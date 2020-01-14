@@ -35,7 +35,7 @@ class Character {
 
         //console.log(character.weapon);
         return new Promise((resolve, reject) => {
-            db.query(sql, [character.characterName, character.species, character.attackPoints, character.defencePoints, character.level, character.fightPoints, character.characterImage, character.creationDate, character.player, character.weapon], (err, rows) => {
+            var zm = db.query(sql, [character.characterName, character.species, character.attackPoints, character.defencePoints, character.level, character.fightPoints, character.characterImage, character.creationDate, character.player, character.weapon.id], (err, rows) => {
                 if (err)
                     return reject(err);
                 resolve(rows);
