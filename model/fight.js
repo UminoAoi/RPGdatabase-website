@@ -27,7 +27,8 @@ class Fight {
     }
     
     static delete(date, you, enemy) {
-        console.log(date.toISOString().slice(0,10));
+        var d = new Date(date);
+        var properDate = d.toISOString().slice(0,19).replace("T", " ");
         var sql = "DELETE FROM fight WHERE FightDate = ? && CharacterId_1 = ? && CharacteId_2 = ?;";
         
         return new Promise((resolve, reject) => {
