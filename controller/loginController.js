@@ -25,17 +25,16 @@ router.post("/register", (req, res, next) => {
 });
 
 router.post("/login", (req, res, next) => {
-    var player = Player.checkAndGetPlayer(req.body.loginName, req.body.loginPassword);
-    var error = "";
-    if (player != null){ 
-        req.session.isUserLoggedIn = true;
-        req.session.loggedUser = player;
-        res.redirect("/player");
-    }
-    else{
-        error = "Wrong username or password.";
-        res.render("user/loginScreen", {error: error});
-    }
+    Player.checkAndGetPlayer(req.body.loginName, req.body.loginPassword).then(result => {
+            var player = result;
+            req.session.isUserLoggedIn = true;
+            req.session.loggedUser = player;
+            res.redirect("/player");
+        }).catch(rej => { 
+            error = "Wrong username or password.";
+            res.render("user/loginScreen", {error: error});
+        });
+    
 });
 
 router.get('/logout', (req, res, next) => {

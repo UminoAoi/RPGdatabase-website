@@ -114,7 +114,7 @@ class Character {
     }
     
     static enemyList(playerId){
-        var sql = "SELECT * FROM rpgdb.character WHERE User_UserId != ?;";
+        var sql = "SELECT * FROM rpgdb.character WHERE User_UserId != ? OR isnull(User_UserId);";
         
         return new Promise((resolve, reject) => {
             db.query(sql,[playerId],(err, rows) => {
