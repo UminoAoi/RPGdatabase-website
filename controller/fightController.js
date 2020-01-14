@@ -1,3 +1,5 @@
+
+
 const express = require('express');
 const router = express.Router();
 
@@ -54,6 +56,13 @@ router.get("/characterFight/fightResults/:worldId/:youId/:enemyId", (req, res, n
     var worldId = req.params.worldId;
     var youId = req.params.youId;
     var enemyId = req.params.enemyId;
+    
+    
+    
+    
+    
+    
+    
     
     Character.getCharacter(youId).then(result => {
         var you = result;

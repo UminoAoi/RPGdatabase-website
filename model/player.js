@@ -29,8 +29,6 @@ class Player {
         else
             this.registrationDate = date;
 
-        //this.addWeapon(new Weapon("CoolWeapon", 5, 5, this.id));
-        //this.addWorld(new World("Amazing World of Coolness", 5, this.id));
     }
     
     static makePlayerFrom(form){

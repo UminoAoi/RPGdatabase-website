@@ -39,23 +39,19 @@
                         </tr>
                         <tr>
                             <th>Strongest character</th>
-                            <td><%= player.getStrongestCharacter().then(result => {
-                                    if (Object.entries(result).length === 0)
-                                        return " ";
-                                    console.log(result[0]["CharacterName"]);
-                                    return result[0]["CharacterName"]}) %></td>
+                            <td><%= strongestCharacter %></td>
                         </tr>
                         <tr>
                             <th>Created characters</th>
-                            <td><%= player.getCharacters().then(result => {console.log(result); return result.length}) %></td>
+                            <td><%= characterList.length %></td>
                         </tr>
                         <tr>
                             <th>Created weapons</th>
-                            <td><%= player.getWeapons().then(result => {console.log(result); return result.length}) %></td>
+                            <td><%= weaponList.length %></td>
                         </tr>
                         <tr>
                             <th>Created worlds</th>
-                            <td><%= player.getWorlds().then(result => {console.log(result); return result.length}) %></td>
+                            <td><%= worldList.length %></td>
                         </tr>
                         <tr>
                             <th>Registration date</th>
@@ -74,27 +70,27 @@
                 <table id="characterListCreated">
                     <thead></thead>
                     <tbody>
-                        <% for(character in player.getCharacters()){ %>
+                        <% characterList.forEach(function(character){ %>
                         <tr>
-                            <td><%= character.characterName %></td>
+                            <td><%- character.characterName %></td>
                             <td>
                                 <div class="statisticsCheck">
                                     <a class="charStat">Statistics</a><span class="tooltiptext">
-                                        Level: <%= character.level %> <br>
-                                        Fight points: <%= character.fightPoints %> <br>
-                                        Species: <%= character.species %> <br>
-                                        Attack Points: <%= character.attackPoints%> <br>
-                                        Defence Points: <%= character.defencePoints %> <br>
-                                        Creation Date: <%= character.creationDate.toISOString().slice(0,10);  %> 
-                                        <img class="characterImageStat" src="<%= character.characterImage %>" alt=" Character image">
+                                        Level: <%- character.level %> <br>
+                                        Fight points: <%- character.fightPoints %> <br>
+                                        Species: <%- character.species %> <br>
+                                        Attack Points: <%- character.attackPoints%> <br>
+                                        Defence Points: <%- character.defencePoints %> <br>
+                                        Creation Date: <%- character.creationDate.toISOString().slice(0,10);  %> 
+                                        <img class="characterImageStat" src="<%- character.characterImage %>" alt=" Character image">
                                         <br>
                                     </span>
                                 </div>
-                                <a class="charEd" href="/creation/editCharacter?character_id=<%= character.id %>">Edit</a>
-                                <a class="charDel" href="/player/delete/character?character_id=<%= character.id %>">Delete</a>
+                                <a class="charEd" href="/creation/editCharacter?character_id=<%- character.id %>">Edit</a>
+                                <a class="charDel" href="/player/delete/character?character_id=<%- character.id %>">Delete</a>
                             </td>
                         </tr>
-                        <% }; %>
+                        <% }); %>
                     </tbody>
                 </table>
 
@@ -107,7 +103,7 @@
                     <thead>
                     </thead>
                     <tbody>
-                        <% for(weapon in player.getWeapons()){ %>
+                        <% weaponList.forEach(function(weapon){%>
                         <tr>
                             <td><%= weapon.weaponName %></td>
                             <td>
@@ -123,7 +119,7 @@
                                 <a class="weapDel" href="/player/delete/weapon?weapon_id=<%= weapon.id %>">Delete</a>
                             </td>
                         </tr>
-                        <% }; %>
+                        <% }); %>
                     </tbody>
                 </table>
 
@@ -136,7 +132,7 @@
                     <thead>
                     </thead>
                     <tbody>
-                        <% for(world in player.getWorlds()){ %>
+                        <% worldList.forEach(function(world){ %>
                         <tr>
                             <td><%= world.worldName %></td>
                             <td>
@@ -152,7 +148,7 @@
                                 <a class="worDel" href="/player/delete/world?world_id=<%= world.id %>">Delete</a>
                             </td>
                         </tr>
-                        <% }; %>
+                        <% }); %>
                     </tbody>
                 </table>
                 <a class="createButton" href="/creation/world">Create World</a>

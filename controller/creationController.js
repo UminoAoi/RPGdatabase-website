@@ -98,8 +98,9 @@ router.post("/editCharacter/post", (req, res, next) => {
 
 router.post("/weapon/post", (req, res, next) => {
     const player = Player.makePlayerFrom(req.session.loggedUser);
+    console.log(req.session.loggedUser.id);
     
-    const newWeapon = new Weapon(req.body.weapName, req.body.bonusAttack, req.body.bonusDefence, player);
+    const newWeapon = new Weapon(req.body.weapName, req.body.attackPoints, req.body.defencePoints, req.session.loggedUser.id);
     
     player.addWeapon(newWeapon);
     res.redirect("/player");
@@ -110,7 +111,7 @@ router.post("/editWeapon/post", (req, res, next) => {
     const player = Player.makePlayerFrom(req.session.loggedUser);
     var weapons = player.getWeapons();
     
-   Weapon.edit(c, req.body.weapName, req.body.bonusAttack, req.body.bonusDefence).then(result =>{
+   Weapon.edit(c, req.body.weapName, req.body.attackPoints, req.body.defencePoints).then(result =>{
         res.redirect("/player");
    });
     
@@ -119,7 +120,7 @@ router.post("/editWeapon/post", (req, res, next) => {
 router.post("/world/post", (req, res, next) => {
     const player = Player.makePlayerFrom(req.session.loggedUser);
     
-    const newWorld = new World(req.body.worldName, req.body.worldDifficulty, player);
+    const newWorld = new World(req.body.worldName, req.body.worldDifficulty, player.id);
     
     player.addWorld(newWorld);
     res.redirect("/player");

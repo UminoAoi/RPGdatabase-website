@@ -39,7 +39,8 @@ class Weapon {
             "values (?,?,?,?,?,?)"
             
         return new Promise((resolve, reject) => {
-            db.query(sql, [weapon.weaponName, weapon.bonusAttack, weapon.bonusDefence, weapon.level, weapon.creationDate, weapon.player], (err, rows) => {
+            var zm = db.query(sql, [weapon.weaponName, weapon.bonusAttack, weapon.bonusDefence, weapon.level, weapon.creationDate, weapon.player], (err, rows) => {
+                console.log(zm);
                 if (err)
                     return reject(err);
                 resolve(rows);
