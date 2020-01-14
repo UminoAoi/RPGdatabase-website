@@ -5,6 +5,8 @@ const bcrypt = require('bcryptjs');
 const Character = require('../model/character');
 const Weapon = require('../model/weapon');
 const World = require('../model/world');
+const Fight = require('../model/fight');
+const MonsterFight = require('../model/monsterFight');
 
 class Player {
     constructor(userName, password, email, id, rank, date) {
@@ -227,7 +229,17 @@ class Player {
             db.query(sql,[this.id], (err, rows) => {
                 if (err)
                     return reject(err);
-                resolve(rows);
+                var fightsList = [];
+                var arr = rows;
+                for (var i = 0; i < rows.length; i++){
+                  var obj = arr[i];
+                    var fight = null;
+                  for (var key in obj){
+                    fight = new Fight(obj["CharacterId_1"], obj["CharacteId_2"], obj["WorldId"], obj["Result"], obj["FightDate"]);
+                  }
+                    fightsList.push(fight);
+                }
+                    resolve(fightsList);
             });
         });
     }
@@ -243,7 +255,17 @@ class Player {
             db.query(sql,[this.id], (err, rows) => {
                 if (err)
                     return reject(err);
-                resolve(rows);
+                var fightsList = [];
+                var arr = rows;
+                for (var i = 0; i < rows.length; i++){
+                  var obj = arr[i];
+                    var fight = null;
+                  for (var key in obj){
+                    fight = new MonsterFight(obj["MonsterId"], obj["CharacterId"]);
+                  }
+                    fightsList.push(fight);
+                }
+                    resolve(fightsList);
             });
         });
     }

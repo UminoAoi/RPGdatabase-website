@@ -31,10 +31,10 @@
                     <th>Options</th>
                 </thead>
                 <tbody>
-                    <% for(fight in enemyFights){ %>
+                    <% enemyFights.forEach(function(fight){ %>
                     <tr>
-                        <td><%= fight.you.characterName %></td>
-                        <td><%= fight.enemy.characterName %></td>
+                        <td><%= fight.you %></td>
+                        <td><%= fight.enemy %></td>
                         <td>
                             <div class="statisticsCheck">
                                 <a class="fightOptions">Details</a><span class="tooltiptext">
@@ -45,7 +45,7 @@
                             <a class="fightOptions" href="/fight/delete?fight_date=<%= fight.fightDate %>&&you_id=<%= fight.you %>&&enemy_id=<%= fight.enemy %>">Delete</a>
                         </td>
                     </tr>
-                    <% } %>
+                    <% }); %>
                 </tbody>
             </table>
             <a class="newFightButton" href="fight/characterFight">New Fight</a>
@@ -60,12 +60,12 @@
                     <th>Monster Name</th>
                 </thead>
                 <tbody>
-                    <% for(mFight in monsterFights){ %>
+                    <% monsterFights.forEach(function(mFight){ %>
                     <tr>
                         <td><%= mFight.you.characterName %></td>
                         <td><%= mFight.monster.monsterName %></td>
                     </tr>
-                    <% } %>
+                    <% }) %>
                 </tbody>
             </table>
 

@@ -32,10 +32,12 @@ class Character {
         var sql =
             "Insert into rpgdb.character (CharacterName, Species, AttackPoints, DefencePoints, Level, FightPoints, CharacterImage, CharacterCreationDate, User_UserId, Weapon_WeaponId) " +
             "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
-
-        //console.log(character.weapon);
+        
+        var weaponId = null;
+        if(character.weapon != null)
+            weaponId = character.weapon.id;
         return new Promise((resolve, reject) => {
-            var zm = db.query(sql, [character.characterName, character.species, character.attackPoints, character.defencePoints, character.level, character.fightPoints, character.characterImage, character.creationDate, character.player, character.weapon.id], (err, rows) => {
+           db.query(sql, [character.characterName, character.species, character.attackPoints, character.defencePoints, character.level, character.fightPoints, character.characterImage, character.creationDate, character.player, weaponId], (err, rows) => {
                 if (err)
                     return reject(err);
                 resolve(rows);
@@ -98,8 +100,12 @@ class Character {
         "SET CharacterName = ?, Species = ?, AttackPoints = ?, DefencePoints = ?, CharacterImage =?, CharacterCreationDate = ?, Weapon_WeaponId = ? " +
         "WHERE characterId = ?;";
         
+        var weaponId = null;
+        if(weapon != null)
+            weaponId = weapon.id;
+        
         return new Promise((resolve, reject) => {
-            db.query(sql,[characterName, species, attackpoints, defencepoints, image, date, weapon, characterId], (err, rows) => {
+            db.query(sql,[characterName, species, attackpoints, defencepoints, image, date, weaponId, characterId], (err, rows) => {
                   if (err)
                      return reject(err);
                  resolve(rows);
@@ -107,19 +113,25 @@ class Character {
         })
     }
     
-    static enemyList(player){
+    static enemyList(playerId){
+        var sql = "SELECT * FROM rpgdb.character WHERE User_UserId != ?;";
         
-        Character.getAllCharacters().then(result => {
-            var charactersList = result;
-            
-            var enemyList = []; //OGARNĄĆ CZY DZIAŁA (BO COŚ TAM Z JSONEM)
-            
-            for (var i = 0; i < charactersList.length; i++) {
-                if (charactersList[i].player == null || charactersList[i].player != player.id) {
-                    enemyList.push(charactersList[i]);
+        return new Promise((resolve, reject) => {
+            db.query(sql,[playerId],(err, rows) => {
+                if (err)
+                    return reject(err);
+                var charactersList = [];
+                var arr = rows;
+                for (var i = 0; i < rows.length; i++){
+                  var obj = arr[i];
+                    var character = null;
+                  for (var key in obj){
+                    character = new Character(obj["CharacterName"], obj["Species"], obj["AttackPoints"], obj["DefencePoints"], obj["CharacterImage"], obj["CharacterCreationDate"], obj["Weapon_WeaponId"], obj["User_UserId"], obj["CharacterId"], obj["Level"], obj["FightPoints"]);
+                  }
+                    charactersList.push(character);
                 }
-            }
-            return enemyList;
+                resolve(charactersList);
+            });
         });
     }
 

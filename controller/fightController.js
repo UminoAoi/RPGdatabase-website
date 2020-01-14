@@ -12,12 +12,20 @@ const Monster = require('../model/monster');
 
 router.get("/", (req, res, next) => {
     const player = Player.makePlayerFrom(req.session.loggedUser);
-    player.getEnemyFights().then(result => {
-        var enemyFights = result;
-        player.getMonsterFights().then(result => {
-            var monsterFights = result;
-            res.render('fight/fightList', {enemyFights:enemyFights, monsterFights:monsterFights, player:player});
-        });
+    
+    var enemyFights = [];
+    var monsterFights = [];
+    
+    var getEnemiesPromise = player.getEnemyFights();
+    var getMonstersPromise = player.getMonsterFights();
+    
+    Promise.all([getEnemiesPromise, getMonstersPromise]).then(function(values) {
+        enemyFights = values[0];
+        monsterFights = values[1];
+        res.render('fight/fightList', {
+            enemyFights:enemyFights, 
+            monsterFights:monsterFights, 
+            player:player});
     });
 });
 
@@ -25,12 +33,24 @@ router.get("/", (req, res, next) => {
 router.get("/characterFight", (req, res, next) => {
     const player = Player.makePlayerFrom(req.session.loggedUser);
     
-    var enemyList= Character.enemyList(player);
-    World.getWorlds().then(result => {
-        var worlds = result;
-        res.render('fight/enemiesList', {player:player, enemyList:enemyList, worlds:worlds});
-    });
+    var enemyList = [];
+    var worlds = [];
+    var characterList = [];
     
+    var getEnemiesPromise = Character.enemyList(player.id);
+    var getWorldsPromise = World.getWorlds();
+    var getCharactersPromise = player.getCharacters();
+    
+    Promise.all([getCharactersPromise, getEnemiesPromise, getWorldsPromise]).then(function(values) {
+        characterList = values[0];
+        enemyList = values [1];
+        worlds = values[2];
+        res.render('fight/enemiesList', {
+            player:player, 
+            characterList: characterList,
+            enemyList:enemyList, 
+            worlds:worlds});
+    });    
 });
 
 router.get("/delete", (req, res, next) => {

@@ -40,25 +40,6 @@ router.get("/", (req, res, next) => {
                     updateMessage: updateMessage
                 });
     });
-    /*
-    player.getCharacters().then(result => {
-        list = result;
-        if(list.length > 0){
-            console.log(list[0].creationDate);
-        }
-        player.getStrongestCharacter().then(result => {
-                if(result[0] != undefined)
-                    strong = result[0]["CharacterName"];
-            res.render('user/userProfile', {
-                    player: player,
-                    strong:strong,
-                    list:list,
-                    updateMessage: updateMessage
-                });
-            });
-            
-        
-    });*/
 });
 
 router.get("/delete/character", (req, res, next) => {

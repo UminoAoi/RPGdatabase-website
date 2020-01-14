@@ -29,14 +29,14 @@
                         <th>Enemy's level</th>
                     </thead>
                     <tbody>
-                        <% for(character in enemyList){ %>
+                        <% enemyList.forEach(function(character){ %>
                         <tr>
                             <td><input type="radio" name="enemy" value="<%= character.id %>"></td>
                             <td><img class="characterImageStat" src="<%= character.characterImage %>"></td>
                             <td><%= character.characterName %></td>
                             <td><%= character.level %></td>
                         </tr>
-                        <% } %>
+                        <% }) %>
                     </tbody>
                 </table>
             </div><!-- enemyTableContainer end -->
@@ -51,13 +51,13 @@
                         <th>World name</th>
                     </thead>
                     <tbody>
-                        <% for(world in worlds){ %>
+                        <% worlds.forEach(function(world){ %>
                         <tr>
                             <td><input type="radio" name="world" value="<%= world.id %>"></td>
                             <td><%= world.difficulty %></td>
                             <td><%= world.worldName %></td>
                         </tr>
-                        <% } %>
+                        <% }) %>
                     </tbody>
                 </table>
             </div><!-- worldTableContainer end -->
@@ -77,7 +77,7 @@
                             <th>Weapon</th>
                         </thead>
                         <tbody>
-                            <% for(character in player.getCharacters()){ %>
+                            <% characterList.forEach(function(character){ %>
                             <tr>
                                 <td><input type="radio" name="user" value="<%= character.id %>"></td>
                                 <td><img class="characterImageStat" src="<%= character.characterImage %>"></td>
@@ -88,10 +88,10 @@
                                 <td><% if (character.weapon == null) { %>
                                 none
                                 <% }else { %>
-                                <%= character.weapon.weaponName %>
+                                <%= character.weapon %>
                                 <% } %></td>
                             </tr>
-                            <% } %>
+                            <% }) %>
                         </tbody>
                     </table>
                 </div>

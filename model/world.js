@@ -57,7 +57,7 @@ class World {
             db.query(sql,[worldId], (err, rows) => {
                 if (err)
                     return reject(err);
-                        var world = null;
+                var world = null;
                 var obj = rows[0];
                 var world = new World(obj["WorldName"], obj["Difficulty"], obj["User_UserId"], obj["WorldId"], obj["FightsNumber"], obj["Favourites"], obj["WorldCreationDate"]);
                 resolve(world);
@@ -72,7 +72,17 @@ class World {
             db.query(sql,(err, rows) => {
                 if (err)
                     return reject(err);
-                resolve(rows);
+                var worldsList = [];
+                var arr = rows;
+                for (var i = 0; i < rows.length; i++){
+                  var obj = arr[i];
+                    var world = null;
+                  for (var key in obj){
+                    var world = new World(obj["WorldName"], obj["Difficulty"], obj["User_UserId"], obj["WorldId"], obj["FightsNumber"], obj["Favourites"], obj["WorldCreationDate"]);
+                  }
+                    worldsList.push(world);
+                }
+                resolve(worldsList);
             });
         });
     }

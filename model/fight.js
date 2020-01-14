@@ -14,11 +14,11 @@ class Fight {
 
     static add(fight) {
             var sql =
-                "Insert into fight (FightDate, CharacterId_1, CharacterId_2, WorldId, Result) " +
+                "Insert into fight (FightDate, CharacterId_1, CharacteId_2, WorldId, Result) " +
                 "values (?, ?, ?, ?, ?);"
 
             return new Promise((resolve, reject) => {
-                db.query(sql, [fight.fightDate, fight.you, fight.enemy, fight.world, fight.result], (err, rows) => {
+                db.query(sql, [fight.fightDate, fight.you.id, fight.enemy.id, fight.world.id, fight.result], (err, rows) => {
                     if (err)
                         return reject(err);
                     resolve(rows);
@@ -27,10 +27,11 @@ class Fight {
     }
     
     static delete(date, you, enemy) {
-        var sql = "DELETE FROM fight WHERE FightDate = ? && CharacterId_1 = ? && CharacterId_2 = ?;";
+        console.log(date.toISOString().slice(0,10));
+        var sql = "DELETE FROM fight WHERE FightDate = ? && CharacterId_1 = ? && CharacteId_2 = ?;";
         
         return new Promise((resolve, reject) => {
-            db.query(sql,[date, you, enemy], (err, rows) => {
+            db.query(sql,[properDate, you, enemy], (err, rows) => {
                 if (err)
                     return reject(err);
                 resolve(rows);
