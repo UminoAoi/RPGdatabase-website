@@ -135,5 +135,8 @@ values ("Dexter", "human", 5, 15, 1,0, "http://19wnx83qh5jk1qlxu63q22fj-wpengine
 Insert into monster (MonsterName, AttackPoints, DefencePoints, MonsterImage, Level, MonsterCreationDate) 
 values ("MarioMonster", 20, 20, "https://www.electronicbeats.net/app/uploads/sites/5/2018/02/mario.png", 3, CURDATE());
 
+Insert into monster (MonsterName, AttackPoints, DefencePoints, MonsterImage, Level, MonsterCreationDate) 
+values ("MarioBIG", 30, 20, "https://www.electronicbeats.net/app/uploads/sites/5/2018/02/mario.png", 3, CURDATE());
+
 -- End of file.
 

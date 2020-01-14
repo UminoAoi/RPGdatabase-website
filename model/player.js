@@ -92,7 +92,7 @@ class Player {
         
         return new Promise((resolve, reject) => {
             db.query(sql,[userName, password], (err, result) => {
-                if (err)
+                if (err || result.length <= 0)
                     return reject(err);
                 const player = new Player(result[0]["Username"], result[0]["Password"], result[0]["Email"], result[0]["UserId"], result[0]["UserRank"], result[0]["RegistrationDate"]);
                 resolve(player);
@@ -262,7 +262,7 @@ class Player {
                   var obj = arr[i];
                     var fight = null;
                   for (var key in obj){
-                    fight = new MonsterFight(obj["MonsterId"], obj["CharacterId"]);
+                    fight = new MonsterFight(obj["CharacterId"], obj["MonsterId"]);
                   }
                     fightsList.push(fight);
                 }

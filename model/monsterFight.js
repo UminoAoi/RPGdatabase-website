@@ -12,7 +12,7 @@ class MonsterFight {
                 "values (?, ?);"
 
             return new Promise((resolve, reject) => {
-                db.query(sql, [monsterFight.monster, monsterFight.you], (err, rows) => {
+                db.query(sql, [monsterFight.monster.id, monsterFight.you.id], (err, rows) => {
                     if (err)
                         return reject(err);
                     resolve(rows);

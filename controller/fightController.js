@@ -66,9 +66,16 @@ router.get("/delete", (req, res, next) => {
 
 router.get("/monsterFight", (req, res, next) => {
     const player = Player.makePlayerFrom(req.session.loggedUser);
-    Monster.getMonsters().then(result => {
-        var monsterList = result;
-        res.render('fight/monsterList', {player:player, monsterList:monsterList});
+    var monsterList = [];
+    var characterList = [];
+    
+    var getMonstersPromise = Monster.getMonsters();
+    var getCharactersPromise = player.getCharacters();
+    
+    Promise.all([getMonstersPromise, getCharactersPromise]).then(function(values) {
+        monsterList = values[0];
+        characterList = values[1];
+        res.render('fight/monsterList', {player:player, monsterList:monsterList, characterList:characterList});
     });
 });
 
@@ -76,13 +83,6 @@ router.get("/characterFight/fightResults/:worldId/:youId/:enemyId", (req, res, n
     var worldId = req.params.worldId;
     var youId = req.params.youId;
     var enemyId = req.params.enemyId;
-    
-    
-    
-    
-    
-    
-    
     
     Character.getCharacter(youId).then(result => {
         var you = result;
