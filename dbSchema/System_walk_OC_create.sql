@@ -51,11 +51,12 @@ CREATE TABLE MonsterFight (
 CREATE TABLE User (
     UserId int NOT NULL AUTO_INCREMENT,
     Username varchar(15) NOT NULL,
-    Password varchar(15) NOT NULL,
+    Password varchar(100) NOT NULL,
     UserRank int NOT NULL,
     RegistrationDate date NOT NULL,
     Email varchar(30) NOT NULL,
-    CONSTRAINT User_pk PRIMARY KEY (UserId)
+    CONSTRAINT User_pk PRIMARY KEY (UserId),
+	CONSTRAINT User_unique UNIQUE (Username)
 );
 
 -- Table: Weapon

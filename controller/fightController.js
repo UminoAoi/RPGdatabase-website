@@ -26,6 +26,8 @@ router.get("/", (req, res, next) => {
             enemyFights:enemyFights, 
             monsterFights:monsterFights, 
             player:player});
+    }).catch(r => {
+        res.status(404).send("Not found.");
     });
 });
 
@@ -50,6 +52,8 @@ router.get("/characterFight", (req, res, next) => {
             characterList: characterList,
             enemyList:enemyList, 
             worlds:worlds});
+    }).catch(r => {
+        res.status(404).send("Not found.");
     });    
 });
 
@@ -76,6 +80,8 @@ router.get("/monsterFight", (req, res, next) => {
         monsterList = values[0];
         characterList = values[1];
         res.render('fight/monsterList', {player:player, monsterList:monsterList, characterList:characterList});
+    }).catch(r => {
+        res.status(404).send("Not found.");
     });
 });
 
@@ -107,8 +113,14 @@ router.get("/characterFight/fightResults/:worldId/:youId/:enemyId", (req, res, n
                 player.addFight(fight);
     
                 res.render('fight/fightScreen', {fight: fight, player:player});
-            });
-        });
+            }).catch(r => {
+        res.status(404).send("Not found.");
+    });
+        }).catch(r => {
+        res.status(404).send("Not found.");
+    });
+    }).catch(r => {
+        res.status(404).send("Not found.");
     });
 });
 
@@ -120,6 +132,8 @@ router.get("/characterFight/fightResults/:worldId/:youId/:enemyId/like", (req, r
     var world = World.getWorld(worldId).then(result => {
         world.like();
         res.render("fightResults/"+ worldId +"/" + youId + "/" + enemyId);
+    }).catch(r => {
+        res.status(404).send("Not found.");
     });
 });
 
@@ -147,7 +161,11 @@ router.get("/monsterFight/monsterFightResults/:youId/:monsterId", (req, res, nex
             player.addMonsterFight(monsterFight);
 
             res.render('fight/monsterFightScreen', {monsterFight: monsterFight, player:player});
-        });
+        }).catch(r => {
+        res.status(404).send("Not found.");
+    });
+    }).catch(r => {
+        res.status(404).send("Not found.");
     });
 });
 

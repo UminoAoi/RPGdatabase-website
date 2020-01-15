@@ -87,11 +87,11 @@ class Player {
         });
     }
 
-    static checkAndGetPlayer(userName, password) {
-        var sql = "SELECT * FROM user WHERE UserName = ? && Password = ?";
+    static checkAndGetPlayer(userName) {
+        var sql = "SELECT * FROM user WHERE UserName = ?";
         
         return new Promise((resolve, reject) => {
-            db.query(sql,[userName, password], (err, result) => {
+            db.query(sql,[userName], (err, result) => {
                 if (err || result.length <= 0)
                     return reject(err);
                 const player = new Player(result[0]["Username"], result[0]["Password"], result[0]["Email"], result[0]["UserId"], result[0]["UserRank"], result[0]["RegistrationDate"]);

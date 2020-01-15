@@ -39,6 +39,8 @@ router.get("/", (req, res, next) => {
                     worldList:worldList,
                     updateMessage: updateMessage
                 });
+    }).catch(r => {
+        res.status(404).send("Not found.");
     });
 });
 

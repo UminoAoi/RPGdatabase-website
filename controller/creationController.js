@@ -12,6 +12,8 @@ router.get("/character", (req, res, next) => {
     player.getWeapons().then(result => {
         var weapons = result;
         res.render('userItems/characterCreation', {character:character, weapons:weapons, player:player});
+    }).catch(r => {
+        res.status(404).send("Not found.");
     });
     
 });
@@ -40,7 +42,11 @@ router.get("/editCharacter", (req, res, next) => {
             weapons: weapons,
             player:player
             });
-        })
+        }).catch(r => {
+        res.status(404).send("Not found.");
+        });
+    }).catch(r => {
+        res.status(404).send("Not found.");
     });
     
 });
@@ -54,6 +60,8 @@ router.get("/editWeapon", (req, res, next) => {
         weapon: weapon,
         player:player
         });
+    }).catch(r => {
+        res.status(404).send("Not found.");
     });
 });
 
@@ -66,6 +74,8 @@ router.get("/editWorld", (req, res, next) => {
         world: world,
         player:player
         });
+    }).catch(r => {
+        res.status(404).send("Not found.");
     });
 });
 
@@ -79,6 +89,8 @@ router.post("/character/post", (req, res, next) => {
         const newCharacter = new Character(req.body.charName, req.body.charSpecies, req.body.attackPoints, req.body.defencePoints, req.body.charImage, date, weapon, player.id);
         player.addCharacter(newCharacter)
             res.redirect("/player");
+    }).catch(r => {
+        res.status(404).send("Not found.");
     });
 });
 
@@ -91,8 +103,12 @@ router.post("/editCharacter/post", (req, res, next) => {
         var weapon = result;
         Character.edit(c, req.body.charName, req.body.charSpecies, req.body.attackPoints, req.body.defencePoints, req.body.charImage, date, weapon).then(result => {    
             res.redirect("/player");
-       });
-    })
+       }).catch(r => {
+        res.status(404).send("Not found.");
+    });
+    }).catch(r => {
+        res.status(404).send("Not found.");
+    });
 
 });
 
@@ -113,7 +129,9 @@ router.post("/editWeapon/post", (req, res, next) => {
     
    Weapon.edit(c, req.body.weapName, req.body.attackPoints, req.body.defencePoints).then(result =>{
         res.redirect("/player");
-   });
+   }).catch(r => {
+        res.status(404).send("Not found.");
+    });
     
 });
 
@@ -132,6 +150,8 @@ router.post("/editWorld/post", (req, res, next) => {
     
     World.edit(c, req.body.worldName, req.body.worldDifficulty).then(result => {
         res.redirect("/player");
+    }).catch(r => {
+        res.status(404).send("Not found.");
     });
     
 });
