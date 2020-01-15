@@ -21,9 +21,9 @@ CREATE TABLE `Character` (
 -- Table: Fight
 CREATE TABLE Fight (
     FightDate datetime NOT NULL,
-    CharacterId_1 int NOT NULL,
-    CharacteId_2 int NOT NULL,
-    WorldId int NOT NULL,
+    CharacterId_1 int ,
+    CharacteId_2 int ,
+    WorldId int ,
     Result varchar(10) NOT NULL,
     CONSTRAINT Fight_pk PRIMARY KEY (FightDate,CharacterId_1,CharacteId_2)
 );
@@ -45,6 +45,7 @@ CREATE TABLE MonsterFight (
     MonsterId int NOT NULL,
     CharacterId int NOT NULL,
     CONSTRAINT MonsterFight_pk PRIMARY KEY (MonsterId,CharacterId)
+
 );
 
 -- Table: User
@@ -90,7 +91,8 @@ ALTER TABLE `Character` ADD CONSTRAINT Character_User FOREIGN KEY Character_User
 
 -- Reference: Character_Weapon (table: Character)
 ALTER TABLE `Character` ADD CONSTRAINT Character_Weapon FOREIGN KEY Character_Weapon (Weapon_WeaponId)
-    REFERENCES Weapon (WeaponId);
+    REFERENCES Weapon (WeaponId)
+	ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- Reference: Fight_Character1 (table: Fight)
 ALTER TABLE Fight ADD CONSTRAINT Fight_Character1 FOREIGN KEY Fight_Character1 (CharacterId_1)
@@ -102,7 +104,8 @@ ALTER TABLE Fight ADD CONSTRAINT Fight_Character2 FOREIGN KEY Fight_Character2 (
 
 -- Reference: Fight_World (table: Fight)
 ALTER TABLE Fight ADD CONSTRAINT Fight_World FOREIGN KEY Fight_World (WorldId)
-    REFERENCES World (WorldId);
+    REFERENCES World (WorldId)
+	ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- Reference: MonsterFight_Character (table: MonsterFight)
 ALTER TABLE MonsterFight ADD CONSTRAINT MonsterFight_Character FOREIGN KEY MonsterFight_Character (CharacterId)
