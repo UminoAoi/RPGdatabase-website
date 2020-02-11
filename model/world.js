@@ -38,7 +38,7 @@ class World {
     
     static edit(worldId, worldName, difficulty){
         var sql = "UPDATE world " + 
-        "SET WorldName = ?, Defficulty = ? " +
+        "SET WorldName = ?, Difficulty = ? " +
         "WHERE worldId = ?;";
         
         return new Promise((resolve, reject) => {

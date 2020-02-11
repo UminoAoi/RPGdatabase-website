@@ -12,13 +12,6 @@ class Player {
     constructor(userName, password, email, id, rank, date) {
         this.id = id;
         this.userName = userName;
-        Player.hashPassword(password) // NIE DZIAŁA CZEMU?? UNDEFINED, W BAZIE DANYCH NULL
-          .then(hash => {
-            //this.password = password; NIE DZIAŁA???
-          })
-          .catch(err => {
-            console.log(err);
-          });
         this.password = password;
         this.email = email;
         if(rank == null)
